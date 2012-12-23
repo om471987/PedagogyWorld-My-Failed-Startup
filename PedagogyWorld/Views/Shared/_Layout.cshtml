@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">
+                        @if(Request.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("MyUnits", "Home", new { area="Member"})"><img src="~/Content/Images/Logo.png" alt="World Pedagogy"></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","Home", new { Area=""})"><img src="~/Content/Images/Logo.png" alt="World Pedagogy"></a>
+                        }
+                    </p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                        @if(Request.IsAuthenticated)
+                        {
+                            <li><a href="@Url.Action("MyUnits", "Home", new { Area="Member"})"><img src="~/Content/Images/Curriculum-Manager-Selected.png" alt="Curriculum Manager Selected"></a></li>
+                            <li><a href="@Url.Action("Planner","Home", new { Area="Member"})"><img src="~/Content/Images/Planner.png" alt="planner"></a></li>
+                            <li><a href="@Url.Action("Settings","Home", new { Area="Member"})"><img src="~/Content/Images/Account-Settings.png" alt="Account Settings"></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("About","Home", new { Area=""})"><img src="~/Content/Images/About-Button.png" alt="about"></a></li>
+                        }
+                            <li><a href="@Url.Action("Help","Home", new { Area=""})"><img src="~/Content/Images/Help-Button.png" alt="help"></a></li>                                                       
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Pedagogy World</p>
+                </div>
+            </div>
+        </footer>
+            @if (!Request.Url.ToString().ToLower().Contains("/member/home/planner"))
+            {
+                Scripts.Render("~/bundles/jquery");
+            }
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
