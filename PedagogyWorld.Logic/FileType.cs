@@ -10,11 +10,6 @@ namespace PedagogyWorld.Domain
 {
     public class FileType
     {
-        public FileType()
-        {
-            Files = new List<File>();
-        }
-
         [Key, DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
@@ -23,10 +18,5 @@ namespace PedagogyWorld.Domain
 
         [MaxLength(1024)]
         public string Description { get; set; }
-
-        [Required]
-        public virtual Unit Unit { get; set; }
-
-        public virtual List<File> Files { get; set; }
     }
 }

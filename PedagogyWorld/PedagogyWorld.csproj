@@ -166,6 +166,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrator\Controllers\FileTypeController.cs" />
     <Compile Include="Areas\Member\Controllers\HomeController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -257,8 +258,14 @@
     <Content Include="Areas\Member\Views\Web.config" />
     <Content Include="Areas\Member\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Member\Views\Home\Settings.cshtml" />
-    <Content Include="Areas\Administrator\Views\Web.config" />
     <Content Include="Areas\Member\Views\Home\UnitOverview.cshtml" />
+    <Content Include="Areas\Administrator\Views\Web.config" />
+    <Content Include="Areas\Administrator\Views\FileType\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\FileType\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\FileType\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\FileType\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\FileType\Delete.cshtml" />
+    <Content Include="Areas\Administrator\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\pedagogyworld - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\pedagogyworld - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -325,7 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administrator\Controllers\" />
     <Folder Include="Areas\Administrator\Models\" />
     <Folder Include="Areas\Administrator\Views\Shared\" />
     <Folder Include="Areas\Member\Models\" />
