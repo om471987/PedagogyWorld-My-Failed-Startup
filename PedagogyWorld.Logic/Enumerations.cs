@@ -31,7 +31,18 @@ namespace PedagogyWorld.Domain
 
     public enum Subjects
     {
-        English = 0,
-        Mathematics = 1
+        English,
+        Mathematics
+    }
+
+    public enum FileTypes
+    {
+        PreRequisites,
+        InstructionalMaterials,
+        Assessments,
+        Projects,
+        ManagementTools,
+        Videos,
+        GradeBooks
     }
 }

@@ -10,7 +10,6 @@ namespace PedagogyWorld.Domain
 {
     public class School
     {
-        [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
@@ -21,7 +20,7 @@ namespace PedagogyWorld.Domain
         public string Description { get; set; }
 
         [Required]
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
     }
 }

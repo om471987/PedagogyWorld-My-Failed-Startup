@@ -11,13 +11,15 @@ namespace PedagogyWorld.Domain
     public class User
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [MinLength(1), MaxLength(255)]
+        public string UserName { get; set; }
+
+        [MaxLength(255)]
         public string FirstName { get; set; }
 
-        [MinLength(1), MaxLength(255)]
+        [MaxLength(255)]
         public string LastName { get; set; }
 
         [Required, MaxLength(256), MinLength(3), RegularExpression(@"^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$")]
@@ -29,10 +31,6 @@ namespace PedagogyWorld.Domain
         [Required, MaxLength(255), MinLength(1)]
         public string District { get; set; }
 
-        public virtual List<School> Schools { get; set; }
-
-        public virtual List<Subject> Subjects { get; set; }
-
-        public virtual List<Grade> Grades { get; set; }
+        public ICollection<School> Schools { get; set; }
     }
 }

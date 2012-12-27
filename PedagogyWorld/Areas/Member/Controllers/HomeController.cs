@@ -8,6 +8,9 @@ using PedagogyWorld.FileManager;
 
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
+using PedagogyWorld.Data;
+using PedagogyWorld.Models;
+using PedagogyWorld.Domain;
 
 namespace PedagogyWorld.Areas.Member.Controllers
 {
@@ -23,11 +26,50 @@ namespace PedagogyWorld.Areas.Member.Controllers
 
         public ActionResult MyUnits()
         {
+            //var db = new Context();
+            //var unitCollection = db.Units;
+            //ViewBag.UnitCollection = unitCollection;
             return View();
         }
 
-        public ActionResult UnitOverview()
+        public ActionResult NewUnit()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewUnit(int a)
+        {
+            //var db = new Context();
+            //var unit = new Unit { 
+            //Name = model.Name,
+            //Description = model.Description,
+            //UserId = db.Users.Where(t => t.UserName == User.Identity.Name)
+            //                      .Select(t => t.Id)
+            //                      .FirstOrDefault(),
+            //Subject = new Subject { Name = model.Subject },
+            //Grade = new Grade { Name = model.Grade },
+            //};
+
+            //try
+            //{
+            //    db.Units.Add(unit);
+            //    db.SaveChanges();
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
+            return RedirectToAction("MyUnits");
+        }
+
+        public ActionResult UnitOverview(Guid id)
+        {
+            //var db = new Context();
+            //var unit = db.Units.First(t => t.Id == id);
+            //ViewBag.Grade = unit.Grade.ToString();
+            //ViewBag.Subject = unit.Subject.ToString();
+            //ViewBag.Unit = unit;
             return View();
         }
 

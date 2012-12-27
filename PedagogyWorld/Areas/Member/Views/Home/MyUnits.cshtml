@@ -8,58 +8,18 @@
         <br/>
         <img src="~/Content/Images/Download-Files.png" alt="My Units"/>
     </div>
-    <div style="float:left;margin-left:200px;">
+    <div style="float:left;margin-left:100px;">
+        
+        <a href="@Url.Action("NewUnit", "Home", new { Area="Member"})">Create new Unit</a>
         <table style="border-width: 4px;border-style:solid;">
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>1</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Whole Numbers</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>2</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Multiplication and Division</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>3</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Shapes</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>4</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Patterns</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>5</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Dimensions</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>6</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Geometry - Area</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>7</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Algebraic Functions</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>8</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Geometric Relationship</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>9</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Graphs and data</a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;<input type="checkbox"/></td>
-                <td>10</td>
-                <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member"})">Introductory Statistics</a></td>
-            </tr>
+            @foreach (var t in ViewBag.UnitCollection)
+            {
+                <tr>
+                    <td>&nbsp;&nbsp;<input type="checkbox"/></td>
+                    <td>1</td>
+                    <td><a href="@Url.Action("UnitOverview", "Home", new { Area="Member", Id = t.Id})">@t.Name</a></td>
+                </tr>          
+            }
         </table>
     </div>
     <div style="float:right">

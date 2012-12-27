@@ -10,7 +10,7 @@ namespace PedagogyWorld.Domain
 {
     public class Unit
     {
-        [Key, DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required, MaxLength(255), MinLength(1)]
@@ -20,6 +20,12 @@ namespace PedagogyWorld.Domain
         public string Description { get; set; }
 
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
         public Subjects Subject { get; set; }
+
+        [Required]
+        public ICollection<Grades> Grade { get; set; }
     }
 }

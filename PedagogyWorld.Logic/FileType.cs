@@ -10,7 +10,7 @@ namespace PedagogyWorld.Domain
 {
     public class FileType
     {
-        [Key, DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required, MaxLength(255), MinLength(1)]

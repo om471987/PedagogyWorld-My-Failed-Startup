@@ -17,7 +17,7 @@ namespace PedagogyWorld.Areas.Administrator
             context.MapRoute(
                 "Administrator_default",
                 "Administrator/{controller}/{action}/{id}",
-                new { controller = "FileType", action = "Index", id = UrlParameter.Optional },
+                new { controller = "Static", action = "Index", id = UrlParameter.Optional },
                 new[] { "PedagogyWorld.Areas.Administrator.Controllers" }
             );
         }

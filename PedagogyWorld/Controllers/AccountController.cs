@@ -8,7 +8,7 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using PedagogyWorld.Filters;
+//using PedagogyWorld.Filters;
 using PedagogyWorld.Models;
 using PedagogyWorld.Data;
 using PedagogyWorld.Domain;
@@ -16,7 +16,7 @@ using System.Data.Entity.Validation;
 
 namespace PedagogyWorld.Controllers
 {
-    [InitializeSimpleMembership]
+    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -88,61 +88,45 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var userId = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                //try
+                //{
+                //    var userId = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                //    WebSecurity.Login(model.UserName, model.Password);
 
-                    var db = new Context();
-                    var user = new User
-                    {
-                        Email = model.Email,
-                        State = model.State,
-                        District = model.District
-                    };
+                //    var db = new Context();
+                //    var user = new User
+                //    {
+                //        UserName = model.UserName,
+                //        Email = model.Email,
+                //        State = model.State,
+                //        District = model.District
+                //    };
+                //    try
+                //    {
+                //        db.Users.Add(user);
+                //        db.SaveChanges();
+                //    }
+                //    catch (DbEntityValidationException e)
+                //    {
+                //        foreach (var eve in e.EntityValidationErrors)
+                //        {
+                //            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                //                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //            foreach (var ve in eve.ValidationErrors)
+                //            {
+                //                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                //                    ve.PropertyName, ve.ErrorMessage);
+                //            }
+                //        }
+                //        throw;
+                //    }
 
-                    //var school = new School 
-                    //{
-                    //    Name = model.School,
-                    //    Description = "",
-                    //    User = user
-                    //};
-
-                    //var grades = new List<Grade>();
-                    //grades.Add(new Grade { Name = model.GradesTeaching, User = user });
-                    //user.Grades = grades;
-
-                    //var subjects = new List<Subject>();
-                    //subjects.Add(new Subject { Name = model.SubjectsTeaching, User = user });
-                    //user.Subjects = subjects;
-
-                    try
-                    {
-                        db.Users.Add(user);
-                        //db.Schools.Add(school);
-                        db.SaveChanges();
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    }
-
-                    return RedirectToAction("TakeATour", "Home", new {area = "Member"});
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
+                //    return RedirectToAction("TakeATour", "Home", new {area = "Member"});
+                //}
+                //catch (MembershipCreateUserException e)
+                //{
+                //    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                //}
             }
             return View(model);
         }

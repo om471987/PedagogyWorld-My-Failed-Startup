@@ -10,14 +10,12 @@ namespace PedagogyWorld.Domain
 {
     public class Grade
     {
-        [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required]
         public Grades Name { get; set; }
 
-        [Required]
-        public virtual User User { get; set; }
+        public ICollection<Unit> Units { get; set; }
     }
 }

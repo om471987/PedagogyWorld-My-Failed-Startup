@@ -20,8 +20,6 @@ namespace PedagogyWorld
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Context>());
-
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -29,6 +27,9 @@ namespace PedagogyWorld
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            //Database.SetInitializer<Context>(new DatabaseInitializer());
+            //new Context().Users.All(t=>t.UserName != "");
         }
     }
 }

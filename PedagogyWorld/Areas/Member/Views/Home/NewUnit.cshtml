@@ -1,16 +1,17 @@
-﻿@model PedagogyWorld.Domain.FileType
+﻿@model PedagogyWorld.Models.UnitModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "NewUnit";
 }
 
-<h2>Create</h2>
+<h2>New Unit</h2>
+
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>FileType</legend>
+        <legend>Unit</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -28,15 +29,24 @@
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Grade)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Grade, new SelectList(Enum.GetValues(typeof(PedagogyWorld.Domain.Grades))))
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Subject)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Subject, new SelectList(Enum.GetValues(typeof(PedagogyWorld.Domain.Subjects))))
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -10,19 +10,19 @@ namespace PedagogyWorld.Domain
 {
     public class File
     {
-        [Key, DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required, MaxLength(255), MinLength(1)]
         public string Name { get; set; }
 
-        [MaxLength(1024)]
-        public string Description { get; set; }
-
         [Required]
         public string Path { get; set; }
 
         [Required]
-        public virtual FileType FileType { get; set; }
+        public FileTypes FileType { get; set; }
+
+        [Required]
+        public User User { get; set; }
     }
 }
