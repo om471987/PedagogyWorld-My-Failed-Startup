@@ -9,7 +9,7 @@ namespace PedagogyWorld.Data
       public Context()
          : base("PedagogyWorldConnectionString")
       {
-         Database.SetInitializer(new Initializer());
+         //Database.SetInitializer(new Initializer());
          //Database.SetInitializer(new DropCreateDatabaseAlways<Context>());
       }
 
