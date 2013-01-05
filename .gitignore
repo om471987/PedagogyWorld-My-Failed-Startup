@@ -168,7 +168,6 @@ pip-log.txt
 
 /PedagogyWorld/bin/*
 /PedagogyWorld/obj/*
-/PedagogyWorld/Web.config
 
 /PedagogyWorld.Data/bin/*
 /PedagogyWorld.Data/obj/*
