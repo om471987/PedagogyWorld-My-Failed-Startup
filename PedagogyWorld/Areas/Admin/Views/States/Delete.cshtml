@@ -1,0 +1,29 @@
+@model PedagogyWorld.Data.State
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>State</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">ShortForm</div>
+    <div class="display-field">@Model.ShortForm</div>
+
+    <div class="display-label">Districts</div>
+    <div class="display-field">@(Model.Districts == null ? "None" : Model.Districts.Count.ToString())</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

@@ -20,11 +20,13 @@ else
     @Html.Partial("_SetPasswordPartial")
 }
 
+@Html.ActionLink("Change other details over here", "Edit")
+
 @*<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins", Area="")
+    @Html.Action("RemoveExternalLogins")
 
     <h3>Add an external login</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl, Area="" })
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>*@
 
 @section Scripts {

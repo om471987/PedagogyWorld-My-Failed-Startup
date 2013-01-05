@@ -1,0 +1,23 @@
+@model PedagogyWorld.Data.TeachingDate
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Date)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Date)
+    @Html.ValidationMessageFor(model => model.Date)
+</div>
+
+<div class="editor-label">
+    File
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.FileId, ((IEnumerable<PedagogyWorld.Data.File>)ViewBag.PossibleFiles).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.Id.ToString(),
+        Selected = (Model != null) && (option.Id == Model.FileId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.FileId)
+</div>

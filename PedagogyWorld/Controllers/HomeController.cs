@@ -31,7 +31,6 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult Help()
         {
-            ViewBag.Message = "Your help page.";
             return View();
         }
     }

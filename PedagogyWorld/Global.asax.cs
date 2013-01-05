@@ -6,10 +6,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using PedagogyWorld.Domain;
-using PedagogyWorld.Data;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
 
 namespace PedagogyWorld
 {
@@ -27,9 +23,6 @@ namespace PedagogyWorld
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
-            //Database.SetInitializer<Context>(new DatabaseInitializer());
-            //new Context().Users.All(t=>t.UserName != "");
         }
     }
 }

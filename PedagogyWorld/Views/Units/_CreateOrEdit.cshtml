@@ -1,0 +1,47 @@
+@model PedagogyWorld.Models.UnitModel
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+<div class="editor-label">
+    Grade
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.GradeId, ((IEnumerable<PedagogyWorld.Data.Grade>)ViewBag.PossibleGrades).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.Id.ToString(),
+        Selected = (Model != null) && (option.Id == Model.GradeId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.GradeId)
+</div>
+<div class="editor-label">
+    Subject
+</div>
+<div class="editor-field">
+   @Html.DropDownListFor(model => model.SubjectId, ((IEnumerable<PedagogyWorld.Data.Subject>)ViewBag.PossibleSubjects).Select(option => new SelectListItem {
+      Text = (option == null ? "None" : option.Name), 
+      Value = option.Id.ToString(),
+      Selected = (Model != null) && (option.Id == Model.SubjectId)
+   }), "Choose...")
+   @Html.ValidationMessageFor(model => model.SubjectId)
+</div>
+
+<p>
+   <label for="SelectedCategories">Categories:</label>
+   @Html.ListBox("SelectedOutcomes", Model.OutcomesList)
+</p>

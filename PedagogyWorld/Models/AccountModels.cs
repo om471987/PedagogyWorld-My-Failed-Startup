@@ -5,10 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
-using PedagogyWorld.Domain;
 
 namespace PedagogyWorld.Models
 {
+    public class RegisterExternalLoginModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        public string ExternalLoginData { get; set; }
+    }
+
     public class LocalPasswordModel
     {
         [Required]
@@ -45,16 +53,14 @@ namespace PedagogyWorld.Models
 
     public class RegisterModel
     {
-        [Required, MaxLength(255), MinLength(1)]
+        [Required]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
-
-        [Required, MaxLength(256), MinLength(3), RegularExpression(@"^([\w.-]+)@([\w-]+)((.(\w){2,3})+)$")]
-        [Display(Name = "Email address")]
-        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
@@ -63,26 +69,17 @@ namespace PedagogyWorld.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public States State { get; set; }
+        public string Email { get; set; }
 
-        [Required, MaxLength(255), MinLength(1)]
-        public string District { get; set; }
+        public string State { get; set; }
 
-        //[Required, MinLength(1), MaxLength(255)]
-        //[Display(Name = "First Name")]
-        //public string FirstName { get; set; }
+        public string School { get; set; }
+    }
 
-        //[Required, MinLength(1), MaxLength(255)]
-        //[Display(Name = "Last Name")]
-        //public string LastName { get; set; }
-
-        //[Display(Name = "Grades Teaching")]
-        //public Grades GradesTeaching { get; set; }
-
-        //[DataType(DataType.Text)]
-        //public string School { get; set; }
-
-        //[Display(Name = "Subjects Teaching")]
-        //public Subjects SubjectsTeaching { get; set; }
+    public class ExternalLogin
+    {
+        public string Provider { get; set; }
+        public string ProviderDisplayName { get; set; }
+        public string ProviderUserId { get; set; }
     }
 }

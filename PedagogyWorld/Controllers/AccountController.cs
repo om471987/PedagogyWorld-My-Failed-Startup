@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Transactions;
 using System.Web;
@@ -8,15 +9,15 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-//using PedagogyWorld.Filters;
+using PedagogyWorld.Filters;
 using PedagogyWorld.Models;
 using PedagogyWorld.Data;
-using PedagogyWorld.Domain;
-using System.Data.Entity.Validation;
+using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace PedagogyWorld.Controllers
 {
-    //[InitializeSimpleMembership]
+    [Authorize]
+    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -25,10 +26,6 @@ namespace PedagogyWorld.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToLocal(returnUrl);
-            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -43,7 +40,8 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToLocal(returnUrl);
+                return RedirectToAction("Index", "Units", new {Area=""});
+                //return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
@@ -51,35 +49,50 @@ namespace PedagogyWorld.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult TakeATour()
+        {
+            return View();
+        }
+
         //
         // POST: /Account/LogOff
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home", new {Area="" });
+            return RedirectToAction("Index", "Home");
         }
 
         //
         // GET: /Account/Register
 
         [AllowAnonymous]
-        public ActionResult Register(string returnUrl)
+        public ActionResult Register()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToLocal(returnUrl);
-            }
-
+            var db = new Context();
+            ViewBag.States = db.States;
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        [AllowAnonymous]
+        public ActionResult RegisterJSon(string selectedState)
+        {
+            var db = new Context();
+
+            var statId = db.States.FirstOrDefault(t => t.ShortForm == selectedState).Id;
+            var districts = db.Districts.Where(t => t.StateId == statId);
+
+            var schools = (from d in districts 
+                           from s in db.Schools 
+                           where d.Id == s.DistrictId 
+                           select s.Name).ToList();
+
+            return Json(schools, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         [AllowAnonymous]
@@ -88,46 +101,27 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                //try
-                //{
-                //    var userId = WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                //    WebSecurity.Login(model.UserName, model.Password);
+                // Attempt to register the user
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new{Email=model.Email});
+                    WebSecurity.Login(model.UserName, model.Password);
 
-                //    var db = new Context();
-                //    var user = new User
-                //    {
-                //        UserName = model.UserName,
-                //        Email = model.Email,
-                //        State = model.State,
-                //        District = model.District
-                //    };
-                //    try
-                //    {
-                //        db.Users.Add(user);
-                //        db.SaveChanges();
-                //    }
-                //    catch (DbEntityValidationException e)
-                //    {
-                //        foreach (var eve in e.EntityValidationErrors)
-                //        {
-                //            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                //                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                //            foreach (var ve in eve.ValidationErrors)
-                //            {
-                //                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                //                    ve.PropertyName, ve.ErrorMessage);
-                //            }
-                //        }
-                //        throw;
-                //    }
-
-                //    return RedirectToAction("TakeATour", "Home", new {area = "Member"});
-                //}
-                //catch (MembershipCreateUserException e)
-                //{
-                //    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                //}
+                    var db = new Context();
+                    var school = db.Schools.FirstOrDefault(t => t.Name == model.School);
+                    var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
+                    school.UserProfiles.Add(user);
+                    user.Schools.Add(school);
+                    db.SaveChanges();
+                    return RedirectToAction("TakeATour");
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
             }
+
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -157,12 +151,12 @@ namespace PedagogyWorld.Controllers
                 }
             }
 
-            return RedirectToAction("Manage", new { Message = message, Area="" });
+            return RedirectToAction("Manage", new { Message = message });
         }
 
         //
         // GET: /Account/Manage
-
+        [Authorize]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -171,7 +165,7 @@ namespace PedagogyWorld.Controllers
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.ReturnUrl = Url.Action("Manage", new { Area=""});
+            ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }
 
@@ -179,12 +173,13 @@ namespace PedagogyWorld.Controllers
         // POST: /Account/Manage
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
-            ViewBag.ReturnUrl = Url.Action("Manage", new { Area = "" });
+            ViewBag.ReturnUrl = Url.Action("Manage");
             if (hasLocalAccount)
             {
                 if (ModelState.IsValid)
@@ -202,7 +197,7 @@ namespace PedagogyWorld.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess, Area = "" });
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
                     {
@@ -225,7 +220,7 @@ namespace PedagogyWorld.Controllers
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess, Area = "" });
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     catch (Exception e)
                     {
@@ -238,6 +233,160 @@ namespace PedagogyWorld.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult Edit()
+        {
+            var context = new Context();
+            int id = context.UserProfiles.FirstOrDefault(t => t.UserName ==                 User.Identity.Name).UserId;
+            UserProfile userprofile = context.UserProfiles.Single(x => x.UserId == id);
+            return View(userprofile);
+        }
+
+        //
+        // POST: /UserProfiles/Edit/5
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Edit(UserProfile userprofile)
+        {
+            var context = new Context();
+            if (ModelState.IsValid)
+            {
+                context.Entry(userprofile).State = EntityState.Modified;
+                context.SaveChanges();
+                return RedirectToAction("Index", "Units");
+            }
+            return View(userprofile);
+        }
+
+        //
+        // POST: /Account/ExternalLogin
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+        }
+
+        //
+        // GET: /Account/ExternalLoginCallback
+
+        [AllowAnonymous]
+        public ActionResult ExternalLoginCallback(string returnUrl)
+        {
+            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            if (!result.IsSuccessful)
+            {
+                return RedirectToAction("ExternalLoginFailure");
+            }
+
+            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            {
+                return RedirectToLocal(returnUrl);
+            }
+
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the current user is logged in add the new account
+                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                return RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                // User is new, ask for their desired membership name
+                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                ViewBag.ReturnUrl = returnUrl;
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+            }
+        }
+
+        //
+        // POST: /Account/ExternalLoginConfirmation
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
+        {
+            string provider = null;
+            string providerUserId = null;
+
+            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            {
+                return RedirectToAction("Manage");
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Insert a new user into the database
+                using (Context db = new Context())
+                {
+                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    // Check if user already exists
+                    if (user == null)
+                    {
+                        // Insert name into the profile table
+                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.SaveChanges();
+
+                        OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
+                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
+
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                    }
+                }
+            }
+
+            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
+            ViewBag.ReturnUrl = returnUrl;
+            return View(model);
+        }
+
+        //
+        // GET: /Account/ExternalLoginFailure
+
+        [AllowAnonymous]
+        public ActionResult ExternalLoginFailure()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public ActionResult ExternalLoginsList(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RemoveExternalLogins()
+        {
+            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
+            foreach (OAuthAccount account in accounts)
+            {
+                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+
+                externalLogins.Add(new ExternalLogin
+                {
+                    Provider = account.Provider,
+                    ProviderDisplayName = clientData.DisplayName,
+                    ProviderUserId = account.ProviderUserId,
+                });
+            }
+
+            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+        }
+
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
@@ -247,7 +396,7 @@ namespace PedagogyWorld.Controllers
             }
             else
             {
-                return RedirectToAction("MyUnits", "Home", new { area = "Member" });
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -256,6 +405,23 @@ namespace PedagogyWorld.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+        }
+
+        internal class ExternalLoginResult : ActionResult
+        {
+            public ExternalLoginResult(string provider, string returnUrl)
+            {
+                Provider = provider;
+                ReturnUrl = returnUrl;
+            }
+
+            public string Provider { get; private set; }
+            public string ReturnUrl { get; private set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+            }
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
