@@ -10,7 +10,7 @@ using PedagogyWorld.Models;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class StatesController : Controller
     {
         private Context context = new Context();
