@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PedagogyWorld.Data;
-using PedagogyWorld.FileStorage;
+//using PedagogyWorld.FileStorage;
 using PedagogyWorld.Models;
 using PedagogyWorld.ExtensionMethod;
 
@@ -27,7 +27,7 @@ namespace PedagogyWorld.Controllers
     public class FilesController : Controller
     {
         private Context context = new Context();
-        private FileManager _fileManager = new FileManager();
+        //private FileManager _fileManager = new FileManager();
         //
         // GET: /Files/
 
@@ -66,10 +66,10 @@ namespace PedagogyWorld.Controllers
             foreach (var file in files)
             {
                 if (file.ContentLength <= 0) continue;
-                var blobContainer = _fileManager.GetCloudBlobContainer(user);
-                var blob = blobContainer.GetBlobReference(file.FileName);
-                blob.UploadFromStream(file.InputStream);
-                path = blob.Uri.ToString();
+                //var blobContainer = _fileManager.GetCloudBlobContainer(user);
+                //var blob = blobContainer.GetBlobReference(file.FileName);
+                //blob.UploadFromStream(file.InputStream);
+                //path = blob.Uri.ToString();
             }
             if (ModelState.IsValid)
             {
