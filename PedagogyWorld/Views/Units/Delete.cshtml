@@ -1,4 +1,4 @@
-@model PedagogyWorld.Data.Unit
+@model PedagogyWorld.Models.UnitModel
 
 @{
     ViewBag.Title = "Delete";
@@ -16,11 +16,11 @@
     <div class="display-label">Description</div>
     <div class="display-field">@Model.Description</div>
 
-    <div class="display-label">Outcome</div>
+@*    <div class="display-label">Outcome</div>
     <div class="display-field">@(Model.Outcome == null ? "None" : Model.Outcome.Count.ToString())</div>
 
     <div class="display-label">Files</div>
-    <div class="display-field">@(Model.Files == null ? "None" : Model.Files.Count.ToString())</div>
+    <div class="display-field">@(Model.Files == null ? "None" : Model.Files.Count.ToString())</div>*@
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

@@ -16,6 +16,10 @@ namespace PedagogyWorld.Models
             var ids = (from t in db.Outcomes select t.Id).ToArray();
             OutcomesList = new MultiSelectList(db.Outcomes.ToList(), "Id", "Name", ids);
         }
+
+        [Required]
+        public Guid Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 
