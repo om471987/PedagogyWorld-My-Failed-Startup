@@ -1,0 +1,1405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="District" EntityType="Model.Store.District" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="File" EntityType="Model.Store.File" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FileFileType" EntityType="Model.Store.FileFileType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FileType" EntityType="Model.Store.FileType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Grade" EntityType="Model.Store.Grade" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Header" EntityType="Model.Store.Header" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Outcome" EntityType="Model.Store.Outcome" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OutcomeUnit" EntityType="Model.Store.OutcomeUnit" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="School" EntityType="Model.Store.School" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SchoolUserProfile" EntityType="Model.Store.SchoolUserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Standard" EntityType="Model.Store.Standard" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="State" EntityType="Model.Store.State" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StrandDomain" EntityType="Model.Store.StrandDomain" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Subject" EntityType="Model.Store.Subject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeachingDate" EntityType="Model.Store.TeachingDate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Unit" EntityType="Model.Store.Unit" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnitFile" EntityType="Model.Store.UnitFile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnitStandard" EntityType="Model.Store.UnitStandard" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnitUserProfile" EntityType="Model.Store.UnitUserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__District__State___20C1E124" Association="Model.Store.FK__District__State___20C1E124">
+            <End Role="State" EntitySet="State" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileFileT__File___628FA481" Association="Model.Store.FK__FileFileT__File___628FA481">
+            <End Role="File" EntitySet="File" />
+            <End Role="FileFileType" EntitySet="FileFileType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileFileT__FileT__6383C8BA" Association="Model.Store.FK__FileFileT__FileT__6383C8BA">
+            <End Role="FileType" EntitySet="FileType" />
+            <End Role="FileFileType" EntitySet="FileFileType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Header__StrandDo__02084FDA" Association="Model.Store.FK__Header__StrandDo__02084FDA">
+            <End Role="StrandDomain" EntitySet="StrandDomain" />
+            <End Role="Header" EntitySet="Header" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutcomeUn__Outco__6E01572D" Association="Model.Store.FK__OutcomeUn__Outco__6E01572D">
+            <End Role="Outcome" EntitySet="Outcome" />
+            <End Role="OutcomeUnit" EntitySet="OutcomeUnit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutcomeUn__Unit___6EF57B66" Association="Model.Store.FK__OutcomeUn__Unit___6EF57B66">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="OutcomeUnit" EntitySet="OutcomeUnit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__School__District__25869641" Association="Model.Store.FK__School__District__25869641">
+            <End Role="District" EntitySet="District" />
+            <End Role="School" EntitySet="School" />
+          </AssociationSet>
+          <AssociationSet Name="FK__School__State_Id__02FC7413" Association="Model.Store.FK__School__State_Id__02FC7413">
+            <End Role="State" EntitySet="State" />
+            <End Role="School" EntitySet="School" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SchoolUse__Schoo__1BC821DD" Association="Model.Store.FK__SchoolUse__Schoo__1BC821DD">
+            <End Role="School" EntitySet="School" />
+            <End Role="SchoolUserProfile" EntitySet="SchoolUserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SchoolUse__UserP__1CBC4616" Association="Model.Store.FK__SchoolUse__UserP__1CBC4616">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="SchoolUserProfile" EntitySet="SchoolUserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Standard__Header__01142BA1" Association="Model.Store.FK__Standard__Header__01142BA1">
+            <End Role="Header" EntitySet="Header" />
+            <End Role="Standard" EntitySet="Standard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StrandDom__Grade__1EA48E88" Association="Model.Store.FK__StrandDom__Grade__1EA48E88">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="StrandDomain" EntitySet="StrandDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StrandDom__State__1DB06A4F" Association="Model.Store.FK__StrandDom__State__1DB06A4F">
+            <End Role="State" EntitySet="State" />
+            <End Role="StrandDomain" EntitySet="StrandDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StrandDom__Subje__1F98B2C1" Association="Model.Store.FK__StrandDom__Subje__1F98B2C1">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="StrandDomain" EntitySet="StrandDomain" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeachingD__File___5441852A" Association="Model.Store.FK__TeachingD__File___5441852A">
+            <End Role="File" EntitySet="File" />
+            <End Role="TeachingDate" EntitySet="TeachingDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Unit__Grade_Id__3A81B327" Association="Model.Store.FK__Unit__Grade_Id__3A81B327">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Unit" EntitySet="Unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Unit__Subject_Id__3B75D760" Association="Model.Store.FK__Unit__Subject_Id__3B75D760">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Unit" EntitySet="Unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitFile__File_I__74AE54BC" Association="Model.Store.FK__UnitFile__File_I__74AE54BC">
+            <End Role="File" EntitySet="File" />
+            <End Role="UnitFile" EntitySet="UnitFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitFile__Unit_I__73BA3083" Association="Model.Store.FK__UnitFile__Unit_I__73BA3083">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitFile" EntitySet="UnitFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitStand__Grade__440B1D61" Association="Model.Store.FK__UnitStand__Grade__440B1D61">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="UnitStandard" EntitySet="UnitStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitStand__Unit___44FF419A" Association="Model.Store.FK__UnitStand__Unit___44FF419A">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitStandard" EntitySet="UnitStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitUserP__Unit___0D7A0286" Association="Model.Store.FK__UnitUserP__Unit___0D7A0286">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitUserProfile" EntitySet="UnitUserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitUserP__UserP__0E6E26BF" Association="Model.Store.FK__UnitUserP__UserP__0E6E26BF">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UnitUserProfile" EntitySet="UnitUserProfile" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="State_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Path" Type="varchar" Nullable="false" MaxLength="511" />
+          <Property Name="Description" Type="varchar" MaxLength="10" />
+          <Property Name="Alias" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="FileFileType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="File_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileType_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileTypeName" Type="varchar" Nullable="false" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GradeName" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Header">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Header1" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Header2" Type="varchar" MaxLength="1024" />
+          <Property Name="Header3" Type="varchar" MaxLength="1024" />
+          <Property Name="Header4" Type="varchar" MaxLength="1024" />
+          <Property Name="StrandDomain_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Outcome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OutcomeName" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Description" Type="varchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="OutcomeUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Outcome_Id" Type="int" Nullable="false" />
+          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="District_Id" Type="int" Nullable="false" />
+          <Property Name="State_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SchoolUserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="School_Id" Type="int" Nullable="false" />
+          <Property Name="UserProfile_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Standard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Name2" Type="varchar" MaxLength="1024" />
+          <Property Name="Name3" Type="varchar" MaxLength="1024" />
+          <Property Name="Name4" Type="varchar" MaxLength="1024" />
+          <Property Name="Header_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ShortForm" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="StrandDomain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="ConceptualCategory" Type="varchar" MaxLength="255" />
+          <Property Name="State_Id" Type="int" Nullable="false" />
+          <Property Name="Grade_Id" Type="int" Nullable="false" />
+          <Property Name="Subject_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TeachingDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="smalldatetime" Nullable="false" />
+          <Property Name="File_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UnitName" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Description" Type="varchar" MaxLength="2048" />
+          <Property Name="Grade_Id" Type="int" Nullable="false" />
+          <Property Name="Subject_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="File_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitStandard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Grade_Id" Type="int" Nullable="false" />
+          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitUserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserProfile_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__District__State___20C1E124">
+          <End Role="State" Type="Model.Store.State" Multiplicity="1" />
+          <End Role="District" Type="Model.Store.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileFileT__File___628FA481">
+          <End Role="File" Type="Model.Store.File" Multiplicity="1" />
+          <End Role="FileFileType" Type="Model.Store.FileFileType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileFileType">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileFileT__FileT__6383C8BA">
+          <End Role="FileType" Type="Model.Store.FileType" Multiplicity="1" />
+          <End Role="FileFileType" Type="Model.Store.FileFileType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileFileType">
+              <PropertyRef Name="FileType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Header__StrandDo__02084FDA">
+          <End Role="StrandDomain" Type="Model.Store.StrandDomain" Multiplicity="1" />
+          <End Role="Header" Type="Model.Store.Header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StrandDomain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Header">
+              <PropertyRef Name="StrandDomain_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutcomeUn__Outco__6E01572D">
+          <End Role="Outcome" Type="Model.Store.Outcome" Multiplicity="1" />
+          <End Role="OutcomeUnit" Type="Model.Store.OutcomeUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outcome">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OutcomeUnit">
+              <PropertyRef Name="Outcome_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutcomeUn__Unit___6EF57B66">
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
+          <End Role="OutcomeUnit" Type="Model.Store.OutcomeUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OutcomeUnit">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__School__District__25869641">
+          <End Role="District" Type="Model.Store.District" Multiplicity="1" />
+          <End Role="School" Type="Model.Store.School" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="School">
+              <PropertyRef Name="District_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__School__State_Id__02FC7413">
+          <End Role="State" Type="Model.Store.State" Multiplicity="1" />
+          <End Role="School" Type="Model.Store.School" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="School">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SchoolUse__Schoo__1BC821DD">
+          <End Role="School" Type="Model.Store.School" Multiplicity="1" />
+          <End Role="SchoolUserProfile" Type="Model.Store.SchoolUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SchoolUserProfile">
+              <PropertyRef Name="School_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SchoolUse__UserP__1CBC4616">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="SchoolUserProfile" Type="Model.Store.SchoolUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SchoolUserProfile">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Standard__Header__01142BA1">
+          <End Role="Header" Type="Model.Store.Header" Multiplicity="1" />
+          <End Role="Standard" Type="Model.Store.Standard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Header">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Standard">
+              <PropertyRef Name="Header_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StrandDom__Grade__1EA48E88">
+          <End Role="Grade" Type="Model.Store.Grade" Multiplicity="1" />
+          <End Role="StrandDomain" Type="Model.Store.StrandDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrandDomain">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StrandDom__State__1DB06A4F">
+          <End Role="State" Type="Model.Store.State" Multiplicity="1" />
+          <End Role="StrandDomain" Type="Model.Store.StrandDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrandDomain">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StrandDom__Subje__1F98B2C1">
+          <End Role="Subject" Type="Model.Store.Subject" Multiplicity="1" />
+          <End Role="StrandDomain" Type="Model.Store.StrandDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrandDomain">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeachingD__File___5441852A">
+          <End Role="File" Type="Model.Store.File" Multiplicity="1" />
+          <End Role="TeachingDate" Type="Model.Store.TeachingDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeachingDate">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Unit__Grade_Id__3A81B327">
+          <End Role="Grade" Type="Model.Store.Grade" Multiplicity="1" />
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Unit__Subject_Id__3B75D760">
+          <End Role="Subject" Type="Model.Store.Subject" Multiplicity="1" />
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitFile__File_I__74AE54BC">
+          <End Role="File" Type="Model.Store.File" Multiplicity="1" />
+          <End Role="UnitFile" Type="Model.Store.UnitFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitFile">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitFile__Unit_I__73BA3083">
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
+          <End Role="UnitFile" Type="Model.Store.UnitFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitFile">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitStand__Grade__440B1D61">
+          <End Role="Grade" Type="Model.Store.Grade" Multiplicity="1" />
+          <End Role="UnitStandard" Type="Model.Store.UnitStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitStandard">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitStand__Unit___44FF419A">
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
+          <End Role="UnitStandard" Type="Model.Store.UnitStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitStandard">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitUserP__Unit___0D7A0286">
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
+          <End Role="UnitUserProfile" Type="Model.Store.UnitUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitUserProfile">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitUserP__UserP__0E6E26BF">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="UnitUserProfile" Type="Model.Store.UnitUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UnitUserProfile">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Context" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Districts" EntityType="Model.District" />
+          <EntitySet Name="Files" EntityType="Model.File" />
+          <EntitySet Name="FileFileTypes" EntityType="Model.FileFileType" />
+          <EntitySet Name="FileTypes" EntityType="Model.FileType" />
+          <EntitySet Name="Grades" EntityType="Model.Grade" />
+          <EntitySet Name="Headers" EntityType="Model.Header" />
+          <EntitySet Name="Outcomes" EntityType="Model.Outcome" />
+          <EntitySet Name="OutcomeUnits" EntityType="Model.OutcomeUnit" />
+          <EntitySet Name="Schools" EntityType="Model.School" />
+          <EntitySet Name="Standards" EntityType="Model.Standard" />
+          <EntitySet Name="States" EntityType="Model.State" />
+          <EntitySet Name="StrandDomains" EntityType="Model.StrandDomain" />
+          <EntitySet Name="Subjects" EntityType="Model.Subject" />
+          <EntitySet Name="TeachingDates" EntityType="Model.TeachingDate" />
+          <EntitySet Name="Units" EntityType="Model.Unit" />
+          <EntitySet Name="UnitFiles" EntityType="Model.UnitFile" />
+          <EntitySet Name="UnitStandards" EntityType="Model.UnitStandard" />
+          <EntitySet Name="UnitUserProfiles" EntityType="Model.UnitUserProfile" />
+          <EntitySet Name="UserProfiles" EntityType="Model.UserProfile" />
+          <AssociationSet Name="FK__District__State___20C1E124" Association="Model.FK__District__State___20C1E124">
+            <End Role="State" EntitySet="States" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__School__District__25869641" Association="Model.FK__School__District__25869641">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="School" EntitySet="Schools" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileFileT__File___628FA481" Association="Model.FK__FileFileT__File___628FA481">
+            <End Role="File" EntitySet="Files" />
+            <End Role="FileFileType" EntitySet="FileFileTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeachingD__File___5441852A" Association="Model.FK__TeachingD__File___5441852A">
+            <End Role="File" EntitySet="Files" />
+            <End Role="TeachingDate" EntitySet="TeachingDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitFile__File_I__74AE54BC" Association="Model.FK__UnitFile__File_I__74AE54BC">
+            <End Role="File" EntitySet="Files" />
+            <End Role="UnitFile" EntitySet="UnitFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileFileT__FileT__6383C8BA" Association="Model.FK__FileFileT__FileT__6383C8BA">
+            <End Role="FileType" EntitySet="FileTypes" />
+            <End Role="FileFileType" EntitySet="FileFileTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Unit__Grade_Id__3A81B327" Association="Model.FK__Unit__Grade_Id__3A81B327">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Unit" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitStand__Grade__440B1D61" Association="Model.FK__UnitStand__Grade__440B1D61">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="UnitStandard" EntitySet="UnitStandards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Header__StrandDo__02084FDA" Association="Model.FK__Header__StrandDo__02084FDA">
+            <End Role="StrandDomain" EntitySet="StrandDomains" />
+            <End Role="Header" EntitySet="Headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Standard__Header__01142BA1" Association="Model.FK__Standard__Header__01142BA1">
+            <End Role="Header" EntitySet="Headers" />
+            <End Role="Standard" EntitySet="Standards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutcomeUn__Outco__6E01572D" Association="Model.FK__OutcomeUn__Outco__6E01572D">
+            <End Role="Outcome" EntitySet="Outcomes" />
+            <End Role="OutcomeUnit" EntitySet="OutcomeUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutcomeUn__Unit___6EF57B66" Association="Model.FK__OutcomeUn__Unit___6EF57B66">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="OutcomeUnit" EntitySet="OutcomeUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__School__State_Id__02FC7413" Association="Model.FK__School__State_Id__02FC7413">
+            <End Role="State" EntitySet="States" />
+            <End Role="School" EntitySet="Schools" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Unit__Subject_Id__3B75D760" Association="Model.FK__Unit__Subject_Id__3B75D760">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Unit" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitFile__Unit_I__73BA3083" Association="Model.FK__UnitFile__Unit_I__73BA3083">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitFile" EntitySet="UnitFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitStand__Unit___44FF419A" Association="Model.FK__UnitStand__Unit___44FF419A">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitStandard" EntitySet="UnitStandards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitUserP__Unit___0D7A0286" Association="Model.FK__UnitUserP__Unit___0D7A0286">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitUserProfile" EntitySet="UnitUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitUserP__UserP__0E6E26BF" Association="Model.FK__UnitUserP__UserP__0E6E26BF">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UnitUserProfile" EntitySet="UnitUserProfiles" />
+          </AssociationSet>
+          <EntitySet Name="SchoolUserProfiles" EntityType="Model.SchoolUserProfile" />
+          <AssociationSet Name="FK__SchoolUse__Schoo__1BC821DD" Association="Model.FK__SchoolUse__Schoo__1BC821DD">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="SchoolUserProfile" EntitySet="SchoolUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SchoolUse__UserP__1CBC4616" Association="Model.FK__SchoolUse__UserP__1CBC4616">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="SchoolUserProfile" EntitySet="SchoolUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StrandDom__Grade__1EA48E88" Association="Model.FK__StrandDom__Grade__1EA48E88">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="StrandDomain" EntitySet="StrandDomains" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StrandDom__State__1DB06A4F" Association="Model.FK__StrandDom__State__1DB06A4F">
+            <End Role="State" EntitySet="States" />
+            <End Role="StrandDomain" EntitySet="StrandDomains" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StrandDom__Subje__1F98B2C1" Association="Model.FK__StrandDom__Subje__1F98B2C1">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="StrandDomain" EntitySet="StrandDomains" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="DistrictName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="State_Id" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="Model.FK__District__State___20C1E124" FromRole="District" ToRole="State" />
+          <NavigationProperty Name="Schools" Relationship="Model.FK__School__District__25869641" FromRole="District" ToRole="School" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Path" Nullable="false" MaxLength="511" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Alias" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FileFileTypes" Relationship="Model.FK__FileFileT__File___628FA481" FromRole="File" ToRole="FileFileType" />
+          <NavigationProperty Name="TeachingDates" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="File" ToRole="TeachingDate" />
+          <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__File_I__74AE54BC" FromRole="File" ToRole="UnitFile" />
+        </EntityType>
+        <EntityType Name="FileFileType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="File_Id" Nullable="false" />
+          <Property Type="Int32" Name="FileType_Id" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Model.FK__FileFileT__File___628FA481" FromRole="FileFileType" ToRole="File" />
+          <NavigationProperty Name="FileType" Relationship="Model.FK__FileFileT__FileT__6383C8BA" FromRole="FileFileType" ToRole="FileType" />
+        </EntityType>
+        <EntityType Name="FileType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FileTypeName" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FileFileTypes" Relationship="Model.FK__FileFileT__FileT__6383C8BA" FromRole="FileType" ToRole="FileFileType" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GradeName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Units" Relationship="Model.FK__Unit__Grade_Id__3A81B327" FromRole="Grade" ToRole="Unit" />
+          <NavigationProperty Name="UnitStandards" Relationship="Model.FK__UnitStand__Grade__440B1D61" FromRole="Grade" ToRole="UnitStandard" />
+          <NavigationProperty Name="StrandDomains" Relationship="Model.FK__StrandDom__Grade__1EA48E88" FromRole="Grade" ToRole="StrandDomain" />
+        </EntityType>
+        <EntityType Name="Header">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Header1" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Header2" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Header3" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Header4" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="StrandDomain_Id" Nullable="false" />
+          <NavigationProperty Name="StrandDomain" Relationship="Model.FK__Header__StrandDo__02084FDA" FromRole="Header" ToRole="StrandDomain" />
+          <NavigationProperty Name="Standards" Relationship="Model.FK__Standard__Header__01142BA1" FromRole="Header" ToRole="Standard" />
+        </EntityType>
+        <EntityType Name="Outcome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OutcomeName" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OutcomeUnits" Relationship="Model.FK__OutcomeUn__Outco__6E01572D" FromRole="Outcome" ToRole="OutcomeUnit" />
+        </EntityType>
+        <EntityType Name="OutcomeUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Outcome_Id" Nullable="false" />
+          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
+          <NavigationProperty Name="Outcome" Relationship="Model.FK__OutcomeUn__Outco__6E01572D" FromRole="OutcomeUnit" ToRole="Outcome" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK__OutcomeUn__Unit___6EF57B66" FromRole="OutcomeUnit" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SchoolName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="District_Id" Nullable="false" />
+          <Property Type="Int32" Name="State_Id" Nullable="false" />
+          <NavigationProperty Name="District" Relationship="Model.FK__School__District__25869641" FromRole="School" ToRole="District" />
+          <NavigationProperty Name="State" Relationship="Model.FK__School__State_Id__02FC7413" FromRole="School" ToRole="State" />
+          <NavigationProperty Name="SchoolUserProfiles" Relationship="Model.FK__SchoolUse__Schoo__1BC821DD" FromRole="School" ToRole="SchoolUserProfile" />
+        </EntityType>
+        <EntityType Name="Standard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name2" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name3" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name4" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Header_Id" Nullable="false" />
+          <NavigationProperty Name="Header" Relationship="Model.FK__Standard__Header__01142BA1" FromRole="Standard" ToRole="Header" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="StateName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShortForm" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Districts" Relationship="Model.FK__District__State___20C1E124" FromRole="State" ToRole="District" />
+          <NavigationProperty Name="Schools" Relationship="Model.FK__School__State_Id__02FC7413" FromRole="State" ToRole="School" />
+          <NavigationProperty Name="StrandDomains" Relationship="Model.FK__StrandDom__State__1DB06A4F" FromRole="State" ToRole="StrandDomain" />
+        </EntityType>
+        <EntityType Name="StrandDomain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ConceptualCategory" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Headers" Relationship="Model.FK__Header__StrandDo__02084FDA" FromRole="StrandDomain" ToRole="Header" />
+          <Property Type="Int32" Name="State_Id" Nullable="false" />
+          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
+          <Property Type="Int32" Name="Subject_Id" Nullable="false" />
+          <NavigationProperty Name="Grade1" Relationship="Model.FK__StrandDom__Grade__1EA48E88" FromRole="StrandDomain" ToRole="Grade" />
+          <NavigationProperty Name="State1" Relationship="Model.FK__StrandDom__State__1DB06A4F" FromRole="StrandDomain" ToRole="State" />
+          <NavigationProperty Name="Subject1" Relationship="Model.FK__StrandDom__Subje__1F98B2C1" FromRole="StrandDomain" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Units" Relationship="Model.FK__Unit__Subject_Id__3B75D760" FromRole="Subject" ToRole="Unit" />
+          <NavigationProperty Name="StrandDomains" Relationship="Model.FK__StrandDom__Subje__1F98B2C1" FromRole="Subject" ToRole="StrandDomain" />
+        </EntityType>
+        <EntityType Name="TeachingDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <Property Type="Guid" Name="File_Id" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="TeachingDate" ToRole="File" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="UnitName" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="2048" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
+          <Property Type="Int32" Name="Subject_Id" Nullable="false" />
+          <NavigationProperty Name="Grade" Relationship="Model.FK__Unit__Grade_Id__3A81B327" FromRole="Unit" ToRole="Grade" />
+          <NavigationProperty Name="OutcomeUnits" Relationship="Model.FK__OutcomeUn__Unit___6EF57B66" FromRole="Unit" ToRole="OutcomeUnit" />
+          <NavigationProperty Name="Subject" Relationship="Model.FK__Unit__Subject_Id__3B75D760" FromRole="Unit" ToRole="Subject" />
+          <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__Unit_I__73BA3083" FromRole="Unit" ToRole="UnitFile" />
+          <NavigationProperty Name="UnitStandards" Relationship="Model.FK__UnitStand__Unit___44FF419A" FromRole="Unit" ToRole="UnitStandard" />
+          <NavigationProperty Name="UnitUserProfiles" Relationship="Model.FK__UnitUserP__Unit___0D7A0286" FromRole="Unit" ToRole="UnitUserProfile" />
+        </EntityType>
+        <EntityType Name="UnitFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
+          <Property Type="Guid" Name="File_Id" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Model.FK__UnitFile__File_I__74AE54BC" FromRole="UnitFile" ToRole="File" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK__UnitFile__Unit_I__73BA3083" FromRole="UnitFile" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="UnitStandard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
+          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
+          <NavigationProperty Name="Grade" Relationship="Model.FK__UnitStand__Grade__440B1D61" FromRole="UnitStandard" ToRole="Grade" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK__UnitStand__Unit___44FF419A" FromRole="UnitStandard" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="UnitUserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
+          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK__UnitUserP__Unit___0D7A0286" FromRole="UnitUserProfile" ToRole="Unit" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK__UnitUserP__UserP__0E6E26BF" FromRole="UnitUserProfile" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UnitUserProfiles" Relationship="Model.FK__UnitUserP__UserP__0E6E26BF" FromRole="UserProfile" ToRole="UnitUserProfile" />
+          <NavigationProperty Name="SchoolUserProfiles" Relationship="Model.FK__SchoolUse__UserP__1CBC4616" FromRole="UserProfile" ToRole="SchoolUserProfile" />
+        </EntityType>
+        <Association Name="FK__District__State___20C1E124">
+          <End Type="Model.State" Role="State" Multiplicity="1" />
+          <End Type="Model.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__School__District__25869641">
+          <End Type="Model.District" Role="District" Multiplicity="1" />
+          <End Type="Model.School" Role="School" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="School">
+              <PropertyRef Name="District_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileFileT__File___628FA481">
+          <End Type="Model.File" Role="File" Multiplicity="1" />
+          <End Type="Model.FileFileType" Role="FileFileType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileFileType">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeachingD__File___5441852A">
+          <End Type="Model.File" Role="File" Multiplicity="1" />
+          <End Type="Model.TeachingDate" Role="TeachingDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeachingDate">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitFile__File_I__74AE54BC">
+          <End Type="Model.File" Role="File" Multiplicity="1" />
+          <End Type="Model.UnitFile" Role="UnitFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitFile">
+              <PropertyRef Name="File_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileFileT__FileT__6383C8BA">
+          <End Type="Model.FileType" Role="FileType" Multiplicity="1" />
+          <End Type="Model.FileFileType" Role="FileFileType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileFileType">
+              <PropertyRef Name="FileType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Unit__Grade_Id__3A81B327">
+          <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="Model.Unit" Role="Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitStand__Grade__440B1D61">
+          <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="Model.UnitStandard" Role="UnitStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitStandard">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Header__StrandDo__02084FDA">
+          <End Type="Model.StrandDomain" Role="StrandDomain" Multiplicity="1" />
+          <End Type="Model.Header" Role="Header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StrandDomain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Header">
+              <PropertyRef Name="StrandDomain_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Standard__Header__01142BA1">
+          <End Type="Model.Header" Role="Header" Multiplicity="1" />
+          <End Type="Model.Standard" Role="Standard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Header">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Standard">
+              <PropertyRef Name="Header_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutcomeUn__Outco__6E01572D">
+          <End Type="Model.Outcome" Role="Outcome" Multiplicity="1" />
+          <End Type="Model.OutcomeUnit" Role="OutcomeUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outcome">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OutcomeUnit">
+              <PropertyRef Name="Outcome_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutcomeUn__Unit___6EF57B66">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="Model.OutcomeUnit" Role="OutcomeUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OutcomeUnit">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__School__State_Id__02FC7413">
+          <End Type="Model.State" Role="State" Multiplicity="1" />
+          <End Type="Model.School" Role="School" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="School">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Unit__Subject_Id__3B75D760">
+          <End Type="Model.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="Model.Unit" Role="Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitFile__Unit_I__73BA3083">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="Model.UnitFile" Role="UnitFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitFile">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitStand__Unit___44FF419A">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="Model.UnitStandard" Role="UnitStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitStandard">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitUserP__Unit___0D7A0286">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="Model.UnitUserProfile" Role="UnitUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitUserProfile">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitUserP__UserP__0E6E26BF">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.UnitUserProfile" Role="UnitUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UnitUserProfile">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SchoolUserProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="School_Id" Nullable="false" />
+          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
+          <NavigationProperty Name="School" Relationship="Model.FK__SchoolUse__Schoo__1BC821DD" FromRole="SchoolUserProfile" ToRole="School" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK__SchoolUse__UserP__1CBC4616" FromRole="SchoolUserProfile" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK__SchoolUse__Schoo__1BC821DD">
+          <End Type="Model.School" Role="School" Multiplicity="1" />
+          <End Type="Model.SchoolUserProfile" Role="SchoolUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SchoolUserProfile">
+              <PropertyRef Name="School_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SchoolUse__UserP__1CBC4616">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.SchoolUserProfile" Role="SchoolUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SchoolUserProfile">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StrandDom__Grade__1EA48E88">
+          <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="Model.StrandDomain" Role="StrandDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrandDomain">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StrandDom__State__1DB06A4F">
+          <End Type="Model.State" Role="State" Multiplicity="1" />
+          <End Type="Model.StrandDomain" Role="StrandDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrandDomain">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StrandDom__Subje__1F98B2C1">
+          <End Type="Model.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="Model.StrandDomain" Role="StrandDomain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StrandDomain">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Context">
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="Model.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="Model.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileFileTypes">
+            <EntityTypeMapping TypeName="Model.FileFileType">
+              <MappingFragment StoreEntitySet="FileFileType">
+                <ScalarProperty Name="FileType_Id" ColumnName="FileType_Id" />
+                <ScalarProperty Name="File_Id" ColumnName="File_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileTypes">
+            <EntityTypeMapping TypeName="Model.FileType">
+              <MappingFragment StoreEntitySet="FileType">
+                <ScalarProperty Name="FileTypeName" ColumnName="FileTypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="Model.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Headers">
+            <EntityTypeMapping TypeName="Model.Header">
+              <MappingFragment StoreEntitySet="Header">
+                <ScalarProperty Name="StrandDomain_Id" ColumnName="StrandDomain_Id" />
+                <ScalarProperty Name="Header4" ColumnName="Header4" />
+                <ScalarProperty Name="Header3" ColumnName="Header3" />
+                <ScalarProperty Name="Header2" ColumnName="Header2" />
+                <ScalarProperty Name="Header1" ColumnName="Header1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outcomes">
+            <EntityTypeMapping TypeName="Model.Outcome">
+              <MappingFragment StoreEntitySet="Outcome">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OutcomeName" ColumnName="OutcomeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutcomeUnits">
+            <EntityTypeMapping TypeName="Model.OutcomeUnit">
+              <MappingFragment StoreEntitySet="OutcomeUnit">
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Outcome_Id" ColumnName="Outcome_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="Model.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+                <ScalarProperty Name="District_Id" ColumnName="District_Id" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Standards">
+            <EntityTypeMapping TypeName="Model.Standard">
+              <MappingFragment StoreEntitySet="Standard">
+                <ScalarProperty Name="Header_Id" ColumnName="Header_Id" />
+                <ScalarProperty Name="Name4" ColumnName="Name4" />
+                <ScalarProperty Name="Name3" ColumnName="Name3" />
+                <ScalarProperty Name="Name2" ColumnName="Name2" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="Model.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="ShortForm" ColumnName="ShortForm" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StrandDomains">
+            <EntityTypeMapping TypeName="Model.StrandDomain">
+              <MappingFragment StoreEntitySet="StrandDomain">
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+                <ScalarProperty Name="ConceptualCategory" ColumnName="ConceptualCategory" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Model.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeachingDates">
+            <EntityTypeMapping TypeName="Model.TeachingDate">
+              <MappingFragment StoreEntitySet="TeachingDate">
+                <ScalarProperty Name="File_Id" ColumnName="File_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="Model.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitFiles">
+            <EntityTypeMapping TypeName="Model.UnitFile">
+              <MappingFragment StoreEntitySet="UnitFile">
+                <ScalarProperty Name="File_Id" ColumnName="File_Id" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitStandards">
+            <EntityTypeMapping TypeName="Model.UnitStandard">
+              <MappingFragment StoreEntitySet="UnitStandard">
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitUserProfiles">
+            <EntityTypeMapping TypeName="Model.UnitUserProfile">
+              <MappingFragment StoreEntitySet="UnitUserProfile">
+                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="Model.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolUserProfiles">
+            <EntityTypeMapping TypeName="Model.SchoolUserProfile">
+              <MappingFragment StoreEntitySet="SchoolUserProfile">
+                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
+                <ScalarProperty Name="School_Id" ColumnName="School_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

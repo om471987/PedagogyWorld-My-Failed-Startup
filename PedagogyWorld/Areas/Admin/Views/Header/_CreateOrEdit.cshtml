@@ -1,0 +1,48 @@
+@model PedagogyWorld.Header
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Header1)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Header1)
+    @Html.ValidationMessageFor(model => model.Header1)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Header2)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Header2)
+    @Html.ValidationMessageFor(model => model.Header2)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Header3)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Header3)
+    @Html.ValidationMessageFor(model => model.Header3)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Header4)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Header4)
+    @Html.ValidationMessageFor(model => model.Header4)
+</div>
+
+<div class="editor-label">
+   StrandDomain
+</div>
+<div class="editor-field">
+   @Html.DropDownListFor(model => model.StrandDomain_Id, ((IEnumerable<PedagogyWorld.StrandDomain>)ViewBag.PossibleStrandDomains).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.Id.ToString(),
+        Selected = (Model != null) && (option.Id == Model.StrandDomain_Id)
+    }), "Choose...")
+   @Html.ValidationMessageFor(model => model.StrandDomain_Id)
+</div>
+

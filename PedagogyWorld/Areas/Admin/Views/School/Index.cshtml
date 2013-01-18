@@ -1,0 +1,65 @@
+@model IEnumerable<PedagogyWorld.School>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            SchoolName
+        </th>
+        <th>
+            District_Id
+        </th>
+        <th>
+            State_Id
+        </th>
+        <th>
+            District
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            SchoolUserProfiles
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+			@item.SchoolName
+        </td>
+        <td>
+			@item.District_Id
+        </td>
+        <td>
+			@item.State_Id
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.District).ToString()
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.State).ToString()
+        </td>
+        <td>
+			@(item.SchoolUserProfiles == null ? "None" : item.SchoolUserProfiles.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using PedagogyWorld.Models;
-using PedagogyWorld.Data;
+
 
 namespace PedagogyWorld.Filters
 {

@@ -1,0 +1,44 @@
+@model PedagogyWorld.StrandDomain
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>StrandDomain</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">ConceptualCategory</div>
+    <div class="display-field">@Model.ConceptualCategory</div>
+
+    <div class="display-label">State_Id</div>
+    <div class="display-field">@Model.State_Id</div>
+
+    <div class="display-label">Grade_Id</div>
+    <div class="display-field">@Model.Grade_Id</div>
+
+    <div class="display-label">Subject_Id</div>
+    <div class="display-field">@Model.Subject_Id</div>
+
+    <div class="display-label">Headers</div>
+    <div class="display-field">@(Model.Headers == null ? "None" : Model.Headers.Count.ToString())</div>
+
+    <div class="display-label">Grade1</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Grade1).ToString()</div>
+
+    <div class="display-label">State1</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.State1).ToString()</div>
+
+    <div class="display-label">Subject1</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Subject1).ToString()</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

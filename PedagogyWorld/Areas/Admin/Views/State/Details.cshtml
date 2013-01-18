@@ -1,0 +1,29 @@
+@model PedagogyWorld.State
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>State</legend>
+
+    <div class="display-label">StateName</div>
+    <div class="display-field">@Model.StateName</div>
+
+    <div class="display-label">ShortForm</div>
+    <div class="display-field">@Model.ShortForm</div>
+
+    <div class="display-label">Districts</div>
+    <div class="display-field">@(Model.Districts == null ? "None" : Model.Districts.Count.ToString())</div>
+
+    <div class="display-label">Schools</div>
+    <div class="display-field">@(Model.Schools == null ? "None" : Model.Schools.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

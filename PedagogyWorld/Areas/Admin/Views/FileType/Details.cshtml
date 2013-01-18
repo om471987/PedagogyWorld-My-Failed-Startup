@@ -1,0 +1,23 @@
+@model PedagogyWorld.FileType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FileType</legend>
+
+    <div class="display-label">FileTypeName</div>
+    <div class="display-field">@Model.FileTypeName</div>
+
+    <div class="display-label">FileFileTypes</div>
+    <div class="display-field">@(Model.FileFileTypes == null ? "None" : Model.FileFileTypes.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

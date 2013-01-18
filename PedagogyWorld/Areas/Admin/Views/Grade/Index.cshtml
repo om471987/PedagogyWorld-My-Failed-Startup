@@ -1,0 +1,47 @@
+@model IEnumerable<PedagogyWorld.Grade>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            GradeName
+        </th>
+        <th>
+            Units
+        </th>
+        <th>
+            UnitStandards
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+			@item.GradeName
+        </td>
+        <td>
+			@(item.Units == null ? "None" : item.Units.Count.ToString())
+        </td>
+        <td>
+			@(item.UnitStandards == null ? "None" : item.UnitStandards.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+

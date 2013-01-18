@@ -1,0 +1,38 @@
+@model PedagogyWorld.Header
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Header</legend>
+
+    <div class="display-label">Header1</div>
+    <div class="display-field">@Model.Header1</div>
+
+    <div class="display-label">Header2</div>
+    <div class="display-field">@Model.Header2</div>
+
+    <div class="display-label">Header3</div>
+    <div class="display-field">@Model.Header3</div>
+
+    <div class="display-label">Header4</div>
+    <div class="display-field">@Model.Header4</div>
+
+    <div class="display-label">StrandDomain_Id</div>
+    <div class="display-field">@Model.StrandDomain_Id</div>
+
+    <div class="display-label">StrandDomain</div>
+    <div class="display-field">@(Model.StrandDomain == null ? "None" : Model.StrandDomain.Name)</div>
+
+    <div class="display-label">Standards</div>
+    <div class="display-field">@(Model.Standards == null ? "None" : Model.Standards.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

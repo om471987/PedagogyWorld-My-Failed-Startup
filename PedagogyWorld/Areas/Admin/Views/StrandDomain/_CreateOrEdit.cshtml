@@ -1,0 +1,56 @@
+@model PedagogyWorld.StrandDomain
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ConceptualCategory)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ConceptualCategory)
+    @Html.ValidationMessageFor(model => model.ConceptualCategory)
+</div>
+
+<div class="editor-label">
+   State
+</div>
+<div class="editor-field">
+   @Html.DropDownListFor(model => model.State_Id, ((IEnumerable<PedagogyWorld.State>)ViewBag.PossibleStates).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.StateName), 
+        Value = option.Id.ToString(),
+        Selected = (Model != null) && (option.Id == Model.State_Id)
+    }), "Choose...")
+   @Html.ValidationMessageFor(model => model.State_Id)
+</div>
+
+<div class="editor-label">
+   Grade
+</div>
+<div class="editor-field">
+   @Html.DropDownListFor(model => model.Grade_Id, ((IEnumerable<PedagogyWorld.Grade>)ViewBag.PossibleGrades).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.GradeName), 
+        Value = option.Id.ToString(),
+        Selected = (Model != null) && (option.Id == Model.Grade_Id)
+    }), "Choose...")
+   @Html.ValidationMessageFor(model => model.Grade_Id)
+</div>
+
+<div class="editor-label">
+   Subject
+</div>
+<div class="editor-field">
+   @Html.DropDownListFor(model => model.Subject_Id, ((IEnumerable<PedagogyWorld.Subject>)ViewBag.PossibleSubjects).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.SubjectName), 
+        Value = option.Id.ToString(),
+        Selected = (Model != null) && (option.Id == Model.Subject_Id)
+    }), "Choose...")
+   @Html.ValidationMessageFor(model => model.Subject_Id)
+</div>
+

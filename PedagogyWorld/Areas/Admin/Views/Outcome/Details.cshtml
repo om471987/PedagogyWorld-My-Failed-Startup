@@ -1,0 +1,26 @@
+@model PedagogyWorld.Outcome
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Outcome</legend>
+
+    <div class="display-label">OutcomeName</div>
+    <div class="display-field">@Model.OutcomeName</div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">@Model.Description</div>
+
+    <div class="display-label">OutcomeUnits</div>
+    <div class="display-field">@(Model.OutcomeUnits == null ? "None" : Model.OutcomeUnits.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

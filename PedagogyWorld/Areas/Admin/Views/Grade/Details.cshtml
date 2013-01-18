@@ -1,0 +1,26 @@
+@model PedagogyWorld.Grade
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Grade</legend>
+
+    <div class="display-label">GradeName</div>
+    <div class="display-field">@Model.GradeName</div>
+
+    <div class="display-label">Units</div>
+    <div class="display-field">@(Model.Units == null ? "None" : Model.Units.Count.ToString())</div>
+
+    <div class="display-label">UnitStandards</div>
+    <div class="display-field">@(Model.UnitStandards == null ? "None" : Model.UnitStandards.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

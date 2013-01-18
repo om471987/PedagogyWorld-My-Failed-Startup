@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld", "PedagogyWo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.Tests", "PedagogyWorld.Tests\PedagogyWorld.Tests.csproj", "{534E4227-407F-4E94-BE34-B3715D561EBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.Data", "PedagogyWorld.Data\PedagogyWorld.Data.csproj", "{EC4FAACD-9952-45A3-B7F1-1136E7B7ADF2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.FileStorage", "PedagogyWorld.FileStorage\PedagogyWorld.FileStorage.csproj", "{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}"
 EndProject
 Global
@@ -23,10 +21,6 @@ Global
 		{534E4227-407F-4E94-BE34-B3715D561EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{534E4227-407F-4E94-BE34-B3715D561EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{534E4227-407F-4E94-BE34-B3715D561EBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC4FAACD-9952-45A3-B7F1-1136E7B7ADF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC4FAACD-9952-45A3-B7F1-1136E7B7ADF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC4FAACD-9952-45A3-B7F1-1136E7B7ADF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC4FAACD-9952-45A3-B7F1-1136E7B7ADF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU

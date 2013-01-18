@@ -11,7 +11,6 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using PedagogyWorld.Filters;
 using PedagogyWorld.Models;
-using PedagogyWorld.Data;
 using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace PedagogyWorld.Controllers
@@ -40,7 +39,7 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToAction("Index", "Units", new {Area=""});
+                return RedirectToAction("Index", "Unit", new {Area=""});
                 //return RedirectToLocal(returnUrl);
             }
 
@@ -84,8 +83,8 @@ namespace PedagogyWorld.Controllers
             var db = new Context();
             var statId = db.States.FirstOrDefault(t => t.ShortForm == selectedState).Id;
             var districts = (from name in db.Districts
-                             where name.StateId == statId
-                             select name.Name).ToList();
+                             where name.State_Id == statId
+                             select name.DistrictName).ToList();
             return Json(districts, JsonRequestBehavior.AllowGet);
         }
 
@@ -94,19 +93,19 @@ namespace PedagogyWorld.Controllers
         public ActionResult UpdateSchoolJSon(string selectedDistrict)
         {
             IList<string> schools;
+            var db = new Context();
             if (selectedDistrict != "-- Loading Districts --")
             {
-                var db = new Context();
-
-                var statId = db.Districts.FirstOrDefault(t => t.Name == selectedDistrict).Id;
+                
+                var statId = db.Districts.FirstOrDefault(t => t.DistrictName == selectedDistrict).Id;
                 schools = (from name in db.Schools
-                               where name.DistrictId == statId
-                               select name.Name).ToList();                
+                               where name.District_Id == statId
+                               select name.SchoolName).ToList();                
             }
             else
             {
-                schools = new List<string>();
-                schools.Add("-- Loading Schools --");
+                schools = (from name in db.Schools
+                           select name.SchoolName).ToList(); 
             }
 
             return Json(schools, JsonRequestBehavior.AllowGet);
@@ -126,11 +125,10 @@ namespace PedagogyWorld.Controllers
                     WebSecurity.Login(model.UserName, model.Password);
 
                     var db = new Context();
-                    var school = db.Schools.FirstOrDefault(t => t.Name == model.School);
+                    var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
                     var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
 
-                    school.UserProfiles.Add(user);
-                    user.Schools.Add(school);
+                    db.SchoolUserProfiles.Add(new SchoolUserProfile{School = school, UserProfile = user});
                     db.SaveChanges();
                     return RedirectToAction("TakeATour");
                 }
@@ -256,7 +254,7 @@ namespace PedagogyWorld.Controllers
         public ActionResult Edit()
         {
             var context = new Context();
-            int id = context.UserProfiles.FirstOrDefault(t => t.UserName ==                 User.Identity.Name).UserId;
+            int id = context.UserProfiles.FirstOrDefault(t => t.UserName == User.Identity.Name).UserId;
             UserProfile userprofile = context.UserProfiles.Single(x => x.UserId == id);
             return View(userprofile);
         }
@@ -273,7 +271,7 @@ namespace PedagogyWorld.Controllers
             {
                 context.Entry(userprofile).State = EntityState.Modified;
                 context.SaveChanges();
-                return RedirectToAction("Index", "Units");
+                return RedirectToAction("Index", "Unit");
             }
             return View(userprofile);
         }

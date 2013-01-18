@@ -17,7 +17,7 @@ namespace PedagogyWorld.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { Controller="States", action = "Main", id = UrlParameter.Optional },
+                new { Controller="State", action = "Manage", id = UrlParameter.Optional },
                 new[] { "PedagogyWorld.Areas.Admin.Controllers" }
             );
         }
