@@ -495,6 +495,7 @@
     <Content Include="Views\File\Details.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\_CreateOrEdit.cshtml" />
+    <Content Include="Views\File\Planner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

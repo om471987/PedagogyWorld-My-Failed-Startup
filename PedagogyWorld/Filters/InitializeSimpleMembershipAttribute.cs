@@ -39,7 +39,7 @@ namespace PedagogyWorld.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("PedagogyWorldConnectionString", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("Context", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PedagogyWorld;
+using PedagogyWorld.ExtensionMethod;
 
 namespace PedagogyWorld.Controllers
 {   
@@ -98,6 +99,43 @@ namespace PedagogyWorld.Controllers
             context.Files.Remove(file);
             context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Planner()
+        {
+            //ViewBag.Files = context.Files;
+
+            ViewBag.Files = new[]
+                { "event3", "Event4"
+                };
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult JSonPlanner(double start, double end)
+        {
+            start.ToDateTime();
+
+            ViewBag.Files = context.Files;
+
+            var title = new[]
+                {
+                    new
+                        {
+                            id = 111,
+                            title = "event1",
+                            start = DateTime.Now.ToUnixTimeStamp(),
+                            url = "http://yahoo.com/"
+                        },
+                    new
+                        {
+                            id = 222,
+                            title = "Event2",
+                            start =  DateTime.Now.AddDays(4).ToUnixTimeStamp(),
+                            url = "http://yahoo.com/"
+                        },
+                };
+            return Json(title, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

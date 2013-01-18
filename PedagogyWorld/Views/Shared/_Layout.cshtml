@@ -23,8 +23,8 @@
                         <ul id="menu">
                            @if(Request.IsAuthenticated)
                            {
-                              <li>@Html.ActionLink("My Units", "Index", "Units", new { Area=""}, new { id = "MyUnitsLink" })</li>
-                              <li>@Html.ActionLink("Planner", "Planner", "Files", new { Area=""}, new { id = "PlannerLink" })</li>
+                              <li>@Html.ActionLink("My Units", "Index", "Unit", new { Area=""}, new { id = "MyUnitsLink" })</li>
+                              <li>@Html.ActionLink("Planner", "Planner", "File", new { Area=""}, new { id = "PlannerLink" })</li>
                               <li>@Html.ActionLink("Settings", "Manage", "Account", new { Area=""},new { id = "SettingsLink" })</li>
                            }
                            else
