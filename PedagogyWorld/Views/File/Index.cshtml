@@ -1,0 +1,71 @@
+@model IEnumerable<PedagogyWorld.File>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            FileName
+        </th>
+        <th>
+            Path
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Alias
+        </th>
+        <th>
+            FileFileTypes
+        </th>
+        <th>
+            TeachingDates
+        </th>
+        <th>
+            UnitFiles
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+			@item.FileName
+        </td>
+        <td>
+			@item.Path
+        </td>
+        <td>
+			@item.Description
+        </td>
+        <td>
+			@item.Alias
+        </td>
+        <td>
+			@(item.FileFileTypes == null ? "None" : item.FileFileTypes.Count.ToString())
+        </td>
+        <td>
+			@(item.TeachingDates == null ? "None" : item.TeachingDates.Count.ToString())
+        </td>
+        <td>
+			@(item.UnitFiles == null ? "None" : item.UnitFiles.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+

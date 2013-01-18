@@ -185,6 +185,7 @@
     <Compile Include="Areas\Admin\Controllers\FileTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\GradeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HeaderController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\StateController.cs" />
     <Compile Include="Areas\Admin\Controllers\SchoolController.cs" />
@@ -217,6 +218,7 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Outcome.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -487,6 +489,12 @@
     <Content Include="Views\Unit\Details.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
     <Content Include="Views\Unit\_CreateOrEdit.cshtml" />
+    <Content Include="Views\File\Create.cshtml" />
+    <Content Include="Views\File\Edit.cshtml" />
+    <Content Include="Views\File\Delete.cshtml" />
+    <Content Include="Views\File\Details.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

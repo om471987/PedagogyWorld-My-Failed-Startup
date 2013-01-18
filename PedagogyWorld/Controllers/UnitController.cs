@@ -35,6 +35,8 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.PossibleGrades = context.Grades;
+            ViewBag.PossibleSubjects = context.Subjects;
             return View();
         } 
 
@@ -48,10 +50,17 @@ namespace PedagogyWorld.Controllers
             {
                 unit.Id = Guid.NewGuid();
                 context.Units.Add(unit);
+
+                context.UnitUserProfiles.Add(new UnitUserProfile
+                    {
+                        Unit_Id = unit.Id ,
+                        UserProfile_Id = context.UserProfiles.FirstOrDefault(t=>t.UserName == User.Identity.Name).UserId
+                    });
                 context.SaveChanges();
                 return RedirectToAction("Index");  
             }
-
+            ViewBag.PossibleGrades = context.Grades;
+            ViewBag.PossibleSubjects = context.Subjects;
             return View(unit);
         }
         
@@ -61,6 +70,8 @@ namespace PedagogyWorld.Controllers
         public ActionResult Edit(System.Guid id)
         {
             Unit unit = context.Units.Single(x => x.Id == id);
+            ViewBag.PossibleGrades = context.Grades;
+            ViewBag.PossibleSubjects = context.Subjects;
             return View(unit);
         }
 
@@ -76,6 +87,8 @@ namespace PedagogyWorld.Controllers
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.PossibleGrades = context.Grades;
+            ViewBag.PossibleSubjects = context.Subjects;
             return View(unit);
         }
 
