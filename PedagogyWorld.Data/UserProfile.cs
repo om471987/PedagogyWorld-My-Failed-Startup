@@ -8,17 +8,17 @@ namespace PedagogyWorld.Data
    {
    [Key]
    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-   public int UserId { get; set;}
+   public virtual int UserId { get; set; }
 
    [Required]
-   public string UserName { get; set; }
+   public virtual string UserName { get; set; }
 
-   public string FirstName { get; set; }
+   public virtual string FirstName { get; set; }
 
-   public string LastName { get; set; }
+   public virtual string LastName { get; set; }
 
    [Required]
-   public string Email { get; set; }
+   public virtual string Email { get; set; }
 
    public virtual ICollection<School> Schools { get; set; }
    }

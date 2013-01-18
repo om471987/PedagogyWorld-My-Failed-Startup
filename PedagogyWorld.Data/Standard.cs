@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PedagogyWorld.Data
 {
-    public class Simple
+    public class Standard
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
     }
 }

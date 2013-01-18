@@ -8,13 +8,13 @@ namespace PedagogyWorld.Data
    {
       [Key]
       [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-      public int Id { get; set; }
+       public virtual int Id { get; set; }
 
       [Required]
-      public string Name { get; set; }
+      public virtual string Name { get; set; }
 
       [Required]
-      public int DistrictId { get; set; }
+      public virtual int DistrictId { get; set; }
 
       public virtual ICollection<UserProfile> UserProfiles { get; set; }
    }

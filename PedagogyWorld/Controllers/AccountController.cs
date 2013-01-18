@@ -79,17 +79,35 @@ namespace PedagogyWorld.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult RegisterJSon(string selectedState)
+        public ActionResult UpdateDistrictJSon(string selectedState)
         {
             var db = new Context();
-
             var statId = db.States.FirstOrDefault(t => t.ShortForm == selectedState).Id;
-            var districts = db.Districts.Where(t => t.StateId == statId);
+            var districts = (from name in db.Districts
+                             where name.StateId == statId
+                             select name.Name).ToList();
+            return Json(districts, JsonRequestBehavior.AllowGet);
+        }
 
-            var schools = (from d in districts 
-                           from s in db.Schools 
-                           where d.Id == s.DistrictId 
-                           select s.Name).ToList();
+
+        [AllowAnonymous]
+        public ActionResult UpdateSchoolJSon(string selectedDistrict)
+        {
+            IList<string> schools;
+            if (selectedDistrict != "-- Loading Districts --")
+            {
+                var db = new Context();
+
+                var statId = db.Districts.FirstOrDefault(t => t.Name == selectedDistrict).Id;
+                schools = (from name in db.Schools
+                               where name.DistrictId == statId
+                               select name.Name).ToList();                
+            }
+            else
+            {
+                schools = new List<string>();
+                schools.Add("-- Loading Schools --");
+            }
 
             return Json(schools, JsonRequestBehavior.AllowGet);
         }
@@ -110,6 +128,7 @@ namespace PedagogyWorld.Controllers
                     var db = new Context();
                     var school = db.Schools.FirstOrDefault(t => t.Name == model.School);
                     var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
+
                     school.UserProfiles.Add(user);
                     user.Schools.Add(school);
                     db.SaveChanges();

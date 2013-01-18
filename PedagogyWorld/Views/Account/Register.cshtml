@@ -39,8 +39,13 @@
            </li>
 
            <li>
+              @Html.LabelFor(m => m.District)
+              @Html.DropDownListFor(m => m.District, Enumerable.Empty<SelectListItem>(), "-- Loading Districts --", new { id = "District" })
+           </li>
+
+           <li>
               @Html.LabelFor(m => m.School)
-              @Html.DropDownListFor(m => m.School, Enumerable.Empty<SelectListItem>(), "-- Loading School --", new { id = "School" })
+              @Html.DropDownListFor(m => m.School, Enumerable.Empty<SelectListItem>(), "-- Loading Schools --", new { id = "School" })
            </li>
         </ol>
         <input type="submit" value="Register" />
@@ -52,8 +57,22 @@
     @Scripts.Render("~/bundles/jqueryval")
 
    <script type="text/javascript">
+      
       $('#state').change(function () {
-         $.getJSON('/Account/RegisterJSon?selectedState=' + $("#state option:selected").text(), function (result) {
+         $.getJSON('/Account/UpdateDistrictJSon?selectedState=' + $("#state option:selected").text(), function (result) {
+            var ddl = $('#District');
+            ddl.empty();
+            $(result).each(function () {
+               $(document.createElement('option'))
+                  .attr('value', this)
+                  .text(this)
+                  .appendTo(ddl);
+            });
+         });
+      }).change();
+      
+      $('#District').change(function () {
+         $.getJSON('/Account/UpdateSchoolJSon?selectedDistrict=' + $("#District option:selected").text(), function (result) {
             var ddl = $('#School');
             ddl.empty();
             $(result).each(function () {
@@ -63,8 +82,8 @@
                   .appendTo(ddl);
             });
          });
-      })
-         .change();
+      }).change();      
+
    </script>
 }
 

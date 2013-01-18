@@ -9,13 +9,13 @@ namespace PedagogyWorld.Data
    {
       [Key]
       [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-      public Guid Id { get; set; }
+       public virtual Guid Id { get; set; }
 
       [Required]
-      public string Name { get; set; }
+      public virtual string Name { get; set; }
 
       [Required]
-      public string Path { get; set; }
+      public virtual string Path { get; set; }
 
       public virtual ICollection<FileType> FileTypes { get; set; }
 

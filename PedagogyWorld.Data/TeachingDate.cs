@@ -9,10 +9,10 @@ namespace PedagogyWorld.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public virtual DateTime Date { get; set; }
 
         [Required]
         public virtual Guid FileId { get; set; }

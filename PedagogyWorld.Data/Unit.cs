@@ -9,21 +9,23 @@ namespace PedagogyWorld.Data
    {
       [Key]
       [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-      public Guid Id { get; set; }
+       public virtual Guid Id { get; set; }
 
       [Required]
-      public string Name { get; set; }
+      public virtual string Name { get; set; }
 
-      public string Description { get; set; }
-
-      [Required]
-      public int GradeId { get; set; }
+      public virtual string Description { get; set; }
 
       [Required]
-      public int SubjectId { get; set; }
+      public virtual int GradeId { get; set; }
+
+      [Required]
+      public virtual int SubjectId { get; set; }
 
       public virtual ICollection<Outcome> Outcomes { get; set; }
 
       public virtual ICollection<File> Files { get; set; }
+
+      public virtual ICollection<Standard> Standards { get; set; }
    }
 }

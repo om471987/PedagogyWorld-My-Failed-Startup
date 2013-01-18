@@ -73,6 +73,8 @@ namespace PedagogyWorld.Models
 
         public string State { get; set; }
 
+        public string District { get; set; }
+
         public string School { get; set; }
     }
 

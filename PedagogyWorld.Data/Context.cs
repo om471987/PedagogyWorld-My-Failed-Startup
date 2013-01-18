@@ -24,7 +24,7 @@ namespace PedagogyWorld.Data
       public DbSet<Unit> Units { get; set; }
       public DbSet<UserProfile> UserProfiles { get; set; }
       public DbSet<TeachingDate> TeachingDates { get; set; }
-      public DbSet<Simple> Simples { get; set; }
+      public DbSet<Standard> Standards { get; set; }
 
       protected override void OnModelCreating(DbModelBuilder modelBuilder)
       {
