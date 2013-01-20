@@ -8,14 +8,12 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using PedagogyWorld.Filters;
 using PedagogyWorld.Models;
 using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace PedagogyWorld.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //

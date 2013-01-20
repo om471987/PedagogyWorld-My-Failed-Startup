@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Web.Mvc;
-using System.Web.Security;
 using WebMatrix.WebData;
 
 namespace PedagogyWorld.Filters
@@ -26,10 +24,10 @@ namespace PedagogyWorld.Filters
                 try
                 {
                     WebSecurity.InitializeDatabaseConnection("ConnStringForWebSecurity", "UserProfile", "UserId", "UserName", autoCreateTables: true);
-                    if (!Roles.RoleExists("Admin"))
-                        Roles.CreateRole("Admin");
-                    if (!((IList<string>) Roles.GetRolesForUser("sri")).Contains("Admin"))
-                        Roles.AddUsersToRoles(new[] { "sri" }, new[] { "Admin" });
+                    //if (!Roles.RoleExists("Admin"))
+                    //    Roles.CreateRole("Admin");
+                    //if (!((IList<string>) Roles.GetRolesForUser("sri")).Contains("Admin"))
+                    //    Roles.AddUsersToRoles(new[] { "sri" }, new[] { "Admin" });
                 }
                 catch (Exception ex)
                 {

@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+<p>
+   @Html.ActionLink("Back to Admin Page List", "Manage","State")
+</p>
+
 <h2>Index</h2>
 
 <p>
@@ -14,12 +18,6 @@
         <th></th>
         <th>
             SchoolName
-        </th>
-        <th>
-            District_Id
-        </th>
-        <th>
-            State_Id
         </th>
         <th>
             District
@@ -43,16 +41,10 @@
 			@item.SchoolName
         </td>
         <td>
-			@item.District_Id
+			@Html.DisplayTextFor(_ => item.District.DistrictName).ToString()
         </td>
         <td>
-			@item.State_Id
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.District).ToString()
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.State).ToString()
+			@Html.DisplayTextFor(_ => item.State.StateName).ToString()
         </td>
         <td>
 			@(item.UserProfileSchools == null ? "None" : item.UserProfileSchools.Count.ToString())

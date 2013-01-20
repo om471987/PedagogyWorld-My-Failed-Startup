@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using PedagogyWorld.App_Start;
+using PedagogyWorld.Filters;
 
 namespace PedagogyWorld
 {
@@ -10,6 +11,8 @@ namespace PedagogyWorld
     {
         protected void Application_Start()
         {
+            new InitializeSimpleMembershipAttribute().OnActionExecuting(null);
+
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
