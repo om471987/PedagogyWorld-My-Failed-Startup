@@ -26,7 +26,7 @@
     <div class="display-field">@Html.DisplayTextFor(_ => Model.State).ToString()</div>
 
     <div class="display-label">SchoolUserProfiles</div>
-    <div class="display-field">@(Model.SchoolUserProfiles == null ? "None" : Model.SchoolUserProfiles.Count.ToString())</div>
+    <div class="display-field">@(Model.UserProfileSchools == null ? "None" : Model.UserProfileSchools.Count.ToString())</div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

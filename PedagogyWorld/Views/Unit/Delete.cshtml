@@ -38,7 +38,7 @@
     <div class="display-field">@(Model.UnitStandards == null ? "None" : Model.UnitStandards.Count.ToString())</div>
 
     <div class="display-label">UnitUserProfiles</div>
-    <div class="display-field">@(Model.UnitUserProfiles == null ? "None" : Model.UnitUserProfiles.Count.ToString())</div>
+    <div class="display-field">@(Model.UserProfileUnits == null ? "None" : Model.UserProfileUnits.Count.ToString())</div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

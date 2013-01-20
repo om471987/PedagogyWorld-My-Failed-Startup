@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class HeaderController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /Header/
 
         public ViewResult Index()
         {
-            return View(context.Headers.Include(header => header.Standards).ToList());
+            return View(_context.Headers.Include(header => header.Standards).ToList());
         }
 
         //
@@ -26,7 +22,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Header header = context.Headers.Single(x => x.Id == id);
+            var header = _context.Headers.Single(x => x.Id == id);
             return View(header);
         }
 
@@ -35,7 +31,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PossibleStrandDomains = context.StrandDomains;
+            ViewBag.PossibleStrandDomains = _context.StrandDomains;
             return View();
         } 
 
@@ -47,11 +43,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Headers.Add(header);
-                context.SaveChanges();
+                _context.Headers.Add(header);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
-            ViewBag.PossibleStrandDomains = context.StrandDomains;
+            ViewBag.PossibleStrandDomains = _context.StrandDomains;
             return View(header);
         }
         
@@ -60,8 +56,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            Header header = context.Headers.Single(x => x.Id == id);
-            ViewBag.PossibleStrandDomains = context.StrandDomains;
+            Header header = _context.Headers.Single(x => x.Id == id);
+            ViewBag.PossibleStrandDomains = _context.StrandDomains;
             return View(header);
         }
 
@@ -73,11 +69,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(header).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(header).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PossibleStrandDomains = context.StrandDomains;
+            ViewBag.PossibleStrandDomains = _context.StrandDomains;
             return View(header);
         }
 
@@ -86,7 +82,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            Header header = context.Headers.Single(x => x.Id == id);
+            Header header = _context.Headers.Single(x => x.Id == id);
             return View(header);
         }
 
@@ -96,16 +92,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Header header = context.Headers.Single(x => x.Id == id);
-            context.Headers.Remove(header);
-            context.SaveChanges();
+            Header header = _context.Headers.Single(x => x.Id == id);
+            _context.Headers.Remove(header);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

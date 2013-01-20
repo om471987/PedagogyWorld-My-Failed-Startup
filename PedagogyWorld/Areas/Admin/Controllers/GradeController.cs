@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class GradeController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /Grade/
 
         public ViewResult Index()
         {
-            return View(context.Grades.Include(grade => grade.Units).Include(grade => grade.UnitStandards).ToList());
+            return View(_context.Grades.Include(grade => grade.Units).Include(grade => grade.UnitStandards).ToList());
         }
 
         //
@@ -26,7 +22,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Grade grade = context.Grades.Single(x => x.Id == id);
+            Grade grade = _context.Grades.Single(x => x.Id == id);
             return View(grade);
         }
 
@@ -46,8 +42,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Grades.Add(grade);
-                context.SaveChanges();
+                _context.Grades.Add(grade);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -59,7 +55,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            Grade grade = context.Grades.Single(x => x.Id == id);
+            Grade grade = _context.Grades.Single(x => x.Id == id);
             return View(grade);
         }
 
@@ -71,8 +67,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(grade).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(grade).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(grade);
@@ -83,7 +79,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            Grade grade = context.Grades.Single(x => x.Id == id);
+            Grade grade = _context.Grades.Single(x => x.Id == id);
             return View(grade);
         }
 
@@ -93,16 +89,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Grade grade = context.Grades.Single(x => x.Id == id);
-            context.Grades.Remove(grade);
-            context.SaveChanges();
+            Grade grade = _context.Grades.Single(x => x.Id == id);
+            _context.Grades.Remove(grade);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

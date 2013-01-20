@@ -1,32 +1,29 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Controllers
 {   
     public class UnitController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /Unit/
 
         public ViewResult Index()
         {
-            return View(context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfileUnits).ToList());
+            return View(_context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfileUnits).ToList());
         }
 
         //
         // GET: /Unit/Details/5
 
-        public ViewResult Details(System.Guid id)
+        public ViewResult Details(Guid id)
         {
-            Unit unit = context.Units.Single(x => x.Id == id);
+            var unit = _context.Units.Single(x => x.Id == id);
             return View(unit);
         }
 
@@ -35,8 +32,8 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PossibleGrades = context.Grades;
-            ViewBag.PossibleSubjects = context.Subjects;
+            ViewBag.PossibleGrades = _context.Grades;
+            ViewBag.PossibleSubjects = _context.Subjects;
             return View();
         } 
 
@@ -49,29 +46,29 @@ namespace PedagogyWorld.Controllers
             if (ModelState.IsValid)
             {
                 unit.Id = Guid.NewGuid();
-                context.Units.Add(unit);
+                _context.Units.Add(unit);
 
-                context.UserProfileUnits.Add(new UserProfileUnit
+                _context.UserProfileUnits.Add(new UserProfileUnit
                     {
                         Unit_Id = unit.Id ,
-                        UserProfile_Id = context.UserProfiles.FirstOrDefault(t=>t.UserName == User.Identity.Name).UserId
+                        UserProfile_Id = _context.UserProfiles.FirstOrDefault(t=>t.UserName == User.Identity.Name).UserId
                     });
-                context.SaveChanges();
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
-            ViewBag.PossibleGrades = context.Grades;
-            ViewBag.PossibleSubjects = context.Subjects;
+            ViewBag.PossibleGrades = _context.Grades;
+            ViewBag.PossibleSubjects = _context.Subjects;
             return View(unit);
         }
         
         //
         // GET: /Unit/Edit/5
  
-        public ActionResult Edit(System.Guid id)
+        public ActionResult Edit(Guid id)
         {
-            Unit unit = context.Units.Single(x => x.Id == id);
-            ViewBag.PossibleGrades = context.Grades;
-            ViewBag.PossibleSubjects = context.Subjects;
+            var unit = _context.Units.Single(x => x.Id == id);
+            ViewBag.PossibleGrades = _context.Grades;
+            ViewBag.PossibleSubjects = _context.Subjects;
             return View(unit);
         }
 
@@ -83,21 +80,21 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(unit).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(unit).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PossibleGrades = context.Grades;
-            ViewBag.PossibleSubjects = context.Subjects;
+            ViewBag.PossibleGrades = _context.Grades;
+            ViewBag.PossibleSubjects = _context.Subjects;
             return View(unit);
         }
 
         //
         // GET: /Unit/Delete/5
  
-        public ActionResult Delete(System.Guid id)
+        public ActionResult Delete(Guid id)
         {
-            Unit unit = context.Units.Single(x => x.Id == id);
+            var unit = _context.Units.Single(x => x.Id == id);
             return View(unit);
         }
 
@@ -105,18 +102,18 @@ namespace PedagogyWorld.Controllers
         // POST: /Unit/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(System.Guid id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
-            Unit unit = context.Units.Single(x => x.Id == id);
-            context.Units.Remove(unit);
-            context.SaveChanges();
+            var unit = _context.Units.Single(x => x.Id == id);
+            _context.Units.Remove(unit);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

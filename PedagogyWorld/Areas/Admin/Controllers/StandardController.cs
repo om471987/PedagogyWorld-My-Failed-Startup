@@ -1,24 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class StandardController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /Standard/
 
         public ViewResult Index()
         {
-            return View(context.Standards.ToList());
+            return View(_context.Standards.ToList());
         }
 
         //
@@ -26,7 +21,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Standard standard = context.Standards.Single(x => x.Id == id);
+            Standard standard = _context.Standards.Single(x => x.Id == id);
             return View(standard);
         }
 
@@ -46,8 +41,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Standards.Add(standard);
-                context.SaveChanges();
+                _context.Standards.Add(standard);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -59,7 +54,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            Standard standard = context.Standards.Single(x => x.Id == id);
+            Standard standard = _context.Standards.Single(x => x.Id == id);
             return View(standard);
         }
 
@@ -71,8 +66,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(standard).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(standard).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(standard);
@@ -83,7 +78,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            Standard standard = context.Standards.Single(x => x.Id == id);
+            Standard standard = _context.Standards.Single(x => x.Id == id);
             return View(standard);
         }
 
@@ -93,16 +88,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Standard standard = context.Standards.Single(x => x.Id == id);
-            context.Standards.Remove(standard);
-            context.SaveChanges();
+            Standard standard = _context.Standards.Single(x => x.Id == id);
+            _context.Standards.Remove(standard);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

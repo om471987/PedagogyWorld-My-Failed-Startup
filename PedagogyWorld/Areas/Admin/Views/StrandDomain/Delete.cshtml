@@ -29,13 +29,13 @@
     <div class="display-field">@(Model.Headers == null ? "None" : Model.Headers.Count.ToString())</div>
 
     <div class="display-label">Grade1</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.Grade1).ToString()</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Grade).ToString()</div>
 
     <div class="display-label">State1</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.State1).ToString()</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.State).ToString()</div>
 
     <div class="display-label">Subject1</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.Subject1).ToString()</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Subject).ToString()</div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>

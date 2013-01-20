@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class SchoolController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /School/
 
         public ViewResult Index()
         {
-            return View(context.Schools.Include(school => school.UserProfileSchools).ToList());
+            return View(_context.Schools.Include(school => school.UserProfileSchools).ToList());
         }
 
         //
@@ -26,7 +22,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            School school = context.Schools.Single(x => x.Id == id);
+            School school = _context.Schools.Single(x => x.Id == id);
             return View(school);
         }
 
@@ -35,8 +31,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PossibleStates = context.States;
-            ViewBag.PossibleDistricts = context.Districts;
+            ViewBag.PossibleStates = _context.States;
+            ViewBag.PossibleDistricts = _context.Districts;
             return View();
         } 
 
@@ -48,12 +44,12 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Schools.Add(school);
-                context.SaveChanges();
+                _context.Schools.Add(school);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
-            ViewBag.PossibleStates = context.States;
-            ViewBag.PossibleDistricts = context.Districts;
+            ViewBag.PossibleStates = _context.States;
+            ViewBag.PossibleDistricts = _context.Districts;
             return View(school);
         }
         
@@ -62,9 +58,9 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            School school = context.Schools.Single(x => x.Id == id);
-            ViewBag.PossibleStates = context.States;
-            ViewBag.PossibleDistricts = context.Districts;
+            School school = _context.Schools.Single(x => x.Id == id);
+            ViewBag.PossibleStates = _context.States;
+            ViewBag.PossibleDistricts = _context.Districts;
             return View(school);
         }
 
@@ -76,12 +72,12 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(school).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(school).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PossibleStates = context.States;
-            ViewBag.PossibleDistricts = context.Districts;
+            ViewBag.PossibleStates = _context.States;
+            ViewBag.PossibleDistricts = _context.Districts;
             return View(school);
         }
 
@@ -90,7 +86,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            School school = context.Schools.Single(x => x.Id == id);
+            School school = _context.Schools.Single(x => x.Id == id);
             return View(school);
         }
 
@@ -100,16 +96,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            School school = context.Schools.Single(x => x.Id == id);
-            context.Schools.Remove(school);
-            context.SaveChanges();
+            School school = _context.Schools.Single(x => x.Id == id);
+            _context.Schools.Remove(school);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

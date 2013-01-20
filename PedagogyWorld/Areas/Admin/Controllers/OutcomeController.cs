@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class OutcomeController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /Outcome/
 
         public ViewResult Index()
         {
-            return View(context.Outcomes.Include(outcome => outcome.OutcomeUnits).ToList());
+            return View(_context.Outcomes.Include(outcome => outcome.OutcomeUnits).ToList());
         }
 
         //
@@ -26,7 +22,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Outcome outcome = context.Outcomes.Single(x => x.Id == id);
+            Outcome outcome = _context.Outcomes.Single(x => x.Id == id);
             return View(outcome);
         }
 
@@ -46,8 +42,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Outcomes.Add(outcome);
-                context.SaveChanges();
+                _context.Outcomes.Add(outcome);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -59,7 +55,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            Outcome outcome = context.Outcomes.Single(x => x.Id == id);
+            Outcome outcome = _context.Outcomes.Single(x => x.Id == id);
             return View(outcome);
         }
 
@@ -71,8 +67,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(outcome).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(outcome).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(outcome);
@@ -83,7 +79,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            Outcome outcome = context.Outcomes.Single(x => x.Id == id);
+            Outcome outcome = _context.Outcomes.Single(x => x.Id == id);
             return View(outcome);
         }
 
@@ -93,16 +89,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Outcome outcome = context.Outcomes.Single(x => x.Id == id);
-            context.Outcomes.Remove(outcome);
-            context.SaveChanges();
+            Outcome outcome = _context.Outcomes.Single(x => x.Id == id);
+            _context.Outcomes.Remove(outcome);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

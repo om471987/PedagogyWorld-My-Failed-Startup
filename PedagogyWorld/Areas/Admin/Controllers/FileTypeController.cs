@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class FileTypeController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /FileType/
 
         public ViewResult Index()
         {
-            return View(context.FileTypes.Include(filetype => filetype.FileFileTypes).ToList());
+            return View(_context.FileTypes.Include(filetype => filetype.FileFileTypes).ToList());
         }
 
         //
@@ -26,7 +22,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            FileType filetype = context.FileTypes.Single(x => x.Id == id);
+            FileType filetype = _context.FileTypes.Single(x => x.Id == id);
             return View(filetype);
         }
 
@@ -46,8 +42,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.FileTypes.Add(filetype);
-                context.SaveChanges();
+                _context.FileTypes.Add(filetype);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -59,7 +55,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            FileType filetype = context.FileTypes.Single(x => x.Id == id);
+            FileType filetype = _context.FileTypes.Single(x => x.Id == id);
             return View(filetype);
         }
 
@@ -71,8 +67,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(filetype).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(filetype).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(filetype);
@@ -83,7 +79,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            FileType filetype = context.FileTypes.Single(x => x.Id == id);
+            FileType filetype = _context.FileTypes.Single(x => x.Id == id);
             return View(filetype);
         }
 
@@ -93,16 +89,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            FileType filetype = context.FileTypes.Single(x => x.Id == id);
-            context.FileTypes.Remove(filetype);
-            context.SaveChanges();
+            FileType filetype = _context.FileTypes.Single(x => x.Id == id);
+            _context.FileTypes.Remove(filetype);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

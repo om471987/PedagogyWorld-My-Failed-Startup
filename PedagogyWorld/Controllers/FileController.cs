@@ -1,33 +1,30 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 using PedagogyWorld.ExtensionMethod;
 
 namespace PedagogyWorld.Controllers
 {   
     public class FileController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /File/
 
         public ViewResult Index()
         {
-            return View(context.Files.Include(file => file.FileFileTypes).Include(file => file.TeachingDates).Include(file => file.UnitFiles).ToList());
+            return View(_context.Files.Include(file => file.FileFileTypes).Include(file => file.TeachingDates).Include(file => file.UnitFiles).ToList());
         }
 
         //
         // GET: /File/Details/5
 
-        public ViewResult Details(System.Guid id)
+        public ViewResult Details(Guid id)
         {
-            File file = context.Files.Single(x => x.Id == id);
+            var file = _context.Files.Single(x => x.Id == id);
             return View(file);
         }
 
@@ -48,8 +45,8 @@ namespace PedagogyWorld.Controllers
             if (ModelState.IsValid)
             {
                 file.Id = Guid.NewGuid();
-                context.Files.Add(file);
-                context.SaveChanges();
+                _context.Files.Add(file);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
@@ -59,9 +56,9 @@ namespace PedagogyWorld.Controllers
         //
         // GET: /File/Edit/5
  
-        public ActionResult Edit(System.Guid id)
+        public ActionResult Edit(Guid id)
         {
-            File file = context.Files.Single(x => x.Id == id);
+            var file = _context.Files.Single(x => x.Id == id);
             return View(file);
         }
 
@@ -73,8 +70,8 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(file).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(file).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(file);
@@ -83,9 +80,9 @@ namespace PedagogyWorld.Controllers
         //
         // GET: /File/Delete/5
  
-        public ActionResult Delete(System.Guid id)
+        public ActionResult Delete(Guid id)
         {
-            File file = context.Files.Single(x => x.Id == id);
+            var file = _context.Files.Single(x => x.Id == id);
             return View(file);
         }
 
@@ -93,11 +90,11 @@ namespace PedagogyWorld.Controllers
         // POST: /File/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(System.Guid id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
-            File file = context.Files.Single(x => x.Id == id);
-            context.Files.Remove(file);
-            context.SaveChanges();
+            var file = _context.Files.Single(x => x.Id == id);
+            _context.Files.Remove(file);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -116,7 +113,7 @@ namespace PedagogyWorld.Controllers
         {
             start.ToDateTime();
 
-            ViewBag.Files = context.Files;
+            ViewBag.Files = _context.Files;
 
             var title = new[]
                 {
@@ -133,7 +130,7 @@ namespace PedagogyWorld.Controllers
                             title = "Event2",
                             start =  DateTime.Now.AddDays(4).ToUnixTimeStamp(),
                             url = "http://yahoo.com/"
-                        },
+                        }
                 };
             return Json(title, JsonRequestBehavior.AllowGet);
         }
@@ -141,7 +138,7 @@ namespace PedagogyWorld.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

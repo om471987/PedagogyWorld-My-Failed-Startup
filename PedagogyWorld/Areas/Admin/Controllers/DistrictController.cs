@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
     public class DistrictController : Controller
     {
-        private Context context = new Context();
+        private readonly Context _context = new Context();
 
         //
         // GET: /District/
 
         public ViewResult Index()
         {
-            return View(context.Districts.Include(district => district.Schools).ToList());
+            return View(_context.Districts.Include(district => district.Schools).ToList());
         }
 
         //
@@ -26,7 +22,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            District district = context.Districts.Single(x => x.Id == id);
+            District district = _context.Districts.Single(x => x.Id == id);
             return View(district);
         }
 
@@ -35,7 +31,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PossibleStates = context.States;
+            ViewBag.PossibleStates = _context.States;
             return View();
         } 
 
@@ -47,11 +43,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Districts.Add(district);
-                context.SaveChanges();
+                _context.Districts.Add(district);
+                _context.SaveChanges();
                 return RedirectToAction("Index");  
             }
-            ViewBag.PossibleStates = context.States;
+            ViewBag.PossibleStates = _context.States;
             return View(district);
         }
         
@@ -60,8 +56,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            District district = context.Districts.Single(x => x.Id == id);
-            ViewBag.PossibleStates = context.States;
+            District district = _context.Districts.Single(x => x.Id == id);
+            ViewBag.PossibleStates = _context.States;
             return View(district);
         }
 
@@ -73,11 +69,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(district).State = EntityState.Modified;
-                context.SaveChanges();
+                _context.Entry(district).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PossibleStates = context.States;
+            ViewBag.PossibleStates = _context.States;
             return View(district);
         }
 
@@ -86,7 +82,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            District district = context.Districts.Single(x => x.Id == id);
+            District district = _context.Districts.Single(x => x.Id == id);
             return View(district);
         }
 
@@ -96,16 +92,16 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            District district = context.Districts.Single(x => x.Id == id);
-            context.Districts.Remove(district);
-            context.SaveChanges();
+            District district = _context.Districts.Single(x => x.Id == id);
+            _context.Districts.Remove(district);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }
