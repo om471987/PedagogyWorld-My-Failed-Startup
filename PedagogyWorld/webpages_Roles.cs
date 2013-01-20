@@ -12,13 +12,16 @@ namespace PedagogyWorld
     using System;
     using System.Collections.Generic;
     
-    public partial class SchoolUserProfile
+    public partial class webpages_Roles
     {
-        public int Id { get; set; }
-        public int School_Id { get; set; }
-        public int UserProfile_Id { get; set; }
+        public webpages_Roles()
+        {
+            this.UserProfiles = new HashSet<UserProfile>();
+        }
     
-        public virtual School School { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+    
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
     }
 }

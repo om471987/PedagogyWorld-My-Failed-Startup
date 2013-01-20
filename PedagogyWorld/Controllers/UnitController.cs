@@ -18,7 +18,7 @@ namespace PedagogyWorld.Controllers
 
         public ViewResult Index()
         {
-            return View(context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UnitUserProfiles).ToList());
+            return View(context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfileUnits).ToList());
         }
 
         //
@@ -51,7 +51,7 @@ namespace PedagogyWorld.Controllers
                 unit.Id = Guid.NewGuid();
                 context.Units.Add(unit);
 
-                context.UnitUserProfiles.Add(new UnitUserProfile
+                context.UserProfileUnits.Add(new UserProfileUnit
                     {
                         Unit_Id = unit.Id ,
                         UserProfile_Id = context.UserProfiles.FirstOrDefault(t=>t.UserName == User.Identity.Name).UserId

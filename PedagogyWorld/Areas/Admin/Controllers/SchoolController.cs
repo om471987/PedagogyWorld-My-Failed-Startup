@@ -18,7 +18,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Index()
         {
-            return View(context.Schools.Include(school => school.SchoolUserProfiles).ToList());
+            return View(context.Schools.Include(school => school.UserProfileSchools).ToList());
         }
 
         //

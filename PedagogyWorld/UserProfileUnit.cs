@@ -12,11 +12,11 @@ namespace PedagogyWorld
     using System;
     using System.Collections.Generic;
     
-    public partial class UnitUserProfile
+    public partial class UserProfileUnit
     {
         public int Id { get; set; }
-        public System.Guid Unit_Id { get; set; }
         public int UserProfile_Id { get; set; }
+        public System.Guid Unit_Id { get; set; }
     
         public virtual Unit Unit { get; set; }
         public virtual UserProfile UserProfile { get; set; }

@@ -16,17 +16,19 @@ namespace PedagogyWorld
     {
         public UserProfile()
         {
-            this.UnitUserProfiles = new HashSet<UnitUserProfile>();
-            this.SchoolUserProfiles = new HashSet<SchoolUserProfile>();
+            this.UserProfileSchools = new HashSet<UserProfileSchool>();
+            this.UserProfileUnits = new HashSet<UserProfileUnit>();
+            this.webpages_Roles = new HashSet<webpages_Roles>();
         }
     
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
     
-        public virtual ICollection<UnitUserProfile> UnitUserProfiles { get; set; }
-        public virtual ICollection<SchoolUserProfile> SchoolUserProfiles { get; set; }
+        public virtual ICollection<UserProfileSchool> UserProfileSchools { get; set; }
+        public virtual ICollection<UserProfileUnit> UserProfileUnits { get; set; }
+        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }

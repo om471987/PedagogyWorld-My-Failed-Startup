@@ -121,14 +121,15 @@ namespace PedagogyWorld.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new{Email=model.Email});
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password,new {Email=model.Email});
                     WebSecurity.Login(model.UserName, model.Password);
 
                     var db = new Context();
+                    
                     var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
                     var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
 
-                    db.SchoolUserProfiles.Add(new SchoolUserProfile{School = school, UserProfile = user});
+                    db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
                     db.SaveChanges();
                     return RedirectToAction("TakeATour");
                 }

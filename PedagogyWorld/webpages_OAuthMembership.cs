@@ -12,20 +12,10 @@ namespace PedagogyWorld
     using System;
     using System.Collections.Generic;
     
-    public partial class School
+    public partial class webpages_OAuthMembership
     {
-        public School()
-        {
-            this.UserProfileSchools = new HashSet<UserProfileSchool>();
-        }
-    
-        public int Id { get; set; }
-        public string SchoolName { get; set; }
-        public int District_Id { get; set; }
-        public int State_Id { get; set; }
-    
-        public virtual District District { get; set; }
-        public virtual State State { get; set; }
-        public virtual ICollection<UserProfileSchool> UserProfileSchools { get; set; }
+        public string Provider { get; set; }
+        public string ProviderUserId { get; set; }
+        public int UserId { get; set; }
     }
 }

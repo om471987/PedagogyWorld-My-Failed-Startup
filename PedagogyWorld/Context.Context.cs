@@ -42,8 +42,11 @@ namespace PedagogyWorld
         public DbSet<Unit> Units { get; set; }
         public DbSet<UnitFile> UnitFiles { get; set; }
         public DbSet<UnitStandard> UnitStandards { get; set; }
-        public DbSet<UnitUserProfile> UnitUserProfiles { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<SchoolUserProfile> SchoolUserProfiles { get; set; }
+        public DbSet<UserProfileSchool> UserProfileSchools { get; set; }
+        public DbSet<UserProfileUnit> UserProfileUnits { get; set; }
+        public DbSet<webpages_Membership> webpages_Membership { get; set; }
+        public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
     }
 }

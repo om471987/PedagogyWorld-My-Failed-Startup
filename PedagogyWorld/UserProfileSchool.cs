@@ -12,20 +12,13 @@ namespace PedagogyWorld
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class UserProfileSchool
     {
-        public Grade()
-        {
-            this.StrandDomains = new HashSet<StrandDomain>();
-            this.Units = new HashSet<Unit>();
-            this.UnitStandards = new HashSet<UnitStandard>();
-        }
-    
         public int Id { get; set; }
-        public string GradeName { get; set; }
+        public int UserProfile_Id { get; set; }
+        public int School_Id { get; set; }
     
-        public virtual ICollection<StrandDomain> StrandDomains { get; set; }
-        public virtual ICollection<Unit> Units { get; set; }
-        public virtual ICollection<UnitStandard> UnitStandards { get; set; }
+        public virtual School School { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

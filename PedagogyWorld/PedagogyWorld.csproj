@@ -229,9 +229,6 @@
     <Compile Include="School.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SchoolUserProfile.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Standard.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -256,10 +253,22 @@
     <Compile Include="UnitStandard.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="UnitUserProfile.cs">
+    <Compile Include="UserProfile.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserProfile.cs">
+    <Compile Include="UserProfileSchool.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfileUnit.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_Membership.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_OAuthMembership.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_Roles.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -377,7 +386,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

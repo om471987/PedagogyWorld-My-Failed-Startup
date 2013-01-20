@@ -26,9 +26,9 @@ namespace PedagogyWorld
         public int Grade_Id { get; set; }
         public int Subject_Id { get; set; }
     
+        public virtual Grade Grade { get; set; }
         public virtual ICollection<Header> Headers { get; set; }
-        public virtual Grade Grade1 { get; set; }
-        public virtual State State1 { get; set; }
-        public virtual Subject Subject1 { get; set; }
+        public virtual State State { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }

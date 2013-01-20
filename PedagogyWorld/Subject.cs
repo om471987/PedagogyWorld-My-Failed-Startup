@@ -16,14 +16,14 @@ namespace PedagogyWorld
     {
         public Subject()
         {
-            this.Units = new HashSet<Unit>();
             this.StrandDomains = new HashSet<StrandDomain>();
+            this.Units = new HashSet<Unit>();
         }
     
         public int Id { get; set; }
         public string SubjectName { get; set; }
     
-        public virtual ICollection<Unit> Units { get; set; }
         public virtual ICollection<StrandDomain> StrandDomains { get; set; }
+        public virtual ICollection<Unit> Units { get; set; }
     }
 }
