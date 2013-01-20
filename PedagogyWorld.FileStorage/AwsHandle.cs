@@ -116,8 +116,9 @@ namespace PedagogyWorld.FileStorage
             return output;
         }
 
-        public void DownloadObject(string bucket, string fileName)
+        public Stream DownloadObject(string bucket, string fileName)
         {
+            Stream output = null;
             try
             {
                 var request = new GetObjectRequest
@@ -126,12 +127,13 @@ namespace PedagogyWorld.FileStorage
                     Key = fileName
                 };
                 var response = _s3Client.GetObject(request);
-                response.WriteResponseStreamToFile("C:\\Users\\larry\\Documents\\perl_poetry.pdf");
+                output = response.ResponseStream;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+            return output;
         }
 
         public void DeleteObject(string bucket, string fileNmae)

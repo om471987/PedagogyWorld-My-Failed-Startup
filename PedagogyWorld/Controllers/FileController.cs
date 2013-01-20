@@ -28,6 +28,13 @@ namespace PedagogyWorld.Controllers
             return Content(serializer.Serialize(aws.GetDocs(id)), "application/json");
         }
 
+        public FileResult DownloadFile()
+        {
+            var aws = new AwsHandle();
+            var stream = aws.DownloadObject("pedagogyworld", "e0807a0f26f3494bad8769d6312bb24a");
+            return File(stream, "text/plain", "google requirements.txt");
+        }
+
         public ActionResult Index()
         {
             return View(db.Files.ToList());
@@ -73,26 +80,26 @@ namespace PedagogyWorld.Controllers
         // POST: /File/Create
 
         [HttpPost]
-        public ActionResult Create(FileModel fileModel, HttpPostedFileBase uploadFile, int[] fileIds)
+        public ActionResult Create(FileModel fileModel)
         {
-            if (ModelState.IsValid && uploadFile != null)
+            if (ModelState.IsValid && fileModel.UploadFile != null)
             {
                 var fileId = Guid.NewGuid();
                 var aws = new AwsHandle();
-                var result = aws.NewFile("pedagogyworld", fileId.ToString("N"), uploadFile.InputStream, uploadFile.ContentType);
+                var result = aws.NewFile("pedagogyworld", fileId.ToString("N"), fileModel.UploadFile.InputStream, fileModel.UploadFile.ContentType);
                 if (result)
                 {
                     var file = new File
                         {
                             Id = fileId,
-                            ContentType = uploadFile.ContentType,
-                            ContentLength = uploadFile.ContentLength,
-                            FileName = uploadFile.FileName,
+                            ContentType = fileModel.UploadFile.ContentType,
+                            ContentLength = fileModel.UploadFile.ContentLength,
+                            FileName = fileModel.UploadFile.FileName,
                             StoragePath = fileId.ToString("N")
                         };
                     db.Files.Add(file);
 
-                    foreach (var t in fileIds)
+                    foreach (var t in fileModel.FileIds)
                     {
                         var type = new FileFileType
                         {
@@ -112,7 +119,16 @@ namespace PedagogyWorld.Controllers
                 }
                 return RedirectToAction("Details", "Unit", new { fileModel.Id });
             }
-
+            var typeList = new List<SelectListItem>();
+            foreach (var t in db.FileTypes)
+            {
+                typeList.Add(new SelectListItem
+                {
+                    Text = t.FileTypeName,
+                    Value = t.Id.ToString()
+                });
+            }
+            fileModel.FileTypes = typeList.ToList();
             return View(fileModel);
         }
 

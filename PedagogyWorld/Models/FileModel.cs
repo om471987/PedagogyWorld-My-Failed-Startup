@@ -16,6 +16,10 @@ namespace PedagogyWorld.Models
         public Guid Id { get; set; }
 
         public IEnumerable<SelectListItem> FileTypes { get; set; }
+
+        public HttpPostedFileBase UploadFile { get; set; }
+
+        public int[] FileIds { get; set; }
     }
 
     public class FileType
