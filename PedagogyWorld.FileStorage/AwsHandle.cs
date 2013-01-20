@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 
@@ -10,7 +9,7 @@ namespace PedagogyWorld.FileStorage
 {
     public class AwsHandle
     {
-        private readonly AmazonS3 _s3Client = AWSClientFactory.CreateAmazonS3Client("AKIAIJNFMB4HFNKTXNXA", "KCEE3e9Ac90LdGfF6QqyjMQNbKV6MCeQHdZACcAc", RegionEndpoint.USWest2);
+        private readonly AmazonS3 _s3Client = Amazon.AWSClientFactory.CreateAmazonS3Client("AKIAIJNFMB4HFNKTXNXA", "KCEE3e9Ac90LdGfF6QqyjMQNbKV6MCeQHdZACcAc", Amazon.RegionEndpoint.USWest2);
 
         public IEnumerable<string> ListBuckets()
         {
