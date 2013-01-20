@@ -5,7 +5,8 @@ using System.Linq;
 using System.Web.Mvc;
 
 namespace PedagogyWorld.Controllers
-{   
+{
+    [Authorize]
     public class UnitController : Controller
     {
         private readonly Context _context = new Context();

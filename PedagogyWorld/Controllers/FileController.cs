@@ -10,6 +10,7 @@ using PedagogyWorld.Models;
 
 namespace PedagogyWorld.Controllers
 {
+    [Authorize]
     public class FileController : Controller
     {
         private Context db = new Context();
@@ -28,11 +29,21 @@ namespace PedagogyWorld.Controllers
             return Content(serializer.Serialize(aws.GetDocs(id)), "application/json");
         }
 
-        public FileResult DownloadFile()
+        public ActionResult DownloadFile(Guid id)
         {
-            var aws = new AwsHandle();
-            var stream = aws.DownloadObject("pedagogyworld", "e0807a0f26f3494bad8769d6312bb24a");
-            return File(stream, "text/plain", "google requirements.txt");
+            var unitId = db.UnitFiles.FirstOrDefault(t => t.File_Id == id).Unit_Id;
+            var fileUserId = db.UserProfileUnits.FirstOrDefault(t => t.Unit_Id == unitId).UserProfile_Id;
+
+            var currentUserId = db.UserProfiles.FirstOrDefault(t => t.UserName == User.Identity.Name).UserId;
+            if (fileUserId == currentUserId)
+            {
+                var aws = new AwsHandle();
+                var file = db.Files.FirstOrDefault(t => t.Id == id);
+
+                var stream = aws.DownloadObject("pedagogyworld", file.StoragePath);
+                return File(stream, file.ContentType, file.FileName);
+            }
+            return Content("");
         }
 
         public ActionResult Index()
@@ -114,6 +125,7 @@ namespace PedagogyWorld.Controllers
                         File_Id = fileId,
                         Unit_Id = fileModel.Id
                     };
+
                     db.UnitFiles.Add(unit);
                     db.SaveChanges();
                 }
