@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using PedagogyWorld.ExtensionMethod;
 using PedagogyWorld.FileStorage;
 using PedagogyWorld.Models;
 
@@ -15,11 +16,6 @@ namespace PedagogyWorld.Controllers
     public class FileController : Controller
     {
         private Context db = new Context();
-
-        public ActionResult Planner()
-        {
-            return View();
-        }
 
         public ContentResult ListBuckets()
         {
@@ -180,6 +176,45 @@ namespace PedagogyWorld.Controllers
             return View(file);
         }
 
+
+        public ActionResult Planner()
+        {
+            var userId = (int)Membership.GetUser().ProviderUserKey;
+            var files = (from f in db.Files.Where(t => t.UserProfile_Id == userId)
+                            select f.FileName).ToList();
+            ViewBag.Files = files;
+            //ViewBag.Files = new[]
+            //    { "event3", "Event4"
+            //    };
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult JSonPlanner(double start, double end)
+        {
+            start.ToDateTime();
+
+            ViewBag.Files = db.Files;
+
+            var title = new[]
+                {
+                    new
+                        {
+                            id = 111,
+                            title = "event1",
+                            start = DateTime.Now.ToUnixTimeStamp(),
+                            url = "http://yahoo.com/"
+                        },
+                    new
+                        {
+                            id = 222,
+                            title = "Event2",
+                            start =  DateTime.Now.AddDays(4).ToUnixTimeStamp(),
+                            url = "http://yahoo.com/"
+                        }
+                };
+            return Json(title, JsonRequestBehavior.AllowGet);
+        }
         //
         // GET: /File/Delete/5
 
