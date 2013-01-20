@@ -108,6 +108,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -216,7 +217,9 @@
     <Compile Include="Header.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebHelper\CheckBoxList.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Outcome.cs">
       <DependentUpon>Context.tt</DependentUpon>
@@ -508,12 +511,11 @@
     <Content Include="Views\Unit\Details.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
     <Content Include="Views\Unit\_CreateOrEdit.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\Details.cshtml" />
     <Content Include="Views\File\Create.cshtml" />
     <Content Include="Views\File\Edit.cshtml" />
     <Content Include="Views\File\Delete.cshtml" />
-    <Content Include="Views\File\Details.cshtml" />
-    <Content Include="Views\File\Index.cshtml" />
-    <Content Include="Views\File\_CreateOrEdit.cshtml" />
     <Content Include="Views\File\Planner.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -525,6 +527,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PedagogyWorld.FileStorage\PedagogyWorld.FileStorage.csproj">
+      <Project>{2ecca326-da2e-4b3e-8152-459ff716b7fc}</Project>
+      <Name>PedagogyWorld.FileStorage</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

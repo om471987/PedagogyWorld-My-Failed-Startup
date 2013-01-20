@@ -22,9 +22,6 @@
         <th>
             Description
         </th>
-        <th>
-            OutcomeUnits
-        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -39,9 +36,6 @@
         </td>
         <td>
 			@item.Description
-        </td>
-        <td>
-			@(item.OutcomeUnits == null ? "None" : item.OutcomeUnits.Count.ToString())
         </td>
     </tr>
 }

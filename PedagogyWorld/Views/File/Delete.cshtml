@@ -1,4 +1,4 @@
-@model PedagogyWorld.File
+﻿@model PedagogyWorld.File
 
 @{
     ViewBag.Title = "Delete";
@@ -10,26 +10,33 @@
 <fieldset>
     <legend>File</legend>
 
-    <div class="display-label">FileName</div>
-    <div class="display-field">@Model.FileName</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FileName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FileName)
+    </div>
 
-    <div class="display-label">Path</div>
-    <div class="display-field">@Model.Path</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContentType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContentType)
+    </div>
 
-    <div class="display-label">Description</div>
-    <div class="display-field">@Model.Description</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContentLength)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContentLength)
+    </div>
 
-    <div class="display-label">Alias</div>
-    <div class="display-field">@Model.Alias</div>
-
-    <div class="display-label">FileFileTypes</div>
-    <div class="display-field">@(Model.FileFileTypes == null ? "None" : Model.FileFileTypes.Count.ToString())</div>
-
-    <div class="display-label">TeachingDates</div>
-    <div class="display-field">@(Model.TeachingDates == null ? "None" : Model.TeachingDates.Count.ToString())</div>
-
-    <div class="display-label">UnitFiles</div>
-    <div class="display-field">@(Model.UnitFiles == null ? "None" : Model.UnitFiles.Count.ToString())</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StoragePath)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoragePath)
+    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
@@ -37,5 +44,3 @@
         @Html.ActionLink("Back to List", "Index")
     </p>
 }
-
-

@@ -145,9 +145,9 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FileName" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="Path" Type="varchar" Nullable="false" MaxLength="511" />
-          <Property Name="Description" Type="varchar" MaxLength="10" />
-          <Property Name="Alias" Type="varchar" MaxLength="255" />
+          <Property Name="ContentType" Type="varchar" Nullable="false" MaxLength="511" />
+          <Property Name="ContentLength" Type="int" Nullable="false" />
+          <Property Name="StoragePath" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="FileFileType">
           <Key>
@@ -785,12 +785,12 @@
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="FileName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Path" Nullable="false" MaxLength="511" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Description" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Alias" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="FileFileTypes" Relationship="Model.FK__FileFileT__File___628FA481" FromRole="File" ToRole="FileFileType" />
           <NavigationProperty Name="TeachingDates" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="File" ToRole="TeachingDate" />
           <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__File_I__74AE54BC" FromRole="File" ToRole="UnitFile" />
+          <Property Type="String" Name="ContentType" Nullable="false" MaxLength="511" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ContentLength" Nullable="false" />
+          <Property Type="String" Name="StoragePath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FileFileType">
           <Key>
@@ -1320,9 +1320,9 @@
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="Model.File">
               <MappingFragment StoreEntitySet="File">
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="StoragePath" ColumnName="StoragePath" />
+                <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -1,30 +1,48 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using PedagogyWorld.ExtensionMethod;
+using System.Web.Script.Serialization;
+using PedagogyWorld.FileStorage;
+using PedagogyWorld.Models;
 
 namespace PedagogyWorld.Controllers
-{   
+{
     public class FileController : Controller
     {
-        private readonly Context _context = new Context();
+        private Context db = new Context();
 
-        //
-        // GET: /File/
-
-        public ViewResult Index()
+        public ContentResult ListBuckets()
         {
-            return View(_context.Files.Include(file => file.FileFileTypes).Include(file => file.TeachingDates).Include(file => file.UnitFiles).ToList());
+            var aws = new AwsHandle();
+            var serializer = new JavaScriptSerializer();
+            return Content(serializer.Serialize(aws.ListBuckets()), "application/json");
+        }
+
+        public ContentResult ListObjects(string id)
+        {
+            var aws = new AwsHandle();
+            var serializer = new JavaScriptSerializer();
+            return Content(serializer.Serialize(aws.GetDocs(id)), "application/json");
+        }
+
+        public ActionResult Index()
+        {
+            return View(db.Files.ToList());
         }
 
         //
         // GET: /File/Details/5
 
-        public ViewResult Details(Guid id)
+        public ActionResult Details(Guid id)
         {
-            var file = _context.Files.Single(x => x.Id == id);
+            File file = db.Files.Find(id);
+            if (file == null)
+            {
+                return HttpNotFound();
+            }
             return View(file);
         }
 
@@ -33,32 +51,78 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult Create()
         {
-            return View();
-        } 
+            var model = new FileModel
+            {
+                TeachingDate=DateTime.Now.Date
+            };
+
+            var result = new List<SelectListItem>();
+            foreach (var t in db.FileTypes)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.FileTypeName,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.FileTypes = result.ToList();
+            return View(model);
+        }
 
         //
         // POST: /File/Create
 
         [HttpPost]
-        public ActionResult Create(File file)
+        public ActionResult Create(FileModel fileModel, HttpPostedFileBase uploadFile, int[] fileIds)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && uploadFile != null)
             {
-                file.Id = Guid.NewGuid();
-                _context.Files.Add(file);
-                _context.SaveChanges();
-                return RedirectToAction("Index");  
+                var fileId = Guid.NewGuid();
+                var aws = new AwsHandle();
+                var result = aws.NewFile("pedagogyworld", fileId.ToString("N"), uploadFile.InputStream, uploadFile.ContentType);
+                if (result)
+                {
+                    var file = new File
+                        {
+                            Id = fileId,
+                            ContentType = uploadFile.ContentType,
+                            ContentLength = uploadFile.ContentLength,
+                            FileName = uploadFile.FileName,
+                            StoragePath = fileId.ToString("N")
+                        };
+                    db.Files.Add(file);
+
+                    foreach (var t in fileIds)
+                    {
+                        var type = new FileFileType
+                        {
+                            File_Id = fileId,
+                            FileType_Id = t
+                        };
+                        db.FileFileTypes.Add(type);
+                    }
+
+                    var unit = new UnitFile
+                    {
+                        File_Id = fileId,
+                        Unit_Id = fileModel.Id
+                    };
+                    db.UnitFiles.Add(unit);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Details", "Unit", new { fileModel.Id });
             }
 
-            return View(file);
+            return View(fileModel);
         }
-        
-        //
-        // GET: /File/Edit/5
- 
+
         public ActionResult Edit(Guid id)
         {
-            var file = _context.Files.Single(x => x.Id == id);
+            File file = db.Files.Find(id);
+            if (file == null)
+            {
+                return HttpNotFound();
+            }
             return View(file);
         }
 
@@ -70,8 +134,8 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(file).State = EntityState.Modified;
-                _context.SaveChanges();
+                db.Entry(file).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(file);
@@ -79,10 +143,14 @@ namespace PedagogyWorld.Controllers
 
         //
         // GET: /File/Delete/5
- 
+
         public ActionResult Delete(Guid id)
         {
-            var file = _context.Files.Single(x => x.Id == id);
+            File file = db.Files.Find(id);
+            if (file == null)
+            {
+                return HttpNotFound();
+            }
             return View(file);
         }
 
@@ -92,54 +160,15 @@ namespace PedagogyWorld.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            var file = _context.Files.Single(x => x.Id == id);
-            _context.Files.Remove(file);
-            _context.SaveChanges();
+            File file = db.Files.Find(id);
+            db.Files.Remove(file);
+            db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Planner()
-        {
-            //ViewBag.Files = context.Files;
-
-            ViewBag.Files = new[]
-                { "event3", "Event4"
-                };
-            return View();
-        }
-
-        [AllowAnonymous]
-        public ActionResult JSonPlanner(double start, double end)
-        {
-            start.ToDateTime();
-
-            ViewBag.Files = _context.Files;
-
-            var title = new[]
-                {
-                    new
-                        {
-                            id = 111,
-                            title = "event1",
-                            start = DateTime.Now.ToUnixTimeStamp(),
-                            url = "http://yahoo.com/"
-                        },
-                    new
-                        {
-                            id = 222,
-                            title = "Event2",
-                            start =  DateTime.Now.AddDays(4).ToUnixTimeStamp(),
-                            url = "http://yahoo.com/"
-                        }
-                };
-            return Json(title, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) {
-                _context.Dispose();
-            }
+            db.Dispose();
             base.Dispose(disposing);
         }
     }

@@ -1,4 +1,4 @@
-@model IEnumerable<PedagogyWorld.File>
+﻿@model IEnumerable<PedagogyWorld.File>
 
 @{
     ViewBag.Title = "Index";
@@ -11,61 +11,41 @@
 </p>
 <table>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContentLength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoragePath)
+        </th>
         <th></th>
-        <th>
-            FileName
-        </th>
-        <th>
-            Path
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Alias
-        </th>
-        <th>
-            FileFileTypes
-        </th>
-        <th>
-            TeachingDates
-        </th>
-        <th>
-            UnitFiles
-        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContentLength)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoragePath)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-        <td>
-			@item.FileName
-        </td>
-        <td>
-			@item.Path
-        </td>
-        <td>
-			@item.Description
-        </td>
-        <td>
-			@item.Alias
-        </td>
-        <td>
-			@(item.FileFileTypes == null ? "None" : item.FileFileTypes.Count.ToString())
-        </td>
-        <td>
-			@(item.TeachingDates == null ? "None" : item.TeachingDates.Count.ToString())
-        </td>
-        <td>
-			@(item.UnitFiles == null ? "None" : item.UnitFiles.Count.ToString())
         </td>
     </tr>
 }
 
 </table>
-
-

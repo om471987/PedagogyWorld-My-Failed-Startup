@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld", "PedagogyWo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.Tests", "PedagogyWorld.Tests\PedagogyWorld.Tests.csproj", "{534E4227-407F-4E94-BE34-B3715D561EBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.FileStorage", "PedagogyWorld.FileStorage\PedagogyWorld.FileStorage.csproj", "{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.FileStorage", "PedagogyWorld.FileStorage\PedagogyWorld.FileStorage.csproj", "{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,10 @@ Global
 		{534E4227-407F-4E94-BE34-B3715D561EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{534E4227-407F-4E94-BE34-B3715D561EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{534E4227-407F-4E94-BE34-B3715D561EBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60E39BBD-ABA8-4366-B577-4B8ADC5A2B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

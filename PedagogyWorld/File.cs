@@ -23,9 +23,9 @@ namespace PedagogyWorld
     
         public System.Guid Id { get; set; }
         public string FileName { get; set; }
-        public string Path { get; set; }
-        public string Description { get; set; }
-        public string Alias { get; set; }
+        public string ContentType { get; set; }
+        public int ContentLength { get; set; }
+        public string StoragePath { get; set; }
     
         public virtual ICollection<FileFileType> FileFileTypes { get; set; }
         public virtual ICollection<TeachingDate> TeachingDates { get; set; }
