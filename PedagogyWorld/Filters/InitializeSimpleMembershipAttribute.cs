@@ -28,8 +28,8 @@ namespace PedagogyWorld.Filters
                     WebSecurity.InitializeDatabaseConnection("ConnStringForWebSecurity", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                     if (!Roles.RoleExists("Admin"))
                         Roles.CreateRole("Admin");
-                    if (!((IList<string>) Roles.GetRolesForUser("omkar")).Contains("Admin"))
-                        Roles.AddUsersToRoles(new[] { "omkar" }, new[] { "Admin" });
+                    if (!((IList<string>) Roles.GetRolesForUser("sri")).Contains("Admin"))
+                        Roles.AddUsersToRoles(new[] { "sri" }, new[] { "Admin" });
                 }
                 catch (Exception ex)
                 {
