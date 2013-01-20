@@ -26,7 +26,9 @@ namespace PedagogyWorld
         public string ContentType { get; set; }
         public int ContentLength { get; set; }
         public string StoragePath { get; set; }
+        public int UserProfile_Id { get; set; }
     
+        public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<FileFileType> FileFileTypes { get; set; }
         public virtual ICollection<TeachingDate> TeachingDates { get; set; }
         public virtual ICollection<UnitFile> UnitFiles { get; set; }

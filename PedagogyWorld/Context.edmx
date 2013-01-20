@@ -25,7 +25,6 @@
           <EntitySet Name="UnitStandard" EntityType="Model.Store.UnitStandard" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfileSchool" EntityType="Model.Store.UserProfileSchool" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserProfileUnit" EntityType="Model.Store.UserProfileUnit" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_Membership" EntityType="Model.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Model.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_Roles" EntityType="Model.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
@@ -33,6 +32,10 @@
           <AssociationSet Name="FK__District__State___20C1E124" Association="Model.Store.FK__District__State___20C1E124">
             <End Role="State" EntitySet="State" />
             <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK__File__UserProfil__2022C2A6" Association="Model.Store.FK__File__UserProfil__2022C2A6">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="File" EntitySet="File" />
           </AssociationSet>
           <AssociationSet Name="FK__FileFileT__File___628FA481" Association="Model.Store.FK__FileFileT__File___628FA481">
             <End Role="File" EntitySet="File" />
@@ -90,6 +93,10 @@
             <End Role="Subject" EntitySet="Subject" />
             <End Role="Unit" EntitySet="Unit" />
           </AssociationSet>
+          <AssociationSet Name="FK__Unit__UserProfil__0E04126B" Association="Model.Store.FK__Unit__UserProfil__0E04126B">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Unit" EntitySet="Unit" />
+          </AssociationSet>
           <AssociationSet Name="FK__UnitFile__File_I__74AE54BC" Association="Model.Store.FK__UnitFile__File_I__74AE54BC">
             <End Role="File" EntitySet="File" />
             <End Role="UnitFile" EntitySet="UnitFile" />
@@ -110,17 +117,9 @@
             <End Role="School" EntitySet="School" />
             <End Role="UserProfileSchool" EntitySet="UserProfileSchool" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserProfi__Unit___7FB5F314" Association="Model.Store.FK__UserProfi__Unit___7FB5F314">
-            <End Role="Unit" EntitySet="Unit" />
-            <End Role="UserProfileUnit" EntitySet="UserProfileUnit" />
-          </AssociationSet>
           <AssociationSet Name="FK__UserProfi__UserP__7908F585" Association="Model.Store.FK__UserProfi__UserP__7908F585">
             <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="UserProfileSchool" EntitySet="UserProfileSchool" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserProfi__UserP__7EC1CEDB" Association="Model.Store.FK__UserProfi__UserP__7EC1CEDB">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="UserProfileUnit" EntitySet="UserProfileUnit" />
           </AssociationSet>
           <AssociationSet Name="fk_RoleId" Association="Model.Store.fk_RoleId">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
@@ -148,6 +147,7 @@
           <Property Name="ContentType" Type="varchar" Nullable="false" MaxLength="511" />
           <Property Name="ContentLength" Type="int" Nullable="false" />
           <Property Name="StoragePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="UserProfile_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FileFileType">
           <Key>
@@ -261,6 +261,7 @@
           <Property Name="Description" Type="varchar" MaxLength="2048" />
           <Property Name="Grade_Id" Type="int" Nullable="false" />
           <Property Name="Subject_Id" Type="int" Nullable="false" />
+          <Property Name="UserProfile_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UnitFile">
           <Key>
@@ -295,14 +296,6 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserProfile_Id" Type="int" Nullable="false" />
           <Property Name="School_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserProfileUnit">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UserProfile_Id" Type="int" Nullable="false" />
-          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -353,6 +346,18 @@
             </Principal>
             <Dependent Role="District">
               <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__File__UserProfil__2022C2A6">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="File" Type="Model.Store.File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="UserProfile_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -524,6 +529,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Unit__UserProfil__0E04126B">
+          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UnitFile__File_I__74AE54BC">
           <End Role="File" Type="Model.Store.File" Multiplicity="1" />
           <End Role="UnitFile" Type="Model.Store.UnitFile" Multiplicity="*" />
@@ -584,18 +601,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserProfi__Unit___7FB5F314">
-          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
-          <End Role="UserProfileUnit" Type="Model.Store.UserProfileUnit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProfileUnit">
-              <PropertyRef Name="Unit_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__UserProfi__UserP__7908F585">
           <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
           <End Role="UserProfileSchool" Type="Model.Store.UserProfileSchool" Multiplicity="*" />
@@ -604,18 +609,6 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="UserProfileSchool">
-              <PropertyRef Name="UserProfile_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserProfi__UserP__7EC1CEDB">
-          <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
-          <End Role="UserProfileUnit" Type="Model.Store.UserProfileUnit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserProfileUnit">
               <PropertyRef Name="UserProfile_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -668,7 +661,6 @@
           <EntitySet Name="UnitStandards" EntityType="Model.UnitStandard" />
           <EntitySet Name="UserProfiles" EntityType="Model.UserProfile" />
           <EntitySet Name="UserProfileSchools" EntityType="Model.UserProfileSchool" />
-          <EntitySet Name="UserProfileUnits" EntityType="Model.UserProfileUnit" />
           <EntitySet Name="webpages_Membership" EntityType="Model.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Model.webpages_OAuthMembership" />
           <EntitySet Name="webpages_Roles" EntityType="Model.webpages_Roles" />
@@ -679,6 +671,10 @@
           <AssociationSet Name="FK__School__District__25869641" Association="Model.FK__School__District__25869641">
             <End Role="District" EntitySet="Districts" />
             <End Role="School" EntitySet="Schools" />
+          </AssociationSet>
+          <AssociationSet Name="FK__File__UserProfil__2022C2A6" Association="Model.FK__File__UserProfil__2022C2A6">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="File" EntitySet="Files" />
           </AssociationSet>
           <AssociationSet Name="FK__FileFileT__File___628FA481" Association="Model.FK__FileFileT__File___628FA481">
             <End Role="File" EntitySet="Files" />
@@ -744,6 +740,10 @@
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="Unit" EntitySet="Units" />
           </AssociationSet>
+          <AssociationSet Name="FK__Unit__UserProfil__0E04126B" Association="Model.FK__Unit__UserProfil__0E04126B">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Unit" EntitySet="Units" />
+          </AssociationSet>
           <AssociationSet Name="FK__UnitFile__Unit_I__73BA3083" Association="Model.FK__UnitFile__Unit_I__73BA3083">
             <End Role="Unit" EntitySet="Units" />
             <End Role="UnitFile" EntitySet="UnitFiles" />
@@ -752,17 +752,9 @@
             <End Role="Unit" EntitySet="Units" />
             <End Role="UnitStandard" EntitySet="UnitStandards" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserProfi__Unit___7FB5F314" Association="Model.FK__UserProfi__Unit___7FB5F314">
-            <End Role="Unit" EntitySet="Units" />
-            <End Role="UserProfileUnit" EntitySet="UserProfileUnits" />
-          </AssociationSet>
           <AssociationSet Name="FK__UserProfi__UserP__7908F585" Association="Model.FK__UserProfi__UserP__7908F585">
             <End Role="UserProfile" EntitySet="UserProfiles" />
             <End Role="UserProfileSchool" EntitySet="UserProfileSchools" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserProfi__UserP__7EC1CEDB" Association="Model.FK__UserProfi__UserP__7EC1CEDB">
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-            <End Role="UserProfileUnit" EntitySet="UserProfileUnits" />
           </AssociationSet>
           <AssociationSet Name="webpages_UsersInRoles" Association="Model.webpages_UsersInRoles">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
@@ -785,12 +777,14 @@
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="FileName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="FileFileTypes" Relationship="Model.FK__FileFileT__File___628FA481" FromRole="File" ToRole="FileFileType" />
-          <NavigationProperty Name="TeachingDates" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="File" ToRole="TeachingDate" />
-          <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__File_I__74AE54BC" FromRole="File" ToRole="UnitFile" />
           <Property Type="String" Name="ContentType" Nullable="false" MaxLength="511" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="ContentLength" Nullable="false" />
           <Property Type="String" Name="StoragePath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK__File__UserProfil__2022C2A6" FromRole="File" ToRole="UserProfile" />
+          <NavigationProperty Name="FileFileTypes" Relationship="Model.FK__FileFileT__File___628FA481" FromRole="File" ToRole="FileFileType" />
+          <NavigationProperty Name="TeachingDates" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="File" ToRole="TeachingDate" />
+          <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__File_I__74AE54BC" FromRole="File" ToRole="UnitFile" />
         </EntityType>
         <EntityType Name="FileFileType">
           <Key>
@@ -929,12 +923,13 @@
           <Property Type="String" Name="Description" MaxLength="2048" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Grade_Id" Nullable="false" />
           <Property Type="Int32" Name="Subject_Id" Nullable="false" />
+          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
           <NavigationProperty Name="Grade" Relationship="Model.FK__Unit__Grade_Id__3A81B327" FromRole="Unit" ToRole="Grade" />
           <NavigationProperty Name="OutcomeUnits" Relationship="Model.FK__OutcomeUn__Unit___6EF57B66" FromRole="Unit" ToRole="OutcomeUnit" />
           <NavigationProperty Name="Subject" Relationship="Model.FK__Unit__Subject_Id__3B75D760" FromRole="Unit" ToRole="Subject" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK__Unit__UserProfil__0E04126B" FromRole="Unit" ToRole="UserProfile" />
           <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__Unit_I__73BA3083" FromRole="Unit" ToRole="UnitFile" />
           <NavigationProperty Name="UnitStandards" Relationship="Model.FK__UnitStand__Unit___44FF419A" FromRole="Unit" ToRole="UnitStandard" />
-          <NavigationProperty Name="UserProfileUnits" Relationship="Model.FK__UserProfi__Unit___7FB5F314" FromRole="Unit" ToRole="UserProfileUnit" />
         </EntityType>
         <EntityType Name="UnitFile">
           <Key>
@@ -965,8 +960,9 @@
           <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="First" MaxLength="31" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Last" MaxLength="31" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Files" Relationship="Model.FK__File__UserProfil__2022C2A6" FromRole="UserProfile" ToRole="File" />
+          <NavigationProperty Name="Units" Relationship="Model.FK__Unit__UserProfil__0E04126B" FromRole="UserProfile" ToRole="Unit" />
           <NavigationProperty Name="UserProfileSchools" Relationship="Model.FK__UserProfi__UserP__7908F585" FromRole="UserProfile" ToRole="UserProfileSchool" />
-          <NavigationProperty Name="UserProfileUnits" Relationship="Model.FK__UserProfi__UserP__7EC1CEDB" FromRole="UserProfile" ToRole="UserProfileUnit" />
           <NavigationProperty Name="webpages_Roles" Relationship="Model.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="UserProfileSchool">
@@ -978,16 +974,6 @@
           <Property Type="Int32" Name="School_Id" Nullable="false" />
           <NavigationProperty Name="School" Relationship="Model.FK__UserProfi__Schoo__79FD19BE" FromRole="UserProfileSchool" ToRole="School" />
           <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserProfi__UserP__7908F585" FromRole="UserProfileSchool" ToRole="UserProfile" />
-        </EntityType>
-        <EntityType Name="UserProfileUnit">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
-          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
-          <NavigationProperty Name="Unit" Relationship="Model.FK__UserProfi__Unit___7FB5F314" FromRole="UserProfileUnit" ToRole="Unit" />
-          <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserProfi__UserP__7EC1CEDB" FromRole="UserProfileUnit" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -1043,6 +1029,18 @@
             </Principal>
             <Dependent Role="School">
               <PropertyRef Name="District_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__File__UserProfil__2022C2A6">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.File" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="UserProfile_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1238,6 +1236,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Unit__UserProfil__0E04126B">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.Unit" Role="Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UnitFile__Unit_I__73BA3083">
           <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
           <End Type="Model.UnitFile" Role="UnitFile" Multiplicity="*" />
@@ -1262,18 +1272,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserProfi__Unit___7FB5F314">
-          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
-          <End Type="Model.UserProfileUnit" Role="UserProfileUnit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProfileUnit">
-              <PropertyRef Name="Unit_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__UserProfi__UserP__7908F585">
           <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
           <End Type="Model.UserProfileSchool" Role="UserProfileSchool" Multiplicity="*" />
@@ -1282,18 +1280,6 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="UserProfileSchool">
-              <PropertyRef Name="UserProfile_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserProfi__UserP__7EC1CEDB">
-          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
-          <End Type="Model.UserProfileUnit" Role="UserProfileUnit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserProfileUnit">
               <PropertyRef Name="UserProfile_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1320,6 +1306,7 @@
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="Model.File">
               <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
                 <ScalarProperty Name="StoragePath" ColumnName="StoragePath" />
                 <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
                 <ScalarProperty Name="ContentType" ColumnName="ContentType" />
@@ -1446,6 +1433,7 @@
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="Model.Unit">
               <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
                 <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
                 <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1487,15 +1475,6 @@
             <EntityTypeMapping TypeName="Model.UserProfileSchool">
               <MappingFragment StoreEntitySet="UserProfileSchool">
                 <ScalarProperty Name="School_Id" ColumnName="School_Id" />
-                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserProfileUnits">
-            <EntityTypeMapping TypeName="Model.UserProfileUnit">
-              <MappingFragment StoreEntitySet="UserProfileUnit">
-                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
                 <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

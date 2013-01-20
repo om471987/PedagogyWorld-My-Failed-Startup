@@ -16,8 +16,9 @@ namespace PedagogyWorld
     {
         public UserProfile()
         {
+            this.Files = new HashSet<File>();
+            this.Units = new HashSet<Unit>();
             this.UserProfileSchools = new HashSet<UserProfileSchool>();
-            this.UserProfileUnits = new HashSet<UserProfileUnit>();
             this.webpages_Roles = new HashSet<webpages_Roles>();
         }
     
@@ -27,8 +28,9 @@ namespace PedagogyWorld
         public string First { get; set; }
         public string Last { get; set; }
     
+        public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<Unit> Units { get; set; }
         public virtual ICollection<UserProfileSchool> UserProfileSchools { get; set; }
-        public virtual ICollection<UserProfileUnit> UserProfileUnits { get; set; }
         public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }

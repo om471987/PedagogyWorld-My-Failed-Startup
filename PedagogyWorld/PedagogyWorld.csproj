@@ -265,9 +265,6 @@
     <Compile Include="UserProfileSchool.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserProfileUnit.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="webpages_Membership.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>

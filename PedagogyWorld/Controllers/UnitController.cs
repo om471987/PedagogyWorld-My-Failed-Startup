@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace PedagogyWorld.Controllers
 {
@@ -16,7 +17,7 @@ namespace PedagogyWorld.Controllers
 
         public ViewResult Index()
         {
-            return View(_context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfileUnits).ToList());
+            return View(_context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
         }
 
         //
@@ -48,12 +49,7 @@ namespace PedagogyWorld.Controllers
             {
                 unit.Id = Guid.NewGuid();
                 _context.Units.Add(unit);
-
-                _context.UserProfileUnits.Add(new UserProfileUnit
-                    {
-                        Unit_Id = unit.Id ,
-                        UserProfile_Id = _context.UserProfiles.FirstOrDefault(t=>t.UserName == User.Identity.Name).UserId
-                    });
+                unit.UserProfile_Id = (int)Membership.GetUser().ProviderUserKey;
                 _context.SaveChanges();
                 return RedirectToAction("Index");  
             }

@@ -4,32 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c27ac8cfbb514836972e07ba7a62dde9" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="Model.District" Width="1.5" PointX="20.5" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="3" PointY="2" />
-        <EntityTypeShape EntityType="Model.FileFileType" Width="1.5" PointX="5.5" PointY="3.5" />
-        <EntityTypeShape EntityType="Model.FileType" Width="1.5" PointX="8.5" PointY="5" />
-        <EntityTypeShape EntityType="Model.Grade" Width="1.5" PointX="11.5" PointY="6.5" />
-        <EntityTypeShape EntityType="Model.Header" Width="1.5" PointX="14.5" PointY="8" />
-        <EntityTypeShape EntityType="Model.Outcome" Width="1.5" PointX="17.5" PointY="9.5" />
-        <EntityTypeShape EntityType="Model.OutcomeUnit" Width="1.5" PointX="20.5" PointY="11" />
-        <EntityTypeShape EntityType="Model.School" Width="1.5" PointX="3" PointY="12.5" />
-        <EntityTypeShape EntityType="Model.Standard" Width="1.5" PointX="5.5" PointY="14" />
-        <EntityTypeShape EntityType="Model.State" Width="1.5" PointX="8.5" PointY="15.5" />
-        <EntityTypeShape EntityType="Model.StrandDomain" Width="1.5" PointX="11.5" PointY="17" />
-        <EntityTypeShape EntityType="Model.Subject" Width="1.5" PointX="14.5" PointY="18.5" />
-        <EntityTypeShape EntityType="Model.TeachingDate" Width="1.5" PointX="17.5" PointY="20" />
-        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="20.5" PointY="21.5" />
-        <EntityTypeShape EntityType="Model.UnitFile" Width="1.5" PointX="3" PointY="23" />
-        <EntityTypeShape EntityType="Model.UnitStandard" Width="1.5" PointX="5.5" PointY="24.5" />
-        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="8.5" PointY="26" />
-        <EntityTypeShape EntityType="Model.UserProfileSchool" Width="1.5" PointX="11.5" PointY="27.5" />
-        <EntityTypeShape EntityType="Model.UserProfileUnit" Width="1.5" PointX="14.5" PointY="29" />
-        <EntityTypeShape EntityType="Model.webpages_Membership" Width="1.5" PointX="17.5" PointY="30.5" />
-        <EntityTypeShape EntityType="Model.webpages_OAuthMembership" Width="1.5" PointX="20.5" PointY="32" />
-        <EntityTypeShape EntityType="Model.webpages_Roles" Width="1.5" PointX="3" PointY="33.5" />
+      <Diagram DiagramId="c27ac8cfbb514836972e07ba7a62dde9" Name="Diagram1" ZoomLevel="29">
+        <EntityTypeShape EntityType="Model.District" Width="1.5" PointX="7.375" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="10.375" PointY="2" />
+        <EntityTypeShape EntityType="Model.FileFileType" Width="1.5" PointX="13.375" PointY="3.5" />
+        <EntityTypeShape EntityType="Model.FileType" Width="1.5" PointX="16.375" PointY="5" />
+        <EntityTypeShape EntityType="Model.Grade" Width="1.5" PointX="19.375" PointY="6.5" />
+        <EntityTypeShape EntityType="Model.Header" Width="1.5" PointX="1.875" PointY="8" />
+        <EntityTypeShape EntityType="Model.Outcome" Width="1.5" PointX="4.375" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.OutcomeUnit" Width="1.5" PointX="7.375" PointY="11" />
+        <EntityTypeShape EntityType="Model.School" Width="1.5" PointX="10.375" PointY="12.5" />
+        <EntityTypeShape EntityType="Model.Standard" Width="1.5" PointX="13.375" PointY="14" />
+        <EntityTypeShape EntityType="Model.State" Width="1.5" PointX="16.375" PointY="15.5" />
+        <EntityTypeShape EntityType="Model.StrandDomain" Width="1.5" PointX="19.375" PointY="17" />
+        <EntityTypeShape EntityType="Model.Subject" Width="1.5" PointX="1.875" PointY="18.5" />
+        <EntityTypeShape EntityType="Model.TeachingDate" Width="1.5" PointX="4.375" PointY="20" />
+        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="7.375" PointY="21.5" />
+        <EntityTypeShape EntityType="Model.UnitFile" Width="1.5" PointX="10.375" PointY="23" />
+        <EntityTypeShape EntityType="Model.UnitStandard" Width="1.5" PointX="13.375" PointY="24.5" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="16.375" PointY="26" />
+        <EntityTypeShape EntityType="Model.UserProfileSchool" Width="1.5" PointX="19.375" PointY="27.5" />
+        <EntityTypeShape EntityType="Model.webpages_Membership" Width="1.5" PointX="1.875" PointY="29" />
+        <EntityTypeShape EntityType="Model.webpages_OAuthMembership" Width="1.5" PointX="4.375" PointY="30.5" />
+        <EntityTypeShape EntityType="Model.webpages_Roles" Width="1.5" PointX="7.375" PointY="32" />
         <AssociationConnector Association="Model.FK__District__State___20C1E124" />
         <AssociationConnector Association="Model.FK__School__District__25869641" />
+        <AssociationConnector Association="Model.FK__File__UserProfil__2022C2A6" />
         <AssociationConnector Association="Model.FK__FileFileT__File___628FA481" />
         <AssociationConnector Association="Model.FK__TeachingD__File___5441852A" />
         <AssociationConnector Association="Model.FK__UnitFile__File_I__74AE54BC" />
@@ -46,11 +46,10 @@
         <AssociationConnector Association="Model.FK__StrandDom__State__1DB06A4F" />
         <AssociationConnector Association="Model.FK__StrandDom__Subje__1F98B2C1" />
         <AssociationConnector Association="Model.FK__Unit__Subject_Id__3B75D760" />
+        <AssociationConnector Association="Model.FK__Unit__UserProfil__0E04126B" />
         <AssociationConnector Association="Model.FK__UnitFile__Unit_I__73BA3083" />
         <AssociationConnector Association="Model.FK__UnitStand__Unit___44FF419A" />
-        <AssociationConnector Association="Model.FK__UserProfi__Unit___7FB5F314" />
         <AssociationConnector Association="Model.FK__UserProfi__UserP__7908F585" />
-        <AssociationConnector Association="Model.FK__UserProfi__UserP__7EC1CEDB" />
         <AssociationConnector Association="Model.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>

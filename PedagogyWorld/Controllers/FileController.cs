@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.Security;
 using PedagogyWorld.FileStorage;
 using PedagogyWorld.Models;
 
@@ -14,6 +15,11 @@ namespace PedagogyWorld.Controllers
     public class FileController : Controller
     {
         private Context db = new Context();
+
+        public ActionResult Planner()
+        {
+            return View();
+        }
 
         public ContentResult ListBuckets()
         {
@@ -31,14 +37,11 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult DownloadFile(Guid id)
         {
-            var unitId = db.UnitFiles.FirstOrDefault(t => t.File_Id == id).Unit_Id;
-            var fileUserId = db.UserProfileUnits.FirstOrDefault(t => t.Unit_Id == unitId).UserProfile_Id;
+            var file = db.Files.FirstOrDefault(t=>t.Id == id);
 
-            var currentUserId = db.UserProfiles.FirstOrDefault(t => t.UserName == User.Identity.Name).UserId;
-            if (fileUserId == currentUserId)
+            if (file.UserProfile_Id == (int)Membership.GetUser().ProviderUserKey)
             {
                 var aws = new AwsHandle();
-                var file = db.Files.FirstOrDefault(t => t.Id == id);
 
                 var stream = aws.DownloadObject("pedagogyworld", file.StoragePath);
                 return File(stream, file.ContentType, file.FileName);
@@ -46,9 +49,16 @@ namespace PedagogyWorld.Controllers
             return Content("");
         }
 
-        public ActionResult Index()
+        public ActionResult Index(Guid id)
         {
-            return View(db.Files.ToList());
+            var unit = db.Units.FirstOrDefault(t => t.Id == id);
+
+            if (unit.UserProfile_Id == (int)Membership.GetUser().ProviderUserKey)
+            {
+                var files = from f in db.UnitFiles.Where(t => t.Unit_Id == id) select f.File;
+                return View(files.ToList());    
+            }
+            return Content(User.Identity.Name);
         }
 
         //
@@ -106,7 +116,8 @@ namespace PedagogyWorld.Controllers
                             ContentType = fileModel.UploadFile.ContentType,
                             ContentLength = fileModel.UploadFile.ContentLength,
                             FileName = fileModel.UploadFile.FileName,
-                            StoragePath = fileId.ToString("N")
+                            StoragePath = fileId.ToString("N"),
+                            UserProfile_Id = (int) Membership.GetUser().ProviderUserKey
                         };
                     db.Files.Add(file);
 
