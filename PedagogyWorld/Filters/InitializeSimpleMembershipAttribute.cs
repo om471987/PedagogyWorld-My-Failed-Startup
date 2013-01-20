@@ -26,8 +26,10 @@ namespace PedagogyWorld.Filters
                 try
                 {
                     WebSecurity.InitializeDatabaseConnection("ConnStringForWebSecurity", "UserProfile", "UserId", "UserName", autoCreateTables: true);
-                    if (!((IList<string>) Roles.GetRolesForUser("omkar")).Contains("Administrator"))
-                        Roles.AddUsersToRoles(new[] { "omkar" }, new[] { "Administrator" });
+                    if (!Roles.RoleExists("Admin"))
+                        Roles.CreateRole("Admin");
+                    if (!((IList<string>) Roles.GetRolesForUser("omkar")).Contains("Admin"))
+                        Roles.AddUsersToRoles(new[] { "omkar" }, new[] { "Admin" });
                 }
                 catch (Exception ex)
                 {
