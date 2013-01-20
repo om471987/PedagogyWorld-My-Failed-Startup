@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
 using PedagogyWorld.App_Start;
 
 namespace PedagogyWorld
@@ -18,9 +16,6 @@ namespace PedagogyWorld
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
-            if (!((IList<string>) Roles.GetRolesForUser("omkar")).Contains("Administrator"))
-                Roles.AddUsersToRoles(new[] { "omkar" }, new[] { "Administrator" });
         }
     }
 }
