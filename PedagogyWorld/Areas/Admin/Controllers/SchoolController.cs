@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
-{   
+{
+    [Authorize(Roles = "Admin")]
     public class SchoolController : Controller
     {
         private readonly Context _context = new Context();

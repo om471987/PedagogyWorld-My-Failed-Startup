@@ -8,7 +8,8 @@ using System.Web.Mvc;
 using PedagogyWorld;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
-{   
+{
+    [Authorize(Roles = "Admin")]
     public class StrandDomainController : Controller
     {
         private Context context = new Context();

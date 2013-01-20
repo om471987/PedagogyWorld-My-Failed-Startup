@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {   
+    [Authorize(Roles = "Admin")]
     public class DistrictController : Controller
     {
         private readonly Context _context = new Context();
