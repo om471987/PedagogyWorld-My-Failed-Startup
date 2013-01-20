@@ -7,38 +7,34 @@
 <h2>Details</h2>
 
 <fieldset>
-    <legend>Unit</legend>
+   <legend>Unit</legend>
 
-    <div class="display-label">UnitName</div>
-    <div class="display-field">@Model.UnitName</div>
+   <div class="display-label">UnitName</div>
+   <div class="display-field">@Model.UnitName</div>
 
-    <div class="display-label">Description</div>
-    <div class="display-field">@Model.Description</div>
+   <div class="display-label">Description</div>
+   <div class="display-field">@Model.Description</div>
 
-    <div class="display-label">Grade_Id</div>
-    <div class="display-field">@Model.Grade_Id</div>
+   <div class="display-label">Grade</div>
+   <div class="display-field">@Html.DisplayTextFor(_ => Model.Grade.GradeName).ToString()</div>
 
-    <div class="display-label">Subject_Id</div>
-    <div class="display-field">@Model.Subject_Id</div>
+   <div class="display-label">Subject</div>
+   <div class="display-field">@Html.DisplayTextFor(_ => Model.Subject.SubjectName).ToString()</div>
 
-    <div class="display-label">Grade</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.Grade).ToString()</div>
+   <div class="display-label">Outcomes</div>
+   <div class="display-field">@(Model.OutcomeUnits == null ? "None" : Model.OutcomeUnits.Count.ToString())</div>
 
-    <div class="display-label">OutcomeUnits</div>
-    <div class="display-field">@(Model.OutcomeUnits == null ? "None" : Model.OutcomeUnits.Count.ToString())</div>
+   <div class="display-label">Files</div>
+   <div class="display-field">@(Model.UnitFiles == null ? "None" : Model.UnitFiles.Count.ToString())</div>
 
-    <div class="display-label">Subject</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.Subject).ToString()</div>
-
-    <div class="display-label">UnitFiles</div>
-    <div class="display-field">@(Model.UnitFiles == null ? "None" : Model.UnitFiles.Count.ToString())</div>
-
-    <div class="display-label">UnitStandards</div>
-    <div class="display-field">@(Model.UnitStandards == null ? "None" : Model.UnitStandards.Count.ToString())</div>
-
-    <div class="display-label">UnitUserProfiles</div>
-    <div class="display-field">@(Model.UserProfileUnits == null ? "None" : Model.UserProfileUnits.Count.ToString())</div>
+   <div class="display-label">Standards</div>
+   <div class="display-field">@(Model.UnitStandards == null ? "None" : Model.UnitStandards.Count.ToString())</div>
 </fieldset>
+
+<p>
+   @Html.ActionLink("Update Outcomes", "Edit", new { id=Model.Id }) | @Html.ActionLink("Add file", "Create","File", null, new { id=Model.Id }) | @Html.ActionLink("Update Standards", "Edit", new { id=Model.Id })
+</p>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

@@ -24,7 +24,7 @@
    @Html.ValidationMessageFor(model => model.Path)*@
 </div>
 
-<@*div class="editor-field">
+@*<div class="editor-field">
    @Html.DropDownListFor(model => model.FileType, ((IEnumerable<PedagogyWorld.FileType>)ViewBag.FileTypes).Select(option => new SelectListItem {
       Text = (option == null ? "None" : option.Name), 
       Value = option.Id.ToString(),

@@ -19,28 +19,10 @@
             Description
         </th>
         <th>
-            Grade_Id
-        </th>
-        <th>
-            Subject_Id
-        </th>
-        <th>
             Grade
         </th>
         <th>
-            OutcomeUnits
-        </th>
-        <th>
             Subject
-        </th>
-        <th>
-            UnitFiles
-        </th>
-        <th>
-            UnitStandards
-        </th>
-        <th>
-            UnitUserProfiles
         </th>
     </tr>
 
@@ -58,28 +40,11 @@
 			@item.Description
         </td>
         <td>
-			@item.Grade_Id
+			@Html.DisplayTextFor(_ => item.Grade.GradeName).ToString()
         </td>
         <td>
-			@item.Subject_Id
-        </td>
         <td>
-			@Html.DisplayTextFor(_ => item.Grade).ToString()
-        </td>
-        <td>
-			@(item.OutcomeUnits == null ? "None" : item.OutcomeUnits.Count.ToString())
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.Subject).ToString()
-        </td>
-        <td>
-			@(item.UnitFiles == null ? "None" : item.UnitFiles.Count.ToString())
-        </td>
-        <td>
-			@(item.UnitStandards == null ? "None" : item.UnitStandards.Count.ToString())
-        </td>
-        <td>
-			@(item.UserProfileUnits == null ? "None" : item.UserProfileUnits.Count.ToString())
+			@Html.DisplayTextFor(_ => item.Subject.SubjectName).ToString()
         </td>
     </tr>
 }
