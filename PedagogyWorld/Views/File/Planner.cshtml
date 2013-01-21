@@ -131,13 +131,15 @@
                $.post("/File/ChangePlannerFile",
                   {
                      id: event.id,
-                     year: event.start.getYear(),
-                     month: event.start.getMonth(),
+                     startYear: event.start.getYear(),
+                     startMonth: event.start.getMonth(),
                      startDay: event.start.getDate(),
+                     endYear: event.end.getYear(),
+                     endMonth: event.end.getMonth(),
                      endDay: event.end.getDate()
                   }, callback);
             },
-            viewDisplay: function (event, callback) {
+            viewDisplay: function (event) {
                $.ajax({
                   type: "POST",
                   url: "/File/LoadPlanner",
@@ -147,7 +149,7 @@
                   }
                }).done(function(files) {
                   $.each(files, function (index, value) {
-                     alert(index + ': ' + value);
+                     $('#calendar').fullCalendar('renderEvent', value, true);
                   });
                });
             }

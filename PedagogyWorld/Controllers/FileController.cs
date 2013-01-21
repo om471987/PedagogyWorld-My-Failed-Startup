@@ -185,11 +185,11 @@ namespace PedagogyWorld.Controllers
         public ActionResult AddPlannerFile(Guid id, int month, int year, int day)
         {
             var s=new StringBuilder();
-            s.Append((month + 1) < 9 ? "0":"");
+            s.Append((month + 1) < 10 ? "0" : "");
             s.Append(month + 1);
             s.Append("-");
-            s.Append((day + 1) < 9 ? "0" : "");
-            s.Append(day + 1);
+            s.Append((day) < 10 ? "0" : "");
+            s.Append(day);
             s.Append("-");
             s.Append(year + 1900);
             var date = DateTime.ParseExact(s.ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
@@ -215,25 +215,60 @@ namespace PedagogyWorld.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult ChangePlannerFile(Guid id, int startMonth, int startYear, int startDay, string endDay, int endMonth, int endYear)
+        public ActionResult ChangePlannerFile(Guid id, int startMonth, int startYear, int startDay, int endDay, int endMonth, int endYear)
         {
-            return Content("");
+            var s = new StringBuilder();
+            s.Append((startMonth + 1) < 10 ? "0" : "");
+            s.Append(startMonth + 1);
+            s.Append("-");
+            s.Append((startDay) < 10 ? "0" : "");
+            s.Append(startDay);
+            s.Append("-");
+            s.Append(startYear + 1900);
+            var startDate = DateTime.ParseExact(s.ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
+            var e = new StringBuilder();
+            e.Append((endMonth + 1) < 10 ? "0" : "");
+            e.Append(endMonth + 1);
+            e.Append("-");
+            e.Append((endDay) < 10 ? "0" : "");
+            e.Append(endDay);
+            e.Append("-");
+            e.Append(endYear + 1900);
+            var endDate = DateTime.ParseExact(e.ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
+            try
+            {
+                var file = db.TeachingDates.FirstOrDefault(t => t.File_Id == id);
+                file.StartDate = startDate;
+                file.EndDate = endDate;
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost]
         [AllowAnonymous]
         public ActionResult LoadPlanner(int month, int year)
         {
-            //var userId = (int) Membership.GetUser().ProviderUserKey;
-            //var files = (from f in db.Files.Where(t => t.UserProfile_Id == userId)
-            //             select new
-            //             {
-            //                 id = f.Id,
-            //                 title = f.FileName,
-            //                 start = DateTime.Now,
-            //                 end = DateTime.Now
-            //             }).ToList();
-            return Content("");
+            var userId = (int) Membership.GetUser().ProviderUserKey;
+
+            var startDate = new DateTime(year + 1900, month + 1, 1);
+            var endDate = new DateTime(year + 1900, month + 1, DateTime.DaysInMonth(year + 1900, month + 1));
+
+            var files = (from f in db.Files.AsEnumerable()
+                          join t in db.TeachingDates on f.Id equals t.File_Id
+                          where t.StartDate >= startDate &&
+                         t.EndDate < endDate &&
+                         f.UserProfile_Id == userId
+                          select new { id=f.Id, title=f.FileName, start = t.StartDate.ToUnixTimeStamp(), end = t.EndDate.ToUnixTimeStamp() }).ToList();
+
+            return Json(files, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
