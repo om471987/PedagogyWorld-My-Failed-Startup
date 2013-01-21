@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -182,7 +184,33 @@ namespace PedagogyWorld.Controllers
         [AllowAnonymous]
         public ActionResult AddPlannerFile(Guid id, int month, int year, int day)
         {
-            return Content("");
+            var s=new StringBuilder();
+            s.Append((month + 1) < 9 ? "0":"");
+            s.Append(month + 1);
+            s.Append("-");
+            s.Append((day + 1) < 9 ? "0" : "");
+            s.Append(day + 1);
+            s.Append("-");
+            s.Append(year + 1900);
+            var date = DateTime.ParseExact(s.ToString(), "MM-dd-yyyy", CultureInfo.InvariantCulture);
+            try
+            {
+                var file = db.Files.FirstOrDefault(t => t.Id == id);
+                var teachingDate = new TeachingDate
+                {
+                    StartDate = date,
+                    EndDate = date,
+                    File_Id = file.Id
+                };
+                db.TeachingDates.Add(teachingDate);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);    
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost]

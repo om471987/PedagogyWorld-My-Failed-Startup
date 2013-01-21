@@ -249,7 +249,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="smalldatetime" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
           <Property Name="File_Id" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Unit">
@@ -910,9 +911,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
           <Property Type="Guid" Name="File_Id" Nullable="false" />
           <NavigationProperty Name="File" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="TeachingDate" ToRole="File" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -1424,8 +1426,9 @@
           <EntitySetMapping Name="TeachingDates">
             <EntityTypeMapping TypeName="Model.TeachingDate">
               <MappingFragment StoreEntitySet="TeachingDate">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="File_Id" ColumnName="File_Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
