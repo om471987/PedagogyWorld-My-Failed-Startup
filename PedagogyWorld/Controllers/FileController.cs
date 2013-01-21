@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -57,9 +58,6 @@ namespace PedagogyWorld.Controllers
             return Content(User.Identity.Name);
         }
 
-        //
-        // GET: /File/Details/5
-
         public ActionResult Details(Guid id)
         {
             File file = db.Files.Find(id);
@@ -69,9 +67,6 @@ namespace PedagogyWorld.Controllers
             }
             return View(file);
         }
-
-        //
-        // GET: /File/Create
 
         public ActionResult Create()
         {
@@ -92,9 +87,6 @@ namespace PedagogyWorld.Controllers
             model.FileTypes = result.ToList();
             return View(model);
         }
-
-        //
-        // POST: /File/Create
 
         [HttpPost]
         public ActionResult Create(FileModel fileModel)
@@ -161,9 +153,6 @@ namespace PedagogyWorld.Controllers
             return View(file);
         }
 
-        //
-        // POST: /File/Edit/5
-
         [HttpPost]
         public ActionResult Edit(File file)
         {
@@ -179,44 +168,77 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult Planner()
         {
-            var userId = (int)Membership.GetUser().ProviderUserKey;
-            var files = (from f in db.Files.Where(t => t.UserProfile_Id == userId)
-                            select f.FileName).ToList();
-            ViewBag.Files = files;
-            //ViewBag.Files = new[]
-            //    { "event3", "Event4"
-            //    };
-            return View();
+            var userId = (int) Membership.GetUser().ProviderUserKey;
+
+            var list = new List<PlannerModel>();
+            foreach (var t in db.Files.Where(t => t.UserProfile_Id == userId))
+            {
+                list.Add(new PlannerModel{Id = t.Id,FileName = t.FileName});
+            }
+            return View(list);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult AddPlannerFile(Guid id, int month, int year, int day)
+        {
+            return Content("");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ChangePlannerFile(Guid id, int startMonth, int startYear, int startDay, string endDay, int endMonth, int endYear)
+        {
+            return Content("");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LoadPlanner(int month, int year)
+        {
+            //var userId = (int) Membership.GetUser().ProviderUserKey;
+            //var files = (from f in db.Files.Where(t => t.UserProfile_Id == userId)
+            //             select new
+            //             {
+            //                 id = f.Id,
+            //                 title = f.FileName,
+            //                 start = DateTime.Now,
+            //                 end = DateTime.Now
+            //             }).ToList();
+            return Content("");
         }
 
         [AllowAnonymous]
         public ActionResult JSonPlanner(double start, double end)
         {
-            start.ToDateTime();
+            //var userId = (int) Membership.GetUser().ProviderUserKey;
+            //var files = (from f in db.Files.Where(t => t.UserProfile_Id == userId)
+            //             select new
+            //             {
+            //                 id = f.Id,
+            //                 title = f.FileName,
+            //                 start = DateTime.Now,
+            //                 end = DateTime.Now
+            //             }).ToList();
+            //start.ToDateTime();
 
-            ViewBag.Files = db.Files;
-
-            var title = new[]
+            var files = new[]
                 {
                     new
                         {
                             id = 111,
                             title = "event1",
-                            start = DateTime.Now.ToUnixTimeStamp(),
-                            url = "http://yahoo.com/"
+                            start = DateTime.Now.ToUnixTimeStamp()
                         },
                     new
                         {
                             id = 222,
                             title = "Event2",
-                            start =  DateTime.Now.AddDays(4).ToUnixTimeStamp(),
-                            url = "http://yahoo.com/"
+                            start =  DateTime.Now.AddDays(4).ToUnixTimeStamp()
                         }
                 };
-            return Json(title, JsonRequestBehavior.AllowGet);
+            return Json(files, JsonRequestBehavior.AllowGet);
         }
-        //
-        // GET: /File/Delete/5
 
         public ActionResult Delete(Guid id)
         {
@@ -227,9 +249,6 @@ namespace PedagogyWorld.Controllers
             }
             return View(file);
         }
-
-        //
-        // POST: /File/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(Guid id)

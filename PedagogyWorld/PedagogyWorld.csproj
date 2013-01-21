@@ -221,6 +221,7 @@
     <Compile Include="Header.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlannerModel.cs" />
     <Compile Include="WebHelper\CheckBoxList.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FileModel.cs" />
