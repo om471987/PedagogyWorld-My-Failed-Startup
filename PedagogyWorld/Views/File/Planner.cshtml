@@ -146,7 +146,8 @@
                      month: event.start.getMonth(),
                      year: event.start.getYear()
                   }
-               }).done(function(files) {
+               }).done(function (files) { 
+                  //$.fullCalendar('removeEvents');
                   $.each(files, function (index, value) {
                      $('#calendar').fullCalendar('renderEvent', value, true);
                   });
