@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace PedagogyWorld.Models
@@ -11,7 +12,7 @@ namespace PedagogyWorld.Models
 
         public Header Header { get; set; }
 
-        public Standard Standard { get; set; }
+        public Guid Id { get; set; }
 
         public int[] StandardIds { get; set; }
     }

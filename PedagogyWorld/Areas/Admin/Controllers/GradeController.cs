@@ -15,7 +15,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Index()
         {
-            return View(_context.Grades.Include(grade => grade.Units).Include(grade => grade.UnitStandards).ToList());
+            return View(_context.Grades.Include(grade => grade.Units).ToList());
         }
 
         //

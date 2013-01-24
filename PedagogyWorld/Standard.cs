@@ -14,6 +14,11 @@ namespace PedagogyWorld
     
     public partial class Standard
     {
+        public Standard()
+        {
+            this.UnitStandards = new HashSet<UnitStandard>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Name2 { get; set; }
@@ -22,5 +27,6 @@ namespace PedagogyWorld
         public int Header_Id { get; set; }
     
         public virtual Header Header { get; set; }
+        public virtual ICollection<UnitStandard> UnitStandards { get; set; }
     }
 }

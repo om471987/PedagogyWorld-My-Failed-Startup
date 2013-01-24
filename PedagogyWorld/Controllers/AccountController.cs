@@ -113,16 +113,20 @@ namespace PedagogyWorld.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
+            var db = new Context();
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
                 try
                 {
+                    if (db.UserProfiles.Any(t=>t.Email == model.Email))
+                    {
+                        ModelState.AddModelError("Email","This email address aleady exists. Please try another email");
+                        ViewBag.States = db.States;
+                        return View(model);
+                    }
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password,new {model.Email});
                     WebSecurity.Login(model.UserName, model.Password);
 
-                    var db = new Context();
-                    
                     var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
                     var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
 
@@ -135,7 +139,7 @@ namespace PedagogyWorld.Controllers
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
-
+            ViewBag.States = db.States;
             // If we got this far, something failed, redisplay form
             return View(model);
         }

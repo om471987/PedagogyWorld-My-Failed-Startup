@@ -15,9 +15,9 @@ namespace PedagogyWorld
     public partial class TeachingDate
     {
         public int Id { get; set; }
-        public System.Guid File_Id { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
+        public System.Guid File_Id { get; set; }
     
         public virtual File File { get; set; }
     }

@@ -105,8 +105,8 @@
             <End Role="Unit" EntitySet="Unit" />
             <End Role="UnitFile" EntitySet="UnitFile" />
           </AssociationSet>
-          <AssociationSet Name="FK__UnitStand__Grade__440B1D61" Association="Model.Store.FK__UnitStand__Grade__440B1D61">
-            <End Role="Grade" EntitySet="Grade" />
+          <AssociationSet Name="FK__UnitStand__Stand__29AC2CE0" Association="Model.Store.FK__UnitStand__Stand__29AC2CE0">
+            <End Role="Standard" EntitySet="Standard" />
             <End Role="UnitStandard" EntitySet="UnitStandard" />
           </AssociationSet>
           <AssociationSet Name="FK__UnitStand__Unit___44FF419A" Association="Model.Store.FK__UnitStand__Unit___44FF419A">
@@ -277,8 +277,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Grade_Id" Type="int" Nullable="false" />
           <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Standard_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -566,15 +566,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UnitStand__Grade__440B1D61">
-          <End Role="Grade" Type="Model.Store.Grade" Multiplicity="1" />
+        <Association Name="FK__UnitStand__Stand__29AC2CE0">
+          <End Role="Standard" Type="Model.Store.Standard" Multiplicity="1" />
           <End Role="UnitStandard" Type="Model.Store.UnitStandard" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Grade">
+            <Principal Role="Standard">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UnitStandard">
-              <PropertyRef Name="Grade_Id" />
+              <PropertyRef Name="Standard_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -701,10 +701,6 @@
             <End Role="Grade" EntitySet="Grades" />
             <End Role="Unit" EntitySet="Units" />
           </AssociationSet>
-          <AssociationSet Name="FK__UnitStand__Grade__440B1D61" Association="Model.FK__UnitStand__Grade__440B1D61">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="UnitStandard" EntitySet="UnitStandards" />
-          </AssociationSet>
           <AssociationSet Name="FK__Header__StrandDo__02084FDA" Association="Model.FK__Header__StrandDo__02084FDA">
             <End Role="StrandDomain" EntitySet="StrandDomains" />
             <End Role="Header" EntitySet="Headers" />
@@ -728,6 +724,10 @@
           <AssociationSet Name="FK__UserProfi__Schoo__79FD19BE" Association="Model.FK__UserProfi__Schoo__79FD19BE">
             <End Role="School" EntitySet="Schools" />
             <End Role="UserProfileSchool" EntitySet="UserProfileSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitStand__Stand__29AC2CE0" Association="Model.FK__UnitStand__Stand__29AC2CE0">
+            <End Role="Standard" EntitySet="Standards" />
+            <End Role="UnitStandard" EntitySet="UnitStandards" />
           </AssociationSet>
           <AssociationSet Name="FK__StrandDom__State__1DB06A4F" Association="Model.FK__StrandDom__State__1DB06A4F">
             <End Role="State" EntitySet="States" />
@@ -813,7 +813,6 @@
           <Property Type="String" Name="GradeName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StrandDomains" Relationship="Model.FK__StrandDom__Grade__1EA48E88" FromRole="Grade" ToRole="StrandDomain" />
           <NavigationProperty Name="Units" Relationship="Model.FK__Unit__Grade_Id__3A81B327" FromRole="Grade" ToRole="Unit" />
-          <NavigationProperty Name="UnitStandards" Relationship="Model.FK__UnitStand__Grade__440B1D61" FromRole="Grade" ToRole="UnitStandard" />
         </EntityType>
         <EntityType Name="Header">
           <Key>
@@ -870,6 +869,7 @@
           <Property Type="String" Name="Name4" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Header_Id" Nullable="false" />
           <NavigationProperty Name="Header" Relationship="Model.FK__Standard__Header__01142BA1" FromRole="Standard" ToRole="Header" />
+          <NavigationProperty Name="UnitStandards" Relationship="Model.FK__UnitStand__Stand__29AC2CE0" FromRole="Standard" ToRole="UnitStandard" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -911,10 +911,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Guid" Name="File_Id" Nullable="false" />
-          <NavigationProperty Name="File" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="TeachingDate" ToRole="File" />
           <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="0" />
           <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="0" />
+          <Property Type="Guid" Name="File_Id" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Model.FK__TeachingD__File___5441852A" FromRole="TeachingDate" ToRole="File" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -948,9 +948,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
           <Property Type="Guid" Name="Unit_Id" Nullable="false" />
-          <NavigationProperty Name="Grade" Relationship="Model.FK__UnitStand__Grade__440B1D61" FromRole="UnitStandard" ToRole="Grade" />
+          <Property Type="Int32" Name="Standard_Id" Nullable="false" />
+          <NavigationProperty Name="Standard" Relationship="Model.FK__UnitStand__Stand__29AC2CE0" FromRole="UnitStandard" ToRole="Standard" />
           <NavigationProperty Name="Unit" Relationship="Model.FK__UnitStand__Unit___44FF419A" FromRole="UnitStandard" ToRole="Unit" />
         </EntityType>
         <EntityType Name="UserProfile">
@@ -1118,18 +1118,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UnitStand__Grade__440B1D61">
-          <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="Model.UnitStandard" Role="UnitStandard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UnitStandard">
-              <PropertyRef Name="Grade_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Header__StrandDo__02084FDA">
           <End Type="Model.StrandDomain" Role="StrandDomain" Multiplicity="1" />
           <End Type="Model.Header" Role="Header" Multiplicity="*" />
@@ -1199,6 +1187,18 @@
             </Principal>
             <Dependent Role="UserProfileSchool">
               <PropertyRef Name="School_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitStand__Stand__29AC2CE0">
+          <End Type="Model.Standard" Role="Standard" Multiplicity="1" />
+          <End Type="Model.UnitStandard" Role="UnitStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Standard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitStandard">
+              <PropertyRef Name="Standard_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1426,9 +1426,9 @@
           <EntitySetMapping Name="TeachingDates">
             <EntityTypeMapping TypeName="Model.TeachingDate">
               <MappingFragment StoreEntitySet="TeachingDate">
+                <ScalarProperty Name="File_Id" ColumnName="File_Id" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="File_Id" ColumnName="File_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1457,8 +1457,8 @@
           <EntitySetMapping Name="UnitStandards">
             <EntityTypeMapping TypeName="Model.UnitStandard">
               <MappingFragment StoreEntitySet="UnitStandard">
+                <ScalarProperty Name="Standard_Id" ColumnName="Standard_Id" />
                 <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
-                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

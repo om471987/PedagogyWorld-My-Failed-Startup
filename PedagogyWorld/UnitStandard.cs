@@ -15,10 +15,10 @@ namespace PedagogyWorld
     public partial class UnitStandard
     {
         public int Id { get; set; }
-        public int Grade_Id { get; set; }
         public System.Guid Unit_Id { get; set; }
+        public int Standard_Id { get; set; }
     
-        public virtual Grade Grade { get; set; }
+        public virtual Standard Standard { get; set; }
         public virtual Unit Unit { get; set; }
     }
 }

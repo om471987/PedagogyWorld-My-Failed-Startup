@@ -19,7 +19,8 @@ namespace PedagogyWorld.Controllers
 
         public ViewResult Index()
         {
-            return View(db.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
+            var userId = (int) Membership.GetUser().ProviderUserKey;
+            return View(db.Units.Where(t => t.UserProfile_Id == userId).Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
         }
 
         //
@@ -148,16 +149,38 @@ namespace PedagogyWorld.Controllers
         }
 
         [HttpPost]
-        public ActionResult AllignStandard(StandardModel model)
+        public ActionResult AllignStandard(StandardModel returnModel)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                foreach (var t in returnModel.StandardIds)
+                {
+                    var us = new UnitStandard
+                        {
+                            Unit_Id = returnModel.Id,
+                            Standard_Id = t
+                        };
+                    db.UnitStandards.Add(us);
+                }
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = returnModel .Id});
             }
             ViewBag.Domains = db.StrandDomains;
             ViewBag.Headers = db.Headers;
             ViewBag.Standards = db.Standards;
-            return View();
+            var model = new StandardModel();
+
+            var result = new List<SelectListItem>();
+            foreach (var t in db.Standards)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.Standards = result.ToList();
+            return View(model);
         }
 
         //

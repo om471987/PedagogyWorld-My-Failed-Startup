@@ -42,9 +42,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="AWSSDK, Version=1.5.10.0, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\AWSSDK.1.5.10.0\lib\AWSSDK.dll</HintPath>
+    <Reference Include="AWSSDK, Version=1.5.11.0, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AWSSDK.1.5.11.0\lib\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -223,17 +223,12 @@
     </Compile>
     <Compile Include="Models\PlannerModel.cs" />
     <Compile Include="Models\StandardModel.cs" />
-    <Compile Include="WebHelper\CheckBoxList.cs" />
-    <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\FileModel.cs" />
-    <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Outcome.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="OutcomeUnit.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="School.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -267,6 +262,11 @@
     <Compile Include="UserProfileSchool.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebHelper\CheckBoxList.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\FileModel.cs" />
+    <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="webpages_Membership.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
