@@ -55,8 +55,9 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
+}
 
-   <script type="text/javascript">
+<script type="text/javascript">
       
       $('#state').change(function () {
          $.getJSON('/Account/UpdateDistrictJSon?selectedState=' + $("#state option:selected").text(), function (result) {
@@ -84,7 +85,5 @@
          });
       }).change();      
 
-   </script>
-}
-
+</script>
 

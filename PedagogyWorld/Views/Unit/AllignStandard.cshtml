@@ -1,0 +1,54 @@
+﻿@using PedagogyWorld
+@using PedagogyWorld.WebHelper
+@model PedagogyWorld.Models.StandardModel
+
+@{
+   var flag = 0;
+}
+@using (Html.BeginForm()) {
+   @Html.ValidationSummary(true)
+   <fieldset>
+      <legend>Outcome Type</legend>
+
+      @*      <div class="editor-field">
+         @Html.CheckBoxList("StandardIds", Model.Standards)
+      </div>*@
+
+      @foreach (var t in ViewBag.Domains as IEnumerable<StrandDomain>)
+      {
+         flag++;
+         if (flag == 6)
+         {
+            break;
+         }
+         <div>
+            <div style="font-size: 24px;">@t.Name</div>
+            @foreach (var u in ViewBag.Headers  as IEnumerable<Header>)
+            {
+               if (t.Id == u.StrandDomain_Id)
+               {
+                  var count = 1;
+               <div style="font-size: 18px; font-weight: bold; padding-left: 2.5em">@u.Header1</div>
+                  foreach (var v in ViewBag.Standards as IEnumerable<Standard>)
+                  {
+                     if (u.Id == v.Header_Id)
+                     {
+               <div style="font-size: 14px; padding-left: 5em">
+                  <input type="checkbox" name="StandardIds" value="@v.Id" />
+                  <text>@count&nbsp;&nbsp;&nbsp;@v.Name</text>
+               </div>
+                        count++;
+                     }
+                  }
+               }
+            }
+         </div>
+      }
+
+      <p>
+         <input type="submit" value="Create" />
+      </p>
+   </fieldset>
+}
+
+    

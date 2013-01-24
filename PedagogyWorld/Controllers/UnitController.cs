@@ -125,6 +125,41 @@ namespace PedagogyWorld.Controllers
             return View(unit);
         }
 
+        public ActionResult AllignStandard(Guid id)
+        {
+            ViewBag.Domains = db.StrandDomains;
+            ViewBag.Headers = db.Headers;
+            ViewBag.Standards = db.Standards;
+
+            var model = new StandardModel();
+
+            var result = new List<SelectListItem>();
+            foreach (var t in db.Standards)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.Standards = result.ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AllignStandard(StandardModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.Domains = db.StrandDomains;
+            ViewBag.Headers = db.Headers;
+            ViewBag.Standards = db.Standards;
+            return View();
+        }
+
         //
         // GET: /Unit/Delete/5
  

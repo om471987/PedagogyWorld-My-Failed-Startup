@@ -222,6 +222,7 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PlannerModel.cs" />
+    <Compile Include="Models\StandardModel.cs" />
     <Compile Include="WebHelper\CheckBoxList.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FileModel.cs" />
@@ -518,6 +519,7 @@
     <Content Include="Views\File\Edit.cshtml" />
     <Content Include="Views\File\Delete.cshtml" />
     <Content Include="Views\File\Planner.cshtml" />
+    <Content Include="Views\Unit\AllignStandard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
