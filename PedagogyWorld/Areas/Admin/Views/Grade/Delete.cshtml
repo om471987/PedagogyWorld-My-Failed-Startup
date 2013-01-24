@@ -15,9 +15,6 @@
 
     <div class="display-label">Units</div>
     <div class="display-field">@(Model.Units == null ? "None" : Model.Units.Count.ToString())</div>
-
-    <div class="display-label">UnitStandards</div>
-    <div class="display-field">@(Model.UnitStandards == null ? "None" : Model.UnitStandards.Count.ToString())</div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
