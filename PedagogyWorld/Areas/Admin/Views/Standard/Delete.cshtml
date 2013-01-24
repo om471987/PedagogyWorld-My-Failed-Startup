@@ -1,4 +1,4 @@
-@model PedagogyWorld.Standard
+﻿@model PedagogyWorld.Standard
 
 @{
     ViewBag.Title = "Delete";
@@ -10,23 +10,40 @@
 <fieldset>
     <legend>Standard</legend>
 
-    <div class="display-label">Name</div>
-    <div class="display-field">@Model.Name</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
 
-    <div class="display-label">Name2</div>
-    <div class="display-field">@Model.Name2</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name2)
+    </div>
 
-    <div class="display-label">Name3</div>
-    <div class="display-field">@Model.Name3</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name3)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name3)
+    </div>
 
-    <div class="display-label">Name4</div>
-    <div class="display-field">@Model.Name4</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name4)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name4)
+    </div>
 
-    <div class="display-label">Header_Id</div>
-    <div class="display-field">@Model.Header_Id</div>
-
-    <div class="display-label">Header</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.Header).ToString()</div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Header.Header1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Header.Header1)
+    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
@@ -34,5 +51,3 @@
         @Html.ActionLink("Back to List", "Index")
     </p>
 }
-
-

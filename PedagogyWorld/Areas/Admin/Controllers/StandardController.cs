@@ -1,105 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace PedagogyWorld.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class StandardController : Controller
     {
-        private readonly Context _context = new Context();
+        private Context db = new Context();
 
         //
-        // GET: /Standard/
+        // GET: /Admin/Standard/
 
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            return View(_context.Standards.ToList());
+            var standards = db.Standards.Include(s => s.Header);
+            return View(standards.ToList());
         }
 
         //
-        // GET: /Standard/Details/5
+        // GET: /Admin/Standard/Details/5
 
-        public ViewResult Details(int id)
+        public ActionResult Details(int id = 0)
         {
-            Standard standard = _context.Standards.Single(x => x.Id == id);
+            Standard standard = db.Standards.Find(id);
+            if (standard == null)
+            {
+                return HttpNotFound();
+            }
             return View(standard);
         }
 
         //
-        // GET: /Standard/Create
+        // GET: /Admin/Standard/Create
 
         public ActionResult Create()
         {
+            ViewBag.Header_Id = new SelectList(db.Headers, "Id", "Header1");
             return View();
-        } 
+        }
 
         //
-        // POST: /Standard/Create
+        // POST: /Admin/Standard/Create
 
         [HttpPost]
         public ActionResult Create(Standard standard)
         {
             if (ModelState.IsValid)
             {
-                _context.Standards.Add(standard);
-                _context.SaveChanges();
-                return RedirectToAction("Index");  
+                db.Standards.Add(standard);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View(standard);
-        }
-        
-        //
-        // GET: /Standard/Edit/5
- 
-        public ActionResult Edit(int id)
-        {
-            Standard standard = _context.Standards.Single(x => x.Id == id);
+            ViewBag.Header_Id = new SelectList(db.Headers, "Id", "Header1", standard.Header_Id);
             return View(standard);
         }
 
         //
-        // POST: /Standard/Edit/5
+        // GET: /Admin/Standard/Edit/5
+
+        public ActionResult Edit(int id = 0)
+        {
+            Standard standard = db.Standards.Find(id);
+            if (standard == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Header_Id = new SelectList(db.Headers, "Id", "Header1", standard.Header_Id);
+            return View(standard);
+        }
+
+        //
+        // POST: /Admin/Standard/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Standard standard)
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(standard).State = EntityState.Modified;
-                _context.SaveChanges();
+                db.Entry(standard).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            ViewBag.Header_Id = new SelectList(db.Headers, "Id", "Header1", standard.Header_Id);
+            return View(standard);
+        }
+
+        //
+        // GET: /Admin/Standard/Delete/5
+
+        public ActionResult Delete(int id = 0)
+        {
+            Standard standard = db.Standards.Find(id);
+            if (standard == null)
+            {
+                return HttpNotFound();
             }
             return View(standard);
         }
 
         //
-        // GET: /Standard/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            Standard standard = _context.Standards.Single(x => x.Id == id);
-            return View(standard);
-        }
-
-        //
-        // POST: /Standard/Delete/5
+        // POST: /Admin/Standard/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Standard standard = _context.Standards.Single(x => x.Id == id);
-            _context.Standards.Remove(standard);
-            _context.SaveChanges();
+            Standard standard = db.Standards.Find(id);
+            db.Standards.Remove(standard);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) {
-                _context.Dispose();
-            }
+            db.Dispose();
             base.Dispose(disposing);
         }
     }

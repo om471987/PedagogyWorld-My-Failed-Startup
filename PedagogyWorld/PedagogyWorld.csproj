@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\StandardController.cs" />
     <Compile Include="Context.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,7 +197,6 @@
     <Compile Include="Areas\Admin\Controllers\OutcomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\StrandDomainController.cs" />
-    <Compile Include="Areas\Admin\Controllers\StandardController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="District.cs">
       <DependentUpon>Context.tt</DependentUpon>
@@ -363,6 +363,11 @@
       <LastGenOutput>Context.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\Admin\Views\State\Manage.cshtml" />
+    <Content Include="Areas\Admin\Views\Standard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Standard\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Standard\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Standard\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Standard\Delete.cshtml" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
@@ -501,12 +506,6 @@
     <Content Include="Areas\Admin\Views\Header\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Header\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Header\_CreateOrEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Standard\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Standard\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Standard\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Standard\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Standard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Standard\_CreateOrEdit.cshtml" />
     <Content Include="Views\Unit\Create.cshtml" />
     <Content Include="Views\Unit\Edit.cshtml" />
     <Content Include="Views\Unit\Delete.cshtml" />

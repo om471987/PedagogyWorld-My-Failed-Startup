@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,26 +11,18 @@ namespace PedagogyWorld.Models
     {
         public UnitModel()
         {
-            var db = new Context();
-            var ids = (from t in db.Outcomes select t.Id).ToArray();
-            OutcomesList = new MultiSelectList(db.Outcomes.ToList(), "Id", "Name", ids);
+            Unit=new Unit();
         }
+        public Unit Unit { get; set; }
 
-        [Required]
-        public Guid Id { get; set; }
+        public IEnumerable<SelectListItem> OutcomeTypes { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        public int[] OutcomeIds { get; set; }
+    }
 
-        [Required]
-        public string Description { get; set; }
-
-        public int GradeId { get; set; }
-
-        public int SubjectId { get; set; }
-
-        public MultiSelectList OutcomesList { get; private set; }
-
-        public int[] SelectedOutcomes { get; set; }
+    public class OutcomeType
+    {
+        public bool IsChecked { get; set; }
+        public string Type { get; set; }
     }
 }

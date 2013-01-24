@@ -1,23 +1,25 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using PedagogyWorld.Models;
 
 namespace PedagogyWorld.Controllers
 {
     [Authorize]
     public class UnitController : Controller
     {
-        private readonly Context _context = new Context();
+        private readonly Context db = new Context();
 
         //
         // GET: /Unit/
 
         public ViewResult Index()
         {
-            return View(_context.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
+            return View(db.Units.Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
         }
 
         //
@@ -25,7 +27,7 @@ namespace PedagogyWorld.Controllers
 
         public ViewResult Details(Guid id)
         {
-            var unit = _context.Units.Single(x => x.Id == id);
+            var unit = db.Units.Single(x => x.Id == id);
             return View(unit);
         }
 
@@ -34,28 +36,65 @@ namespace PedagogyWorld.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PossibleGrades = _context.Grades;
-            ViewBag.PossibleSubjects = _context.Subjects;
-            return View();
+
+            var model = new UnitModel();
+
+            var result = new List<SelectListItem>();
+            foreach (var t in db.Outcomes)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.OutcomeName,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.OutcomeTypes = result.ToList();
+            
+            ViewBag.PossibleGrades = db.Grades;
+            ViewBag.PossibleSubjects = db.Subjects;
+            return View(model);
         } 
 
         //
         // POST: /Unit/Create
 
         [HttpPost]
-        public ActionResult Create(Unit unit)
+        public ActionResult Create(UnitModel unitModel)
         {
             if (ModelState.IsValid)
             {
-                unit.Id = Guid.NewGuid();
-                _context.Units.Add(unit);
-                unit.UserProfile_Id = (int)Membership.GetUser().ProviderUserKey;
-                _context.SaveChanges();
+                unitModel.Unit.Id = Guid.NewGuid();
+                db.Units.Add(unitModel.Unit);
+                unitModel.Unit.UserProfile_Id = (int) Membership.GetUser().ProviderUserKey;
+
+                foreach (var t in unitModel.OutcomeIds)
+                {
+                    var type = new OutcomeUnit
+                    {
+                        Unit_Id = unitModel.Unit.Id,
+                        Outcome_Id = t
+                    };
+                    db.OutcomeUnits.Add(type);
+                }
+
+                db.SaveChanges();
                 return RedirectToAction("Index");  
             }
-            ViewBag.PossibleGrades = _context.Grades;
-            ViewBag.PossibleSubjects = _context.Subjects;
-            return View(unit);
+            ViewBag.PossibleGrades = db.Grades;
+            ViewBag.PossibleSubjects = db.Subjects;
+            var model = new UnitModel();
+            var result = new List<SelectListItem>();
+            foreach (var t in db.Outcomes)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.OutcomeName,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.OutcomeTypes = result.ToList();
+
+            return View(model);
         }
         
         //
@@ -63,9 +102,9 @@ namespace PedagogyWorld.Controllers
  
         public ActionResult Edit(Guid id)
         {
-            var unit = _context.Units.Single(x => x.Id == id);
-            ViewBag.PossibleGrades = _context.Grades;
-            ViewBag.PossibleSubjects = _context.Subjects;
+            var unit = db.Units.Single(x => x.Id == id);
+            ViewBag.PossibleGrades = db.Grades;
+            ViewBag.PossibleSubjects = db.Subjects;
             return View(unit);
         }
 
@@ -77,12 +116,12 @@ namespace PedagogyWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Entry(unit).State = EntityState.Modified;
-                _context.SaveChanges();
+                db.Entry(unit).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PossibleGrades = _context.Grades;
-            ViewBag.PossibleSubjects = _context.Subjects;
+            ViewBag.PossibleGrades = db.Grades;
+            ViewBag.PossibleSubjects = db.Subjects;
             return View(unit);
         }
 
@@ -91,7 +130,7 @@ namespace PedagogyWorld.Controllers
  
         public ActionResult Delete(Guid id)
         {
-            var unit = _context.Units.Single(x => x.Id == id);
+            var unit = db.Units.Single(x => x.Id == id);
             return View(unit);
         }
 
@@ -101,16 +140,16 @@ namespace PedagogyWorld.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            var unit = _context.Units.Single(x => x.Id == id);
-            _context.Units.Remove(unit);
-            _context.SaveChanges();
+            var unit = db.Units.Single(x => x.Id == id);
+            db.Units.Remove(unit);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                _context.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }
