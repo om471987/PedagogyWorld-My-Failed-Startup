@@ -14,15 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.FileName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContentLength)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StoragePath)
-        </th>
         <th></th>
     </tr>
 
@@ -30,15 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.FileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContentLength)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoragePath)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

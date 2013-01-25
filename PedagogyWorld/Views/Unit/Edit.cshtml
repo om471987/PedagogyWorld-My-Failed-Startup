@@ -1,4 +1,4 @@
-@model PedagogyWorld.Unit
+@model PedagogyWorld.Models.UnitModel
 
 @{
     ViewBag.Title = "Edit";
@@ -14,7 +14,6 @@
     <fieldset>
         <legend>Unit</legend>
 
-        @Html.HiddenFor(model => model.Id)
 		@Html.Partial("_CreateOrEdit", Model)
 
         <p>

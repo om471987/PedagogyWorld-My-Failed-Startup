@@ -137,23 +137,26 @@
                      endMonth: event.end.getMonth(),
                      endDay: event.end.getDate()
                   }, callback);
-            },
-            viewDisplay: function (event) {
-               $.ajax({
-                  type: "POST",
-                  url: "/File/LoadPlanner",
-                  data: {
-                     month: event.start.getMonth(),
-                     year: event.start.getYear()
-                  }
-               }).done(function (files) { 
-                  //$.fullCalendar('removeEvents');
-                  $.each(files, function (index, value) {
-                     $('#calendar').fullCalendar('renderEvent', value, true);
-                  });
-               });
             }
+            //events: function (month, year, callback) {
+            //   $.ajax({
+            //      url: '/File/LoadPlanner',
+            //      dataType: 'json',
+            //      data: {
+            //         month: event.start.getMonth(),
+            //         year: event.start.getYear()
+            //      },
+            //      success: function (doc) {
+            //         $.each(doc, function (index, value) {
+            //            $('#calendar').fullCalendar('renderEvent', value, true);
+            //         });
+            //         callback(events);
+            //      }
+            //   });
+            //}
          });
       });
    </script>
 }
+
+

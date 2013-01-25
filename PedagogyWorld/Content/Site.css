@@ -754,3 +754,33 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.display-label {
+               color: #333333;
+            content: attr(alt);
+            font-size: 1.8em;
+            font-weight: 600;
+}
+
+.display-field {
+   
+               color: #787878;
+            content: attr(alt);
+            font-size: 1.2em;
+            font-weight: 600;
+
+}
+
+.editor-label {
+                     color: #333333;
+            content: attr(alt);
+            font-size: 1.2em;
+            font-weight: 600;
+}
+
+.editor-field {
+                     color: #333333;
+            content: attr(alt);
+            font-size: 1.2em;
+            font-weight: 600;
+}
