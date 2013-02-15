@@ -4,12 +4,20 @@ using System.IO;
 using System.Linq;
 using Amazon.S3;
 using Amazon.S3.Model;
+using System.Configuration;
 
 namespace PedagogyWorld.FileStorage
 {
     public class AwsHandle
     {
-        private readonly AmazonS3 _s3Client = Amazon.AWSClientFactory.CreateAmazonS3Client("AKIAIJNFMB4HFNKTXNXA", "KCEE3e9Ac90LdGfF6QqyjMQNbKV6MCeQHdZACcAc", Amazon.RegionEndpoint.USWest2);
+        private readonly AmazonS3 _s3Client;
+
+        public AwsHandle ()
+	    {
+            var awsAccessKey = ConfigurationManager.AppSettings["awsAccessKey"];
+            var awsSecreteAccessKey = ConfigurationManager.AppSettings["awsSecreteAccessKey"];
+            _s3Client = Amazon.AWSClientFactory.CreateAmazonS3Client(awsAccessKey, awsSecreteAccessKey, Amazon.RegionEndpoint.USWest2);
+	    }
 
         public IEnumerable<string> ListBuckets()
         {
