@@ -10,16 +10,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
     {
         private readonly Context _context = new Context();
 
-        //
-        // GET: /District/
-
-        public ViewResult Index()
+        public ViewResult Index(int start = 0)
         {
-            return View(_context.Districts.Include(district => district.Schools).ToList());
+            ViewBag.Next = start + 20;
+            return View(_context.Districts.Include(district => district.Schools).OrderBy(t=>t.Id).Skip(start).Take(20).ToList());
         }
-
-        //
-        // GET: /District/Details/5
 
         public ViewResult Details(int id)
         {
@@ -27,17 +22,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
             return View(district);
         }
 
-        //
-        // GET: /District/Create
-
         public ActionResult Create()
         {
             ViewBag.PossibleStates = _context.States;
             return View();
         } 
-
-        //
-        // POST: /District/Create
 
         [HttpPost]
         public ActionResult Create(District district)
@@ -51,19 +40,13 @@ namespace PedagogyWorld.Areas.Admin.Controllers
             ViewBag.PossibleStates = _context.States;
             return View(district);
         }
-        
-        //
-        // GET: /District/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
             District district = _context.Districts.Single(x => x.Id == id);
             ViewBag.PossibleStates = _context.States;
             return View(district);
         }
-
-        //
-        // POST: /District/Edit/5
 
         [HttpPost]
         public ActionResult Edit(District district)
@@ -78,17 +61,11 @@ namespace PedagogyWorld.Areas.Admin.Controllers
             return View(district);
         }
 
-        //
-        // GET: /District/Delete/5
- 
         public ActionResult Delete(int id)
         {
             District district = _context.Districts.Single(x => x.Id == id);
             return View(district);
         }
-
-        //
-        // POST: /District/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

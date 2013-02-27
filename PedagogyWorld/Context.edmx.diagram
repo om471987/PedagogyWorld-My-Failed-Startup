@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c27ac8cfbb514836972e07ba7a62dde9" Name="Diagram1" ZoomLevel="10">
+      <Diagram DiagramId="c27ac8cfbb514836972e07ba7a62dde9" Name="Diagram1" ZoomLevel="42">
         <EntityTypeShape EntityType="Model.District" Width="1.5" PointX="9.1574871694471156" PointY="10.46874054263753" />
         <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="8.35839227789938" PointY="1.1876469260024125" />
         <EntityTypeShape EntityType="Model.FileFileType" Width="1.5" PointX="10.348484934469912" PointY="5.1376131945930483" />
@@ -23,7 +23,7 @@
         <EntityTypeShape EntityType="Model.UnitFile" Width="1.5" PointX="0.33838404730818428" PointY="21.921749706343633" />
         <EntityTypeShape EntityType="Model.UnitStandard" Width="1.5" PointX="1.804179093709299" PointY="1.8621018835632606" />
         <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="4.2826993299101943" PointY="8.9342281114935069" />
-        <EntityTypeShape EntityType="Model.UserProfileSchool" Width="1.5" PointX="4.1594847609100327" PointY="9.40197273036557" />
+        <EntityTypeShape EntityType="Model.UserProfileSchool" Width="1.5" PointX="7.875" PointY="8" />
         <EntityTypeShape EntityType="Model.webpages_Membership" Width="1.5" PointX="7.0957909594736019" PointY="29.108568458402793" />
         <EntityTypeShape EntityType="Model.webpages_OAuthMembership" Width="1.5" PointX="6.5579219081243139" PointY="2.1977221081954066" />
         <EntityTypeShape EntityType="Model.webpages_Roles" Width="1.5" PointX="1.4396876028923726" PointY="9.1660953802830054" />
@@ -51,6 +51,12 @@
         <AssociationConnector Association="Model.FK__UnitStand__Unit___44FF419A" />
         <AssociationConnector Association="Model.FK__UserProfi__UserP__7908F585" />
         <AssociationConnector Association="Model.webpages_UsersInRoles" />
+        <EntityTypeShape EntityType="Model.UserGrade" Width="1.5" PointX="5.400701162126242" PointY="0.64595796197930255" />
+        <EntityTypeShape EntityType="Model.UserSubject" Width="1.5" PointX="1.7364666991571274" PointY="31.082724272777664" />
+        <AssociationConnector Association="Model.FK__UserGrade__Grade__351DDF8C" />
+        <AssociationConnector Association="Model.FK__UserSubje__Subje__2F650636" />
+        <AssociationConnector Association="Model.FK__UserGrade__UserP__3429BB53" />
+        <AssociationConnector Association="Model.FK__UserSubje__UserP__2E70E1FD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

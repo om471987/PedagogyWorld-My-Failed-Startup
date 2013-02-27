@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace PedagogyWorld.Models
 {
@@ -26,7 +28,7 @@ namespace PedagogyWorld.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -59,8 +61,14 @@ namespace PedagogyWorld.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "First Name")]
+        public string First { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string Last { get; set; }
 
         [Required]
         public string Email { get; set; }
@@ -70,6 +78,10 @@ namespace PedagogyWorld.Models
         public string District { get; set; }
 
         public string School { get; set; }
+
+        public IEnumerable<SelectListItem> Subjects { get; set; }
+
+        public int[] SubjectIds { get; set; }
     }
 
     public class ExternalLogin

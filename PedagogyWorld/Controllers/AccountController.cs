@@ -124,14 +124,14 @@ namespace PedagogyWorld.Controllers
                         ViewBag.States = db.States;
                         return View(model);
                     }
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password,new {model.Email});
+                    WebSecurity.CreateUserAndAccount( model.UserName, model.Password, new {model.Email, model.First, model.Last});
                     WebSecurity.Login(model.UserName, model.Password);
 
                     var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
                     var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
 
                     db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
-                    db.SaveChanges();
+                    //db.SaveChanges();
                     return RedirectToAction("TakeATour");
                 }
                 catch (MembershipCreateUserException e)

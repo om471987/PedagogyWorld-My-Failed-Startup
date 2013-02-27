@@ -3,30 +3,35 @@
 @{
     ViewBag.Title = "Delete";
 }
+@if (Model.Schools.Any())
+{
+    <h2>Can't delete district containing schools. This district has @Model.Schools.Count.ToString() schools.</h2>
+   
+    <p>@Html.ActionLink("Back to List", "Index")</p>
+}
+else
+{
+    <h2>Delete</h2>
 
-<h2>Delete</h2>
+    <h3>Are you sure you want to delete this?</h3>
+    <fieldset>
+        <legend>District</legend>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>District</legend>
+        <div class="display-label">District Name</div>
+        <div class="display-field">@Model.DistrictName</div>
 
-    <div class="display-label">DistrictName</div>
-    <div class="display-field">@Model.DistrictName</div>
+        <div class="display-label">State</div>
+        <div class="display-field">@Html.DisplayTextFor(_ => Model.State.StateName).ToString()</div>
 
-    <div class="display-label">State_Id</div>
-    <div class="display-field">@Model.State_Id</div>
-
-    <div class="display-label">State</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.State).ToString()</div>
-
-    <div class="display-label">Schools</div>
-    <div class="display-field">@(Model.Schools == null ? "None" : Model.Schools.Count.ToString())</div>
-</fieldset>
-@using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        <div class="display-label">Schools</div>
+        <div class="display-field">@(Model.Schools == null ? "None" : Model.Schools.Count.ToString())</div>
+    </fieldset>
+    using (Html.BeginForm()) {
+        <p>
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
 }
 
 

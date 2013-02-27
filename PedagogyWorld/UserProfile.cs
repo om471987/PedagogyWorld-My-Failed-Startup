@@ -20,6 +20,8 @@ namespace PedagogyWorld
             this.Units = new HashSet<Unit>();
             this.UserProfileSchools = new HashSet<UserProfileSchool>();
             this.webpages_Roles = new HashSet<webpages_Roles>();
+            this.UserGrades = new HashSet<UserGrade>();
+            this.UserSubjects = new HashSet<UserSubject>();
         }
     
         public int UserId { get; set; }
@@ -32,5 +34,7 @@ namespace PedagogyWorld
         public virtual ICollection<Unit> Units { get; set; }
         public virtual ICollection<UserProfileSchool> UserProfileSchools { get; set; }
         public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
+        public virtual ICollection<UserGrade> UserGrades { get; set; }
+        public virtual ICollection<UserSubject> UserSubjects { get; set; }
     }
 }

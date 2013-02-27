@@ -9,14 +9,15 @@
 <fieldset>
     <legend>Grade</legend>
 
-    <div class="display-label">GradeName</div>
+    <div class="display-label">Grade</div>
     <div class="display-field">@Model.GradeName</div>
 
-    <div class="display-label">Units</div>
+    <div class="display-label">Units using this grade</div>
     <div class="display-field">@(Model.Units == null ? "None" : Model.Units.Count.ToString())</div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id })
     @Html.ActionLink("Back to List", "Index")
 </p>
 

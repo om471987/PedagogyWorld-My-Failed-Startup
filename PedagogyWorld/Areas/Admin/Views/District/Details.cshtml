@@ -9,14 +9,11 @@
 <fieldset>
     <legend>District</legend>
 
-    <div class="display-label">DistrictName</div>
+    <div class="display-label">District Name</div>
     <div class="display-field">@Model.DistrictName</div>
 
-    <div class="display-label">State_Id</div>
-    <div class="display-field">@Model.State_Id</div>
-
     <div class="display-label">State</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.State).ToString()</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.State.StateName).ToString()</div>
 
     <div class="display-label">Schools</div>
     <div class="display-field">@(Model.Schools == null ? "None" : Model.Schools.Count.ToString())</div>

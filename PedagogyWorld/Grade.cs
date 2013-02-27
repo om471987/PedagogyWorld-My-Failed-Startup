@@ -18,6 +18,7 @@ namespace PedagogyWorld
         {
             this.StrandDomains = new HashSet<StrandDomain>();
             this.Units = new HashSet<Unit>();
+            this.UserGrades = new HashSet<UserGrade>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,6 @@ namespace PedagogyWorld
     
         public virtual ICollection<StrandDomain> StrandDomains { get; set; }
         public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<UserGrade> UserGrades { get; set; }
     }
 }

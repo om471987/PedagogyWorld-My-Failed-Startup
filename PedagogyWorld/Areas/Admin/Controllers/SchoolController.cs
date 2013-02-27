@@ -13,9 +13,10 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         //
         // GET: /School/
 
-        public ViewResult Index()
+        public ViewResult Index(int start = 0)
         {
-            return View(_context.Schools.Include(school => school.UserProfileSchools).ToList());
+            ViewBag.Next = start + 20;
+            return View(_context.Schools.Include(school => school.UserProfileSchools).OrderBy(t => t.Id).Skip(start).Take(20).ToList());
         }
 
         //

@@ -35,6 +35,10 @@
                               <li>@Html.ActionLink("About", "About", "Home", new { Area=""}, new { id = "AboutLink" })</li>                           
                            }
                            <li>@Html.ActionLink("Help", "Help", "Home", new { Area=""}, new { id = "HelpLink" })</li>
+                           @if (User.IsInRole("Admin"))
+                           {
+                            <li>@Html.ActionLink("Admin", "", "", new { Area="Admin"}, new { id = "HelpLink" })</li>     
+                           }
                         </ul>
                     </nav>
                 </div>

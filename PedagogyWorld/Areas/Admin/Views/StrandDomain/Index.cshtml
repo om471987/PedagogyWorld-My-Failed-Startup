@@ -20,28 +20,16 @@
             Name
         </th>
         <th>
-            ConceptualCategory
+            Conceptual Category
         </th>
         <th>
-            State_Id
+            Grade
         </th>
         <th>
-            Grade_Id
+            State
         </th>
         <th>
-            Subject_Id
-        </th>
-        <th>
-            Headers
-        </th>
-        <th>
-            Grade1
-        </th>
-        <th>
-            State1
-        </th>
-        <th>
-            Subject1
+            Subject
         </th>
     </tr>
 
@@ -59,25 +47,13 @@
 			@item.ConceptualCategory
         </td>
         <td>
-			@item.State_Id
+			@Html.DisplayTextFor(_ => item.Grade.GradeName).ToString()
         </td>
         <td>
-			@item.Grade_Id
+			@Html.DisplayTextFor(_ => item.State.StateName).ToString()
         </td>
         <td>
-			@item.Subject_Id
-        </td>
-        <td>
-			@(item.Headers == null ? "None" : item.Headers.Count.ToString())
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.Grade).ToString()
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.State).ToString()
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.Subject).ToString()
+			@Html.DisplayTextFor(_ => item.Subject.SubjectName).ToString()
         </td>
     </tr>
 }

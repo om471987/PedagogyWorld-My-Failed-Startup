@@ -9,10 +9,10 @@
 <fieldset>
     <legend>State</legend>
 
-    <div class="display-label">StateName</div>
+    <div class="display-label">State Name</div>
     <div class="display-field">@Model.StateName</div>
 
-    <div class="display-label">ShortForm</div>
+    <div class="display-label">Short Form</div>
     <div class="display-field">@Model.ShortForm</div>
 
     <div class="display-label">Districts</div>
@@ -23,6 +23,7 @@
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) | 
     @Html.ActionLink("Back to List", "Index")
 </p>
 

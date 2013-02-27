@@ -9,22 +9,16 @@
 <fieldset>
     <legend>School</legend>
 
-    <div class="display-label">SchoolName</div>
+    <div class="display-label">School Name</div>
     <div class="display-field">@Model.SchoolName</div>
 
-    <div class="display-label">District_Id</div>
-    <div class="display-field">@Model.District_Id</div>
-
-    <div class="display-label">State_Id</div>
-    <div class="display-field">@Model.State_Id</div>
-
     <div class="display-label">District</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.District).ToString()</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.District.DistrictName).ToString()</div>
 
     <div class="display-label">State</div>
-    <div class="display-field">@Html.DisplayTextFor(_ => Model.State).ToString()</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.State.StateName).ToString()</div>
 
-    <div class="display-label">SchoolUserProfiles</div>
+    <div class="display-label">Users</div>
     <div class="display-field">@(Model.UserProfileSchools == null ? "None" : Model.UserProfileSchools.Count.ToString())</div>
 </fieldset>
 <p>

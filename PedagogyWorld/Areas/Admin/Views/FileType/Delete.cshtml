@@ -4,23 +4,32 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+@if (Model.FileFileTypes.Any())
+{
+    <h2>Can't delete Types taged by files. This type is tagged by @Model.FileFileTypes.Count.ToString() files.</h2>
+   
+    <p>@Html.ActionLink("Back to List", "Index")</p>
+}
+else
+{
+    <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>FileType</legend>
+    <h3>Are you sure you want to delete this?</h3>
+    <fieldset>
+        <legend>FileType</legend>
 
-    <div class="display-label">FileTypeName</div>
-    <div class="display-field">@Model.FileTypeName</div>
+        <div class="display-label">File Type</div>
+        <div class="display-field">@Model.FileTypeName</div>
 
-    <div class="display-label">FileFileTypes</div>
-    <div class="display-field">@(Model.FileFileTypes == null ? "None" : Model.FileFileTypes.Count.ToString())</div>
-</fieldset>
-@using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        <div class="display-label">Files</div>
+        <div class="display-field">@(Model.FileFileTypes == null ? "None" : Model.FileFileTypes.Count.ToString())</div>
+    </fieldset>
+    using (Html.BeginForm()) {
+        <p>
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
 }
 
 
