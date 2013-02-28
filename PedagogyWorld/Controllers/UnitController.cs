@@ -103,10 +103,25 @@ namespace PedagogyWorld.Controllers
  
         public ActionResult Edit(Guid id)
         {
+            var model = new UnitModel();
             var unit = db.Units.Single(x => x.Id == id);
+
+            model.Unit = unit;
             ViewBag.PossibleGrades = db.Grades;
             ViewBag.PossibleSubjects = db.Subjects;
-            return View(unit);
+
+            var result = new List<SelectListItem>();
+            foreach (var t in db.Outcomes)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.OutcomeName,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.OutcomeTypes = result.ToList();
+
+            return View(model);
         }
 
         //
