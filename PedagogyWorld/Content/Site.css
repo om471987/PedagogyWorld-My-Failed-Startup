@@ -49,7 +49,9 @@ mark {
 .float-right {
     float: right;
 }
-
+.clear {
+    clear:both
+}
 .clear-fix:after {
     content: ".";
     clear: both;

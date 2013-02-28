@@ -7,8 +7,11 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
-
-       @Scripts.Render("~/bundles/jquery")
+        
+        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <script src="~/bootstrap/js/bootstrap.min.js"></script>
+        @Scripts.Render("~/bundles/jquery")
        @RenderSection("scripts", required: false)
     </head>
     <body>

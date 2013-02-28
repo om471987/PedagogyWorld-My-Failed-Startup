@@ -1,51 +1,88 @@
-@model IEnumerable<PedagogyWorld.Unit>
+@model List<PedagogyWorld.Unit>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            UnitName
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Grade
-        </th>
-       <th>
-          Subject
-       </th>
-       <th></th>
-    </tr>
+<div style="display:inline-block;float:left">
+    
+    <div class="row" style="text-align: center ;">
+        <img src="~/Images/My-Units.png" />
+    </div>
+    <div class="clear"></div>
+    <div class="row">
+        <div class="span4">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <br />
+            <img id="addfile" src="~/Images/Add-Files.png" style="cursor:pointer"/>  
+            <br />
+            <img id="downloadfile" src="~/Images/Download-Files.png" style="cursor:pointer"/>
+        </div>
+        <div class="float:left;span8">
+            <br /><br />
+            <table style="border:1px solid black;">
+                <tr style="border:1px solid black;">
+                   <th></th>
+                    <th style="border:1px solid black;"></th>
+                    <th style="border:1px solid black;text-align:center">
+                        UnitName
+                    </th>
+                    <th style="border:1px solid black;text-align:center">
+                        Grade
+                    </th>
+                   <th style="border:1px solid black;text-align:center">
+                      Subject
+                   </th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-			@Html.ActionLink(item.UnitName, "Details", new { id=item.Id })
-        </td>
-        <td>
-			@item.Description
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.Grade.GradeName).ToString()
-        </td>
-        <td>
-           @Html.DisplayTextFor(_ => item.Subject.SubjectName).ToString()
-        </td>
-       <td>
-          @Html.ActionLink("Edit", "Edit", new { id=item.Id }) | @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-       </td>
-    </tr>
-}
+            @foreach (var item in Model) {
+                <tr>
+                    <td style="border:1px solid black;text-align:center">
+                        @Model.IndexOf(item)
+                    </td>
+                    <td style="border:1px solid black;">
+                        <input id="@item.Id" type="checkbox" style="margin-left:30px"/>
+                    </td>
+                    <td style="border:1px solid black;text-align:center">
+			            @Html.ActionLink(item.UnitName, "Details", new { id=item.Id })
+                    </td>
+                    <td style="border:1px solid black;text-align:center">
+			            @Html.DisplayTextFor(_ => item.Grade.GradeName).ToString()
+                    </td>
+                    <td style="border:1px solid black;text-align:center">
+                       @Html.DisplayTextFor(_ => item.Subject.SubjectName).ToString()
+                    </td>
+                </tr>
+            }
 
-</table>
+            </table>            
+        </div>
+    </div>
+</div>
 
-
+<script>
+    $('input:checkbox').change(function (event) {
+        if (!$("#" + event.target.id).prop("checked")) {
+            $("#" + event.target.id).prop("checked", false);
+        }
+        else {
+            $('input:checkbox').prop("checked", false);
+            $("#" + event.target.id).prop("checked", true);
+        }
+    });
+    $('#addfile').click(function () {
+        var checked = $('input:checked');
+        if (checked.length == 1) {
+            window.location.href = "http://localhost:20000/File/Create/" + checked[0].id;
+        }
+    });
+    $('#downloadfile').click(function () {
+        var checked = $('input:checked');
+        if (checked.length == 1) {
+            alert(checked[0].id);
+        }
+    });
+</script>
