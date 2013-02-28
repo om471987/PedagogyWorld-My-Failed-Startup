@@ -151,51 +151,25 @@ namespace PedagogyWorld.Controllers
         public ActionResult Manage(LocalPasswordModel model)
         {
             ViewBag.ReturnUrl = Url.Action("Manage");
-            if (true)
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+                bool changePasswordSucceeded;
+                try
                 {
-                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
-                    bool changePasswordSucceeded;
-                    try
-                    {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                    }
-                    catch (Exception)
-                    {
-                        changePasswordSucceeded = false;
-                    }
-
-                    if (changePasswordSucceeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                 }
-            }
-            else
-            {
-                // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
+                catch (Exception)
                 {
-                    state.Errors.Clear();
+                    changePasswordSucceeded = false;
                 }
 
-                if (ModelState.IsValid)
+                if (changePasswordSucceeded)
                 {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e);
-                    }
+                    return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
-            }
+                ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+            }            
 
             // If we got this far, something failed, redisplay form
             return View(model);
