@@ -179,17 +179,17 @@ namespace PedagogyWorld.Controllers
                 list.Add(new PlannerModel{Id = t.Id,FileName = t.FileName});
             }
 
-            //var now = DateTime.Now;
-            //var startDate = new DateTime(now.Year,now.Month,1);
-            //var endDate = new DateTime(now.Year,now.Month, DateTime.DaysInMonth(now.Year, now.Month));
+            var now = DateTime.Now;
+            var startDate = new DateTime(now.Year, now.Month, 1);
+            var endDate = new DateTime(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month));
 
-            //var files = (from f in db.Files.AsEnumerable()
-            //              join t in db.TeachingDates on f.Id equals t.File_Id
-            //              where t.StartDate >= startDate &&
-            //             t.EndDate < endDate &&
-            //             f.UserProfile_Id == userId
-            //              select new { id=f.Id, title=f.FileName, start = t.StartDate.ToUnixTimeStamp(), end = t.EndDate.ToUnixTimeStamp() }).ToList();
-            //ViewBag.Files = JsonConvert.SerializeObject(files);
+            var files = (from f in db.Files.AsEnumerable()
+                         join t in db.TeachingDates on f.Id equals t.File_Id
+                         where t.StartDate >= startDate &&
+                        t.EndDate < endDate &&
+                        f.UserProfile_Id == userId
+                         select new { id = f.Id, title = f.FileName, start = t.StartDate.ToUnixTimeStamp(), end = t.EndDate.ToUnixTimeStamp() }).ToList();
+            ViewBag.Files = JsonConvert.SerializeObject(files);
             return View(list);
         }
 
