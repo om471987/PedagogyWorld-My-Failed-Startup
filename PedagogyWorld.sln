@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld", "PedagogyWo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.Tests", "PedagogyWorld.Tests\PedagogyWorld.Tests.csproj", "{534E4227-407F-4E94-BE34-B3715D561EBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.FileStorage", "PedagogyWorld.FileStorage\PedagogyWorld.FileStorage.csproj", "{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedagogyWorld.Services", "PedagogyWorld.Services\PedagogyWorld.Services.csproj", "{2ECCA326-DA2E-4B3E-8152-459FF716B7FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

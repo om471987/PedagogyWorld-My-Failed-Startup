@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 using System.Web.Security;
 using Newtonsoft.Json;
 using PedagogyWorld.ExtensionMethod;
-using PedagogyWorld.FileStorage;
+using PedagogyWorld.Services;
 using PedagogyWorld.Models;
 
 namespace PedagogyWorld.Controllers
@@ -23,14 +23,14 @@ namespace PedagogyWorld.Controllers
 
         public ContentResult ListBuckets()
         {
-            var aws = new AwsHandle();
+            var aws = new FileHandle();
             var serializer = new JavaScriptSerializer();
             return Content(serializer.Serialize(aws.ListBuckets()), "application/json");
         }
 
         public ContentResult ListObjects(string id)
         {
-            var aws = new AwsHandle();
+            var aws = new FileHandle();
             var serializer = new JavaScriptSerializer();
             return Content(serializer.Serialize(aws.GetDocs(id)), "application/json");
         }
@@ -41,7 +41,7 @@ namespace PedagogyWorld.Controllers
 
             if (file.UserProfile_Id == (int)Membership.GetUser().ProviderUserKey)
             {
-                var aws = new AwsHandle();
+                var aws = new FileHandle();
 
                 var stream = aws.DownloadObject("pedagogyworld", file.StoragePath);
                 return File(stream, file.ContentType, file.FileName);
@@ -97,7 +97,7 @@ namespace PedagogyWorld.Controllers
             if (ModelState.IsValid && fileModel.UploadFile != null)
             {
                 var fileId = Guid.NewGuid();
-                var aws = new AwsHandle();
+                var aws = new FileHandle();
                 var result = aws.NewFile("pedagogyworld", fileId.ToString("N"), fileModel.UploadFile.InputStream, fileModel.UploadFile.ContentType);
                 if (result)
                 {

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using PedagogyWorld.Models;
@@ -289,32 +288,32 @@ namespace PedagogyWorld.Controllers
         //
         // GET: /Account/ExternalLoginCallback
 
-        [AllowAnonymous]
-        public ActionResult ExternalLoginCallback(string returnUrl)
-        {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-            if (!result.IsSuccessful)
-            {
-                return RedirectToAction("ExternalLoginFailure");
-            }
+        //[AllowAnonymous]
+        //public ActionResult ExternalLoginCallback(string returnUrl)
+        //{
+        //    AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+        //    if (!result.IsSuccessful)
+        //    {
+        //        return RedirectToAction("ExternalLoginFailure");
+        //    }
 
-            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-            {
-                return RedirectToLocal(returnUrl);
-            }
+        //    if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+        //    {
+        //        return RedirectToLocal(returnUrl);
+        //    }
 
-            if (User.Identity.IsAuthenticated)
-            {
-                // If the current user is logged in add the new account
-                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-                return RedirectToLocal(returnUrl);
-            }
-            // User is new, ask for their desired membership name
-            var loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-            ViewBag.ReturnUrl = returnUrl;
-            return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-        }
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        // If the current user is logged in add the new account
+        //        OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+        //        return RedirectToLocal(returnUrl);
+        //    }
+        //    // User is new, ask for their desired membership name
+        //    var loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+        //    ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+        //    ViewBag.ReturnUrl = returnUrl;
+        //    return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+        //}
 
         //
         // POST: /Account/ExternalLoginConfirmation
