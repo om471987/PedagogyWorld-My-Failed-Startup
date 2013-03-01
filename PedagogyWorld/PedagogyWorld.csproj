@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AWSSDK.1.5.14.0\lib\AWSSDK.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.1.8\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,6 +152,7 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="ExtensionMethod\TimeStamp.cs" />
+    <Compile Include="ExtensionMethod\ZipActionResult.cs" />
     <Compile Include="File.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -408,7 +412,7 @@
     <Content Include="Views\Errors\OperationalError.cshtml" />
     <Content Include="Views\Errors\NotAuthorized.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
-    <Content Include="Views\Account\TakeATour.cshtml" />
+    <Content Include="Views\Home\TakeATour.cshtml" />
     <Content Include="Views\Account\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\State\Create.cshtml" />
     <Content Include="Areas\Admin\Views\State\Edit.cshtml" />

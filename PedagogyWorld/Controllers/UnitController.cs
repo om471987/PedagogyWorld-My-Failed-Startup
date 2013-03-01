@@ -14,26 +14,17 @@ namespace PedagogyWorld.Controllers
     {
         private readonly Context db = new Context();
 
-        //
-        // GET: /Unit/
-
         public ViewResult Index()
         {
             var userId = (int) Membership.GetUser().ProviderUserKey;
             return View(db.Units.Where(t => t.UserProfile_Id == userId).Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
         }
 
-        //
-        // GET: /Unit/Details/5
-
         public ViewResult Details(Guid id)
         {
             var unit = db.Units.Single(x => x.Id == id);
             return View(unit);
         }
-
-        //
-        // GET: /Unit/Create
 
         public ActionResult Create()
         {
@@ -55,9 +46,6 @@ namespace PedagogyWorld.Controllers
             ViewBag.PossibleSubjects = db.Subjects;
             return View(model);
         } 
-
-        //
-        // POST: /Unit/Create
 
         [HttpPost]
         public ActionResult Create(UnitModel unitModel)
@@ -97,9 +85,6 @@ namespace PedagogyWorld.Controllers
 
             return View(model);
         }
-        
-        //
-        // GET: /Unit/Edit/5
  
         public ActionResult Edit(Guid id)
         {
@@ -123,9 +108,6 @@ namespace PedagogyWorld.Controllers
 
             return View(model);
         }
-
-        //
-        // POST: /Unit/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Unit unit)
@@ -198,17 +180,11 @@ namespace PedagogyWorld.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Unit/Delete/5
- 
         public ActionResult Delete(Guid id)
         {
             var unit = db.Units.Single(x => x.Id == id);
             return View(unit);
         }
-
-        //
-        // POST: /Unit/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(Guid id)

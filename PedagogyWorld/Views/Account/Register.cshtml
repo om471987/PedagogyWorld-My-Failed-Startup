@@ -47,7 +47,7 @@
 
            <li>
               @Html.LabelFor(m => m.State)
-              @Html.DropDownListFor(m => m.State, new SelectList(ViewBag.States, "Id", "ShortForm"), new { id = "state" })
+              @Html.DropDownListFor(m => m.State, new SelectList(Model.States, "Id", "ShortForm"), new { id = "state" })
            </li>
 
            <li>
@@ -63,6 +63,11 @@
             <li>
                 @Html.LabelFor(m => m.Subjects, "Subjects Teaching")
                @Html.CheckBoxList("SubjectIds", Model.Subjects)
+            </li>
+
+            <li>
+                @Html.LabelFor(m => m.Grades, "Grades Teaching")
+               @Html.CheckBoxList("GradeIds", Model.Grades)
             </li>
         </ol>
         <input type="submit" value="Register" />

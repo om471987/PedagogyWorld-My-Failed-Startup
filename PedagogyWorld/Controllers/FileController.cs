@@ -315,6 +315,21 @@ namespace PedagogyWorld.Controllers
             return Json(files, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult DownloadZip(Guid id)
+        {
+            var file = db.Files.Select(t=>t.StoragePath).ToList();
+
+            //if (file.UserProfile_Id == (int)Membership.GetUser().ProviderUserKey)
+            //{
+            //    var aws = new FileHandle();
+
+            //    var stream = aws.DownloadObject("pedagogyworld", file.StoragePath);
+            //    return File(stream, file.ContentType, file.FileName);
+            //}
+
+            return new ZipResult(file, "test.zip");
+        }
+
         public ActionResult Delete(Guid id)
         {
             File file = db.Files.Find(id);

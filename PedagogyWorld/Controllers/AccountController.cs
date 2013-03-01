@@ -14,18 +14,12 @@ namespace PedagogyWorld.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
 
         [HttpPost]
         [AllowAnonymous]
@@ -43,15 +37,6 @@ namespace PedagogyWorld.Controllers
             return View(model);
         }
 
-        [Authorize]
-        public ActionResult TakeATour()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/LogOff
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -61,15 +46,10 @@ namespace PedagogyWorld.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var db = new Context();
-            ViewBag.States = db.States;
-            return View();
+            return View(GenerateRegisterForm());
         }
 
         [AllowAnonymous]
@@ -82,7 +62,6 @@ namespace PedagogyWorld.Controllers
                              select name.DistrictName).ToList();
             return Json(districts, JsonRequestBehavior.AllowGet);
         }
-
 
         [AllowAnonymous]
         public ActionResult UpdateSchoolJSon(string selectedDistrict)
@@ -116,34 +95,32 @@ namespace PedagogyWorld.Controllers
             {
                 try
                 {
-                    if (db.UserProfiles.Any(t=>t.Email == model.Email))
+                    if (db.UserProfiles.Any(t => t.UserName == model.UserName))
                     {
-                        ModelState.AddModelError("Email","This email address aleady exists. Please try another email");
-                        ViewBag.States = db.States;
-                        return View(model);
+                        ModelState.AddModelError("UserName", "This user name address aleady exists. Please try another name");
+                        return View(GenerateRegisterForm(model));
                     }
-                    WebSecurity.CreateUserAndAccount( model.UserName, model.Password, new {model.Email, model.First, model.Last});
-                    WebSecurity.Login(model.UserName, model.Password);
+                    if (db.UserProfiles.Any(t => t.Email == model.Email))
+                    {
+                        ModelState.AddModelError("Email", "This email address aleady exists. Please try another email");
+                        return View(GenerateRegisterForm());
+                    }
+                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.First, model.Last });
+                    //WebSecurity.Login(model.UserName, model.Password);
 
-                    var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
-                    var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
-
-                    db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
+                    //var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
+                    //var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
+                    //db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
                     //db.SaveChanges();
-                    return RedirectToAction("TakeATour");
+                    return RedirectToAction("TakeATour", "Home", new { Area = "" });
                 }
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
-            ViewBag.States = db.States;
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(GenerateRegisterForm());
         }
-
-        //
-        // POST: /Account/Manage
 
         [HttpPost]
         [Authorize]
@@ -184,9 +161,6 @@ namespace PedagogyWorld.Controllers
             return View(userprofile);
         }
 
-        //
-        // POST: /UserProfiles/Edit/5
-
         [HttpPost]
         [Authorize]
         public ActionResult Edit(UserProfile userprofile)
@@ -200,7 +174,7 @@ namespace PedagogyWorld.Controllers
             }
             return View(userprofile);
         }
-        #region Helpers
+        
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -254,6 +228,39 @@ namespace PedagogyWorld.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
+
+        private RegisterModel GenerateRegisterForm(RegisterModel model = null)
+        {
+            var db = new Context();
+            if (model == null)
+            {
+                model = new RegisterModel();
+            }
+            
+            model.States = db.States;
+            
+            var result = new List<SelectListItem>();
+            foreach (var t in db.Subjects)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.SubjectName,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.Subjects = result.ToList();
+
+            result = new List<SelectListItem>();
+            foreach (var t in db.Grades)
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.GradeName,
+                    Value = t.Id.ToString()
+                });
+            }
+            model.Grades = result.ToList();
+            return model;
+        }
     }
 }

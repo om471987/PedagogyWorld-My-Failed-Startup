@@ -14,11 +14,14 @@ namespace PedagogyWorld.Areas.Admin
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { Controller="State", action = "Manage", id = UrlParameter.Optional },
-                new[] { "PedagogyWorld.Areas.Admin.Controllers" }
+            context.MapRoute("Admin_default", "Admin/{controller}/{action}/{id}",new 
+                                                                                    { 
+                                                                                        Controller="State", 
+                                                                                        action = "Manage", 
+                                                                                        id = UrlParameter.Optional 
+                                                                                    }, new[]                                                                                                               { 
+                                                                                        "PedagogyWorld.Areas.Admin.Controllers"
+                                                                                    }
             );
         }
     }

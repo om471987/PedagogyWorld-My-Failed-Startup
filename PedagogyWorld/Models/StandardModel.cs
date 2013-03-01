@@ -16,10 +16,4 @@ namespace PedagogyWorld.Models
 
         public int[] StandardIds { get; set; }
     }
-
-    public class StandardType
-    {
-        public bool IsChecked { get; set; }
-        public string Type { get; set; }
-    }
 }
