@@ -17,8 +17,11 @@
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
-                <div class="clear"></div>
-                <img id="usernameloading" src="~/Images/ajax-loader.gif" style="display:none"/>
+                <span>
+                    <img id="usernameloading" src="~/Images/ajax-loader.gif" style="display:none;height:24px;width:24px;"/>
+                    <img id="usernameyes" src="~/Images/yes.png" style="display:none;height:24px;width:24px;"/>
+                    <img id="usernameno" src="~/Images/no.png" style="display:none;height:24px;width:24px;"/>
+                </span>
                 <p id="usernamevalidate" class="field-validation-error"></p>
             </li>
 
@@ -47,8 +50,11 @@
               @Html.LabelFor(m => m.Email)
               @Html.TextBoxFor(m => m.Email)
                @Html.ValidationMessageFor(m => m.Email)
-               <div class="clear"></div>
-               <img id="emailloading" src="~/Images/ajax-loader.gif" style="display:none"/>
+                <span>
+                    <img id="emailloading" src="~/Images/ajax-loader.gif" style="display:none;height:24px;width:24px;"/>
+                    <img id="emailyes" src="~/Images/yes.png" style="display:none;height:24px;width:24px;"/>
+                    <img id="emailno" src="~/Images/no.png" style="display:none;height:24px;width:24px;"/>
+                </span>
                <p id="emailvalidate" class="field-validation-error" style="display:none"></p>
            </li>
 
@@ -100,19 +106,28 @@
         }
         else {
             $("#usernamevalidate").text("");
+            $("#usernameyes").hide();
+            $("#usernameno").hide();
         }
 
         request.done(function (msg) {
             var txt = "User Name already exists. Please select another one.";
             var color = "red";
+            $("#usernameyes").hide();
+            $("#usernameno").hide();
+            $("#usernameloading").hide();
             if (!msg) {
                 txt = "This User Name can be used."
                 color = "green";
+                $("#usernameyes").show();
+            }
+            else {
+                $("#usernameno").show();
             }
             $("#usernamevalidate").text(txt)
                                 .css("color", color)
-                                .css("display", "block");
-            $("#usernameloading").hide();
+                                .show();
+
         });
     });
 

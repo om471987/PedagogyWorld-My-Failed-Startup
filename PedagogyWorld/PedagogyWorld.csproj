@@ -346,12 +346,14 @@
     <Content Include="Images\Home.png" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\My-Units.png" />
+    <Content Include="Images\no.png" />
     <Content Include="Images\Planner.png" />
     <Content Include="Images\Registration.png" />
     <Content Include="Images\Signin-Button.png" />
     <Content Include="Images\Signup-Button.png" />
     <Content Include="Images\take-a-tour.png" />
     <Content Include="Images\Tour.png" />
+    <Content Include="Images\yes.png" />
     <Content Include="Scripts\Calender\fullcalendar.min.js" />
     <Content Include="Scripts\Calender\jquery-1.8.1.min.js" />
     <Content Include="Scripts\Calender\jquery-ui-1.8.23.custom.min.js" />
