@@ -219,7 +219,7 @@
     <Compile Include="UserSubject.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="WebHelper\CheckBoxList.cs" />
+    <Compile Include="ExtensionMethod\CheckBoxList.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
@@ -337,6 +337,7 @@
     <Content Include="Images\About-Button.png" />
     <Content Include="Images\Account-Settings.png" />
     <Content Include="Images\Add-Files.png" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\Ask-Ms-Jean.png" />
     <Content Include="Images\Curriculum-Manager-Selected.png" />
     <Content Include="Images\Download-Files.png" />

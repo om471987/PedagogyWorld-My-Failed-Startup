@@ -41,11 +41,23 @@ namespace PedagogyWorld.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "User Name")]
+        [RegularExpression("^[a-zA-Z0-9_-]{3,15}$", ErrorMessage = "Name must be alphabets, numbers, hiphen and underscore.")]
+        [StringLength(12, ErrorMessage = "The {0} must be in the range of {2} and {1} characters.", MinimumLength = 3)]
         public string UserName { get; set; }
 
+        [Display(Name = "First Name")]
+        [RegularExpression("^[a-zA-Z]{1,20}$", ErrorMessage = "First Name must contain only alphabets.")]
+        [StringLength(20, ErrorMessage = "The {0} must be in the range of {2} and {1} characters.", MinimumLength = 1)]
+        public string First { get; set; }
+
+        [Display(Name = "Last Name")]
+        [RegularExpression("^[a-zA-Z]{1,20}$", ErrorMessage = "Last Name must contain only alphabets.")]
+        [StringLength(20, ErrorMessage = "The {0} must be in the range of {2} and {1} characters.", MinimumLength = 1)]
+        public string Last { get; set; }
+
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(15, ErrorMessage = "The {0} must be in the range of {2} and {1} characters.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -54,14 +66,9 @@ namespace PedagogyWorld.Models
         [Display(Name = "Confirm password")]
         [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Display(Name = "First Name")]
-        public string First { get; set; }
-
-        [Display(Name = "Last Name")]
-        public string Last { get; set; }
-
+        
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         public string State { get; set; }

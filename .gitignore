@@ -175,8 +175,8 @@ pip-log.txt
 /PedagogyWorld.Logic/bin/*
 /PedagogyWorld.Logic/obj/*
 
-/PedagogyWorld.FileStorage/bin/*
-/PedagogyWorld.FileStorage/obj/*
+/PedagogyWorld.Services/bin/*
+/PedagogyWorld.Services/obj/*
 
 /PedagogyWorld.Tests/bin/*
 /PedagogyWorld.Tests/obj/*

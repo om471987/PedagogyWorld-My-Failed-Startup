@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 using PedagogyWorld.Models;
+
 using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace PedagogyWorld.Controllers
@@ -14,6 +15,102 @@ namespace PedagogyWorld.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View(GenerateRegisterForm());
+        }
+
+        [AllowAnonymous]
+        public ActionResult UpdateDistrictJSon(string selectedState)
+        {
+            var db = new Context();
+            var statId = db.States.FirstOrDefault(t => t.ShortForm == selectedState).Id;
+            var districts = (from name in db.Districts
+                             where name.State_Id == statId
+                             select name.DistrictName).ToList();
+            return Json(districts, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public ActionResult UpdateSchoolJSon(string selectedDistrict)
+        {
+            IList<string> schools;
+            var db = new Context();
+            if (selectedDistrict != "-- Loading Districts --")
+            {
+
+                var statId = db.Districts.FirstOrDefault(t => t.DistrictName == selectedDistrict).Id;
+                schools = (from name in db.Schools
+                           where name.District_Id == statId
+                           select name.SchoolName).ToList();
+            }
+            else
+            {
+                schools = (from name in db.Schools
+                           select name.SchoolName).ToList();
+            }
+
+            return Json(schools, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterModel model)
+        {
+            var db = new Context();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (db.UserProfiles.Any(t => t.UserName == model.UserName))
+                    {
+                        ModelState.AddModelError("UserName", "This user name address aleady exists. Please try another name");
+                        return Content("This user name address aleady exists. Please try another name");
+                    }
+                    if (db.UserProfiles.Any(t => t.Email == model.Email))
+                    {
+                        //ModelState.AddModelError("Email", "This email address aleady exists. Please try another email");
+                        return Content("This email address aleady exists. Please try another email");
+                    }
+                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.First, model.Last });
+                    //WebSecurity.Login(model.UserName, model.Password);
+
+                    //var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
+                    //var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
+                    //db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
+                    //db.SaveChanges();
+
+                    WebSecurity.Login("omkar", "abc123");
+                    return View("TakeATour", "Home", new { Area = "" });
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+            }
+            return Content("Please fill the required fields and try again.");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult DoesUserNameExist(string userName)
+        {
+            var db = new Context();
+            var result = db.UserProfiles.Any(t => t.UserName == userName);
+            return Json(result);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult DoesEmailExist(string email)
+        {
+            var db = new Context();
+            var result = db.UserProfiles.Any(t => t.Email == email);
+            return Json(result);
+        }
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -44,82 +141,6 @@ namespace PedagogyWorld.Controllers
             WebSecurity.Logout();
 
             return RedirectToAction("Index", "Home");
-        }
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View(GenerateRegisterForm());
-        }
-
-        [AllowAnonymous]
-        public ActionResult UpdateDistrictJSon(string selectedState)
-        {
-            var db = new Context();
-            var statId = db.States.FirstOrDefault(t => t.ShortForm == selectedState).Id;
-            var districts = (from name in db.Districts
-                             where name.State_Id == statId
-                             select name.DistrictName).ToList();
-            return Json(districts, JsonRequestBehavior.AllowGet);
-        }
-
-        [AllowAnonymous]
-        public ActionResult UpdateSchoolJSon(string selectedDistrict)
-        {
-            IList<string> schools;
-            var db = new Context();
-            if (selectedDistrict != "-- Loading Districts --")
-            {
-                
-                var statId = db.Districts.FirstOrDefault(t => t.DistrictName == selectedDistrict).Id;
-                schools = (from name in db.Schools
-                               where name.District_Id == statId
-                               select name.SchoolName).ToList();                
-            }
-            else
-            {
-                schools = (from name in db.Schools
-                           select name.SchoolName).ToList(); 
-            }
-
-            return Json(schools, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            var db = new Context();
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if (db.UserProfiles.Any(t => t.UserName == model.UserName))
-                    {
-                        ModelState.AddModelError("UserName", "This user name address aleady exists. Please try another name");
-                        return View(GenerateRegisterForm(model));
-                    }
-                    if (db.UserProfiles.Any(t => t.Email == model.Email))
-                    {
-                        ModelState.AddModelError("Email", "This email address aleady exists. Please try another email");
-                        return View(GenerateRegisterForm());
-                    }
-                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.First, model.Last });
-                    //WebSecurity.Login(model.UserName, model.Password);
-
-                    //var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
-                    //var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
-                    //db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
-                    //db.SaveChanges();
-                    return RedirectToAction("TakeATour", "Home", new { Area = "" });
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
-            }
-            return View(GenerateRegisterForm());
         }
 
         [HttpPost]
@@ -229,14 +250,10 @@ namespace PedagogyWorld.Controllers
             }
         }
 
-        private RegisterModel GenerateRegisterForm(RegisterModel model = null)
+        private RegisterModel GenerateRegisterForm()
         {
             var db = new Context();
-            if (model == null)
-            {
-                model = new RegisterModel();
-            }
-            
+            var model = new RegisterModel();
             model.States = db.States;
             
             var result = new List<SelectListItem>();

@@ -5,18 +5,21 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PedagogyWorld.WebHelper
+namespace PedagogyWorld.ExtensionMethod
 {
     public static class CheckBox
     {
         public static HtmlString CheckBoxList(this HtmlHelper helper, string name, IEnumerable<SelectListItem> items)
         {
             var output = new StringBuilder();
-            output.Append(@"<div class=""checkboxList"">");
+            output.Append(@"<div id=""");
+            output.Append(name);
+            output.Append(@""" class=""checkboxList"">");
 
             foreach (var item in items)
             {
                 output.Append(@"<input type=""checkbox"" name=""");
+                
                 output.Append(name);
                 output.Append("\" value=\"");
                 output.Append(item.Value);
