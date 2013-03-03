@@ -88,8 +88,7 @@ namespace PedagogyWorld.Controllers
         public JsonResult DoesUserNameExist(string userName)
         {
             var db = new Context();
-            var result = db.UserProfiles.Any(t => t.UserName == userName);
-            return Json(result);
+            return Json(!db.UserProfiles.Any(t => t.UserName == userName));
         }
 
         [HttpPost]
@@ -97,8 +96,7 @@ namespace PedagogyWorld.Controllers
         public JsonResult DoesEmailExist(string email)
         {
             var db = new Context();
-            var result = db.UserProfiles.Any(t => t.Email == email);
-            return Json(result);
+            return Json(!db.UserProfiles.Any(t => t.Email == email));
         }
 
         [AllowAnonymous]
@@ -245,6 +243,8 @@ namespace PedagogyWorld.Controllers
             var db = new Context();
             var model = new RegisterModel();
             model.States = db.States;
+            model.Districts = db.Districts.Where(t => t.State_Id == 1);
+            model.Schools = db.Schools.Where(t => t.District_Id == 1);
             
             var result = new List<SelectListItem>();
             foreach (var t in db.Subjects)

@@ -173,7 +173,9 @@
     <Compile Include="Header.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PlannerModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\StandardModel.cs" />
     <Compile Include="Outcome.cs">
       <DependentUpon>Context.tt</DependentUpon>
@@ -230,7 +232,7 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="ExtensionMethod\CheckBoxList.cs" />
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\LocalPasswordModel.cs" />
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

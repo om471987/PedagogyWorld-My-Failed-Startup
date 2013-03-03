@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using PedagogyWorld.Models;
+using WebMatrix.WebData;
 
 namespace PedagogyWorld.Controllers
 {
@@ -17,7 +18,7 @@ namespace PedagogyWorld.Controllers
         public ViewResult Index()
         {
             var userId = (int) Membership.GetUser().ProviderUserKey;
-            return View(db.Units.Where(t => t.UserProfile_Id == userId).Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).ToList());
+            return View(db.Units.Where(t => t.UserProfile_Id == userId).Include(unit => unit.OutcomeUnits).Include(unit => unit.UnitFiles).Include(unit => unit.UnitStandards).Include(unit => unit.UserProfile).Include(unit => unit.UnitGrades).Include(unit => unit.UnitSubjects).ToList());
         }
 
         public ViewResult Details(Guid id)
@@ -40,10 +41,30 @@ namespace PedagogyWorld.Controllers
                     Value = t.Id.ToString()
                 });
             }
-            model.OutcomeTypes = result.ToList();
-            
-            ViewBag.PossibleGrades = db.Grades;
-            ViewBag.PossibleSubjects = db.Subjects;
+            model.Outcomes = result.ToList();
+
+            result = new List<SelectListItem>();
+            foreach (var t in db.UserGrades.Where(t=>t.UserProfile_Id == WebSecurity.CurrentUserId))
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.Grade.GradeName,
+                    Value = t.Grade_Id.ToString()
+                });
+            }
+            model.Grades = result.ToList();
+
+            result = new List<SelectListItem>();
+            foreach (var t in db.UserSubjects.Where(t => t.UserProfile_Id == WebSecurity.CurrentUserId))
+            {
+                result.Add(new SelectListItem
+                {
+                    Text = t.Subject.SubjectName,
+                    Value = t.Subject_Id.ToString()
+                });
+            }
+            model.Subjects = result.ToList();
+
             return View(model);
         } 
 
@@ -81,7 +102,7 @@ namespace PedagogyWorld.Controllers
                     Value = t.Id.ToString()
                 });
             }
-            model.OutcomeTypes = result.ToList();
+            model.Outcomes = result.ToList();
 
             return View(model);
         }
@@ -104,7 +125,7 @@ namespace PedagogyWorld.Controllers
                     Value = t.Id.ToString()
                 });
             }
-            model.OutcomeTypes = result.ToList();
+            model.Outcomes = result.ToList();
 
             return View(model);
         }

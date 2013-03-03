@@ -15,8 +15,13 @@ namespace PedagogyWorld.Models
 
         public Unit Unit { get; set; }
 
-        public IEnumerable<SelectListItem> OutcomeTypes { get; set; }
-
+        public IEnumerable<SelectListItem> Outcomes { get; set; }
         public int[] OutcomeIds { get; set; }
+
+        public IEnumerable<SelectListItem> Subjects { get; set; }
+        public int[] SubjectIds { get; set; }
+
+        public IEnumerable<SelectListItem> Grades { get; set; }
+        public int[] GradeIds { get; set; }
     }
 }

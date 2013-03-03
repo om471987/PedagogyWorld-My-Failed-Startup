@@ -15,11 +15,11 @@
    <div class="display-label">Description</div>
    <div class="display-field">@Model.Description</div>
 
-   <div class="display-label">Grade</div>
-   <div class="display-field">@Html.DisplayTextFor(_ => Model.Grade.GradeName).ToString()</div>
+   <div class="display-label">Grades</div>
+   <div class="display-field">@Html.DisplayTextFor(_ => Model.UnitGrades.Count).ToString()</div>
 
    <div class="display-label">Subject</div>
-   <div class="display-field">@Html.DisplayTextFor(_ => Model.Subject.SubjectName).ToString()</div>
+   <div class="display-field">@Html.DisplayTextFor(_ => Model.UnitSubjects.Count).ToString()</div>
 
    <div class="display-label">Outcomes</div>
    <div class="display-field">@(Model.OutcomeUnits == null ? "None" : Model.OutcomeUnits.Count.ToString())</div>
@@ -41,6 +41,7 @@
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 

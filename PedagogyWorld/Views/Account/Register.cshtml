@@ -16,12 +16,6 @@
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
-                <span>
-                    <img id="usernameloading" src="~/Images/ajax-loader.gif" style="display:none;height:24px;width:24px;"/>
-                    <img id="usernameyes" src="~/Images/yes.png" style="display:none;height:24px;width:24px;"/>
-                    <img id="usernameno" src="~/Images/no.png" style="display:none;height:24px;width:24px;"/>
-                </span>
-                <p id="usernamevalidate" class="field-validation-error"></p>
             </li>
 
             <li>
@@ -51,12 +45,6 @@
               @Html.LabelFor(m => m.Email)
               @Html.TextBoxFor(m => m.Email)
                @Html.ValidationMessageFor(m => m.Email)
-                <span>
-                    <img id="emailloading" src="~/Images/ajax-loader.gif" style="display:none;height:24px;width:24px;"/>
-                    <img id="emailyes" src="~/Images/yes.png" style="display:none;height:24px;width:24px;"/>
-                    <img id="emailno" src="~/Images/no.png" style="display:none;height:24px;width:24px;"/>
-                </span>
-               <p id="emailvalidate" class="field-validation-error" style="display:none"></p>
            </li>
 
            <li>
@@ -66,26 +54,24 @@
 
            <li>
               @Html.LabelFor(m => m.District)
-              @Html.DropDownListFor(m => m.District, Enumerable.Empty<SelectListItem>(), "-- Loading Districts --")
+               @Html.DropDownListFor(m => m.District, new SelectList(Model.Districts, "Id", "DistrictName"))
            </li>
 
            <li>
               @Html.LabelFor(m => m.School)
-              @Html.DropDownListFor(m => m.School, Enumerable.Empty<SelectListItem>(), "-- Loading Schools --")
+               @Html.DropDownListFor(m => m.School, new SelectList(Model.Schools, "Id", "SchoolName"))
            </li>
 
             <li>
                 @Html.LabelFor(m => m.Subjects, "Subjects Teaching")
                 @Html.CheckBoxList("SubjectIds", Model.Subjects)
                 @Html.ValidationMessageFor(m => m.SubjectIds)
-                <p id="subjectvalidate" class="field-validation-error" style="display:none"></p>
             </li>
 
             <li>
                 @Html.LabelFor(m => m.Grades, "Grades Teaching")
                 @Html.CheckBoxList("GradeIds", Model.Grades)
                 @Html.ValidationMessageFor(m => m.GradeIds)
-                <p id="gradevalidate" class="field-validation-error" style="display:none"></p>
             </li>
         </ol>
         <input type="submit" value="Register" id="submit"/>
@@ -97,88 +83,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script type="text/javascript">
-    $('#UserName').blur(function () {
-        if (validateUserName($(this).val())) {
-            $("#usernameloading").show();
-            var request = $.ajax({
-                url: "/Account/DoesUserNameExist",
-                type: "POST",
-                data: { userName: $(this).val() },
-                dataType: "json"
-            });
-        }
-        else {
-            $("#usernamevalidate").text("");
-            $("#usernameyes").hide();
-            $("#usernameno").hide();
-        }
 
-        request.done(function (msg) {
-            var txt = "User Name already exists. Please select another one.";
-            var color = "red";
-            $("#usernameyes").hide();
-            $("#usernameno").hide();
-            $("#usernameloading").hide();
-            if (!msg) {
-                txt = "This User Name can be used."
-                color = "green";
-                $("#usernameyes").show();
-            }
-            else {
-                $("#usernameno").show();
-            }
-            $("#usernamevalidate").text(txt)
-                                .css("color", color)
-                                .show();
-
-        });
-    });
-
-    $('#Email').blur(function() {
-        if (validateEmail($(this).val())) {
-            $("#emailloading").show();
-            var request = $.ajax({
-                url: "/Account/DoesEmailExist",
-                type: "POST",
-                data: { email: $(this).val() },
-                dataType: "json"
-            });
-            request.done(function (msg) {
-                var txt = "Email Address already exists. Please select another one.";
-                var color = "red";
-                $("#emailyes").hide();
-                $("#emailno").hide();
-                $("#emailloading").hide();
-                if (!msg) {
-                    txt = "This Email Address can be used."
-                    color = "green";
-                    $("#emailyes").show();
-                }
-                else {
-                    $("#emailno").show();
-                }
-                $("#emailvalidate").text(txt)
-                                    .css("color", color)
-                                    .show();
-            });
-        }
-        else {
-            $("#emailvalidate").text("");
-            $("#emailyes").hide();
-            $("#emailno").hide();
-        }
-    });
-
-    function validateUserName(userName) {
-        var re = /^[a-zA-Z0-9_-]{3,12}$/;
-        return re.test(userName);
-    }
-    function validateEmail(email) { 
-        var re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
+<script>
     $('#State').change(function () {
         $.getJSON('/Account/UpdateDistrictJSon?stateId=' + $("#State option:selected").val(), function (result) {
             var district = $('#District');
@@ -189,15 +95,13 @@
                   .text(data.DistrictName)
                   .appendTo(district);
             });
+            $('#District').change();
          });
-      }).change();
+      });
       
     $('#District').change(function () {
-        var selected = $("#District option:selected");
-        if (selected.text() == "-- Loading Districts --") {
-            selected.val(-1);
-        }
-        $.getJSON('/Account/UpdateSchoolJSon?districtId=' + selected.val(), function (result) {
+        alert("distrinct changed");
+        $.getJSON('/Account/UpdateSchoolJSon?districtId=' + $("#District option:selected").val(), function (result) {
             var school = $('#School');
             school.empty();
             $(result).each(function (index, data) {
@@ -207,34 +111,5 @@
                   .appendTo(school);
             });
          });
-    }).change();
-
-    //$("#submit").click(function () {
-    //    if ($("#usernameno").css('display') != "none") {
-    //        alert("Duplicate username");
-    //    }
-
-    //    if ($("#emailno").css('display') != "none") {
-    //        alert("Duplicate email");
-    //    }
-
-    //    if ($("#GradeIds input:checked").length == 0) {
-    //        $("#gradevalidate").text("Please select atleast one Grade.")
-    //                           .css("color", "red")
-    //                           .show();
-    //    }
-    //    else {
-    //        $("#gradevalidate").hide();
-    //    }
-
-    //    if ($("#SubjectIds input:checked").length == 0) {
-    //        $("#subjectvalidate").text("Please select atleast one subject.")
-    //                             .css("color", "red")
-    //                             .show();
-    //    }
-    //    else {
-    //        $("#subjectvalidate").hide();
-    //    }
-    //});
+    });
 </script>
-

@@ -30,12 +30,6 @@
                     <th style="border:1px solid black;text-align:center">
                         UnitName
                     </th>
-                    <th style="border:1px solid black;text-align:center">
-                        Grade
-                    </th>
-                   <th style="border:1px solid black;text-align:center">
-                      Subject
-                   </th>
                 </tr>
 
             @foreach (var item in Model) {
@@ -48,12 +42,6 @@
                     </td>
                     <td style="border:1px solid black;text-align:center">
 			            @Html.ActionLink(item.UnitName, "Details", new { id=item.Id })
-                    </td>
-                    <td style="border:1px solid black;text-align:center">
-			            @Html.DisplayTextFor(_ => item.Grade.GradeName).ToString()
-                    </td>
-                    <td style="border:1px solid black;text-align:center">
-                       @Html.DisplayTextFor(_ => item.Subject.SubjectName).ToString()
                     </td>
                 </tr>
             }
