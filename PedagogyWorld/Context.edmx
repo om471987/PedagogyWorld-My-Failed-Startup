@@ -19,10 +19,13 @@
           <EntitySet Name="State" EntityType="Model.Store.State" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StrandDomain" EntityType="Model.Store.StrandDomain" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Subject" EntityType="Model.Store.Subject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TeachingDate" EntityType="Model.Store.TeachingDate" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Unit" EntityType="Model.Store.Unit" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnitFile" EntityType="Model.Store.UnitFile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnitGrade" EntityType="Model.Store.UnitGrade" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnitStandard" EntityType="Model.Store.UnitStandard" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UnitSubject" EntityType="Model.Store.UnitSubject" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserGrade" EntityType="Model.Store.UserGrade" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfileSchool" EntityType="Model.Store.UserProfileSchool" store:Type="Tables" Schema="dbo" />
@@ -87,14 +90,6 @@
             <End Role="File" EntitySet="File" />
             <End Role="TeachingDate" EntitySet="TeachingDate" />
           </AssociationSet>
-          <AssociationSet Name="FK__Unit__Grade_Id__3A81B327" Association="Model.Store.FK__Unit__Grade_Id__3A81B327">
-            <End Role="Grade" EntitySet="Grade" />
-            <End Role="Unit" EntitySet="Unit" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Unit__Subject_Id__3B75D760" Association="Model.Store.FK__Unit__Subject_Id__3B75D760">
-            <End Role="Subject" EntitySet="Subject" />
-            <End Role="Unit" EntitySet="Unit" />
-          </AssociationSet>
           <AssociationSet Name="FK__Unit__UserProfil__0E04126B" Association="Model.Store.FK__Unit__UserProfil__0E04126B">
             <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="Unit" EntitySet="Unit" />
@@ -107,6 +102,14 @@
             <End Role="Unit" EntitySet="Unit" />
             <End Role="UnitFile" EntitySet="UnitFile" />
           </AssociationSet>
+          <AssociationSet Name="FK__UnitGrade__Grade__4FD1D5C8" Association="Model.Store.FK__UnitGrade__Grade__4FD1D5C8">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="UnitGrade" EntitySet="UnitGrade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitGrade__Unit___4EDDB18F" Association="Model.Store.FK__UnitGrade__Unit___4EDDB18F">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitGrade" EntitySet="UnitGrade" />
+          </AssociationSet>
           <AssociationSet Name="FK__UnitStand__Stand__29AC2CE0" Association="Model.Store.FK__UnitStand__Stand__29AC2CE0">
             <End Role="Standard" EntitySet="Standard" />
             <End Role="UnitStandard" EntitySet="UnitStandard" />
@@ -114,6 +117,14 @@
           <AssociationSet Name="FK__UnitStand__Unit___44FF419A" Association="Model.Store.FK__UnitStand__Unit___44FF419A">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="UnitStandard" EntitySet="UnitStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitSubje__Subje__558AAF1E" Association="Model.Store.FK__UnitSubje__Subje__558AAF1E">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="UnitSubject" EntitySet="UnitSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UnitSubje__Unit___54968AE5" Association="Model.Store.FK__UnitSubje__Unit___54968AE5">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitSubject" EntitySet="UnitSubject" />
           </AssociationSet>
           <AssociationSet Name="FK__UserGrade__Grade__351DDF8C" Association="Model.Store.FK__UserGrade__Grade__351DDF8C">
             <End Role="Grade" EntitySet="Grade" />
@@ -262,6 +273,16 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SubjectName" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TeachingDate">
           <Key>
             <PropertyRef Name="Id" />
@@ -278,8 +299,6 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UnitName" Type="varchar" Nullable="false" MaxLength="1024" />
           <Property Name="Description" Type="varchar" MaxLength="2048" />
-          <Property Name="Grade_Id" Type="int" Nullable="false" />
-          <Property Name="Subject_Id" Type="int" Nullable="false" />
           <Property Name="UserProfile_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UnitFile">
@@ -290,6 +309,14 @@
           <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="File_Id" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="UnitGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Grade_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UnitStandard">
           <Key>
             <PropertyRef Name="Id" />
@@ -297,6 +324,14 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Standard_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Unit_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Subject_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserGrade">
           <Key>
@@ -540,30 +575,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Unit__Grade_Id__3A81B327">
-          <End Role="Grade" Type="Model.Store.Grade" Multiplicity="1" />
-          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Unit">
-              <PropertyRef Name="Grade_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Unit__Subject_Id__3B75D760">
-          <End Role="Subject" Type="Model.Store.Subject" Multiplicity="1" />
-          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Unit">
-              <PropertyRef Name="Subject_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Unit__UserProfil__0E04126B">
           <End Role="UserProfile" Type="Model.Store.UserProfile" Multiplicity="1" />
           <End Role="Unit" Type="Model.Store.Unit" Multiplicity="*" />
@@ -600,6 +611,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UnitGrade__Grade__4FD1D5C8">
+          <End Role="Grade" Type="Model.Store.Grade" Multiplicity="1" />
+          <End Role="UnitGrade" Type="Model.Store.UnitGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitGrade">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitGrade__Unit___4EDDB18F">
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
+          <End Role="UnitGrade" Type="Model.Store.UnitGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitGrade">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UnitStand__Stand__29AC2CE0">
           <End Role="Standard" Type="Model.Store.Standard" Multiplicity="1" />
           <End Role="UnitStandard" Type="Model.Store.UnitStandard" Multiplicity="*" />
@@ -620,6 +655,30 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UnitStandard">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitSubje__Subje__558AAF1E">
+          <End Role="Subject" Type="Model.Store.Subject" Multiplicity="1" />
+          <End Role="UnitSubject" Type="Model.Store.UnitSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitSubject">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UnitSubje__Unit___54968AE5">
+          <End Role="Unit" Type="Model.Store.Unit" Multiplicity="1" />
+          <End Role="UnitSubject" Type="Model.Store.UnitSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitSubject">
               <PropertyRef Name="Unit_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -738,12 +797,17 @@
           <EntitySet Name="States" EntityType="Model.State" />
           <EntitySet Name="StrandDomains" EntityType="Model.StrandDomain" />
           <EntitySet Name="Subjects" EntityType="Model.Subject" />
+          <EntitySet Name="sysdiagrams" EntityType="Model.sysdiagram" />
           <EntitySet Name="TeachingDates" EntityType="Model.TeachingDate" />
           <EntitySet Name="Units" EntityType="Model.Unit" />
           <EntitySet Name="UnitFiles" EntityType="Model.UnitFile" />
+          <EntitySet Name="UnitGrades" EntityType="Model.UnitGrade" />
           <EntitySet Name="UnitStandards" EntityType="Model.UnitStandard" />
+          <EntitySet Name="UnitSubjects" EntityType="Model.UnitSubject" />
+          <EntitySet Name="UserGrades" EntityType="Model.UserGrade" />
           <EntitySet Name="UserProfiles" EntityType="Model.UserProfile" />
           <EntitySet Name="UserProfileSchools" EntityType="Model.UserProfileSchool" />
+          <EntitySet Name="UserSubjects" EntityType="Model.UserSubject" />
           <EntitySet Name="webpages_Membership" EntityType="Model.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Model.webpages_OAuthMembership" />
           <EntitySet Name="webpages_Roles" EntityType="Model.webpages_Roles" />
@@ -779,9 +843,13 @@
             <End Role="Grade" EntitySet="Grades" />
             <End Role="StrandDomain" EntitySet="StrandDomains" />
           </AssociationSet>
-          <AssociationSet Name="FK__Unit__Grade_Id__3A81B327" Association="Model.FK__Unit__Grade_Id__3A81B327">
+          <AssociationSet Name="FK__UnitGrade__Grade__4FD1D5C8" Association="Model.FK__UnitGrade__Grade__4FD1D5C8">
             <End Role="Grade" EntitySet="Grades" />
-            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitGrade" EntitySet="UnitGrades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserGrade__Grade__351DDF8C" Association="Model.FK__UserGrade__Grade__351DDF8C">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="UserGrade" EntitySet="UserGrades" />
           </AssociationSet>
           <AssociationSet Name="FK__Header__StrandDo__02084FDA" Association="Model.FK__Header__StrandDo__02084FDA">
             <End Role="StrandDomain" EntitySet="StrandDomains" />
@@ -819,9 +887,13 @@
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="StrandDomain" EntitySet="StrandDomains" />
           </AssociationSet>
-          <AssociationSet Name="FK__Unit__Subject_Id__3B75D760" Association="Model.FK__Unit__Subject_Id__3B75D760">
+          <AssociationSet Name="FK__UnitSubje__Subje__558AAF1E" Association="Model.FK__UnitSubje__Subje__558AAF1E">
             <End Role="Subject" EntitySet="Subjects" />
-            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitSubject" EntitySet="UnitSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserSubje__Subje__2F650636" Association="Model.FK__UserSubje__Subje__2F650636">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="UserSubject" EntitySet="UserSubjects" />
           </AssociationSet>
           <AssociationSet Name="FK__Unit__UserProfil__0E04126B" Association="Model.FK__Unit__UserProfil__0E04126B">
             <End Role="UserProfile" EntitySet="UserProfiles" />
@@ -831,35 +903,33 @@
             <End Role="Unit" EntitySet="Units" />
             <End Role="UnitFile" EntitySet="UnitFiles" />
           </AssociationSet>
+          <AssociationSet Name="FK__UnitGrade__Unit___4EDDB18F" Association="Model.FK__UnitGrade__Unit___4EDDB18F">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitGrade" EntitySet="UnitGrades" />
+          </AssociationSet>
           <AssociationSet Name="FK__UnitStand__Unit___44FF419A" Association="Model.FK__UnitStand__Unit___44FF419A">
             <End Role="Unit" EntitySet="Units" />
             <End Role="UnitStandard" EntitySet="UnitStandards" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserProfi__UserP__7908F585" Association="Model.FK__UserProfi__UserP__7908F585">
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-            <End Role="UserProfileSchool" EntitySet="UserProfileSchools" />
-          </AssociationSet>
-          <AssociationSet Name="webpages_UsersInRoles" Association="Model.webpages_UsersInRoles">
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-          </AssociationSet>
-          <EntitySet Name="UserGrades" EntityType="Model.UserGrade" />
-          <EntitySet Name="UserSubjects" EntityType="Model.UserSubject" />
-          <AssociationSet Name="FK__UserGrade__Grade__351DDF8C" Association="Model.FK__UserGrade__Grade__351DDF8C">
-            <End Role="Grade" EntitySet="Grades" />
-            <End Role="UserGrade" EntitySet="UserGrades" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserSubje__Subje__2F650636" Association="Model.FK__UserSubje__Subje__2F650636">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="UserSubject" EntitySet="UserSubjects" />
+          <AssociationSet Name="FK__UnitSubje__Unit___54968AE5" Association="Model.FK__UnitSubje__Unit___54968AE5">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitSubject" EntitySet="UnitSubjects" />
           </AssociationSet>
           <AssociationSet Name="FK__UserGrade__UserP__3429BB53" Association="Model.FK__UserGrade__UserP__3429BB53">
             <End Role="UserProfile" EntitySet="UserProfiles" />
             <End Role="UserGrade" EntitySet="UserGrades" />
           </AssociationSet>
+          <AssociationSet Name="FK__UserProfi__UserP__7908F585" Association="Model.FK__UserProfi__UserP__7908F585">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UserProfileSchool" EntitySet="UserProfileSchools" />
+          </AssociationSet>
           <AssociationSet Name="FK__UserSubje__UserP__2E70E1FD" Association="Model.FK__UserSubje__UserP__2E70E1FD">
             <End Role="UserProfile" EntitySet="UserProfiles" />
             <End Role="UserSubject" EntitySet="UserSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Model.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="District">
@@ -912,7 +982,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="GradeName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StrandDomains" Relationship="Model.FK__StrandDom__Grade__1EA48E88" FromRole="Grade" ToRole="StrandDomain" />
-          <NavigationProperty Name="Units" Relationship="Model.FK__Unit__Grade_Id__3A81B327" FromRole="Grade" ToRole="Unit" />
+          <NavigationProperty Name="UnitGrades" Relationship="Model.FK__UnitGrade__Grade__4FD1D5C8" FromRole="Grade" ToRole="UnitGrade" />
           <NavigationProperty Name="UserGrades" Relationship="Model.FK__UserGrade__Grade__351DDF8C" FromRole="Grade" ToRole="UserGrade" />
         </EntityType>
         <EntityType Name="Header">
@@ -1005,8 +1075,18 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StrandDomains" Relationship="Model.FK__StrandDom__Subje__1F98B2C1" FromRole="Subject" ToRole="StrandDomain" />
-          <NavigationProperty Name="Units" Relationship="Model.FK__Unit__Subject_Id__3B75D760" FromRole="Subject" ToRole="Unit" />
+          <NavigationProperty Name="UnitSubjects" Relationship="Model.FK__UnitSubje__Subje__558AAF1E" FromRole="Subject" ToRole="UnitSubject" />
           <NavigationProperty Name="UserSubjects" Relationship="Model.FK__UserSubje__Subje__2F650636" FromRole="Subject" ToRole="UserSubject" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TeachingDate">
           <Key>
@@ -1025,15 +1105,13 @@
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="UnitName" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Description" MaxLength="2048" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
-          <Property Type="Int32" Name="Subject_Id" Nullable="false" />
           <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
-          <NavigationProperty Name="Grade" Relationship="Model.FK__Unit__Grade_Id__3A81B327" FromRole="Unit" ToRole="Grade" />
           <NavigationProperty Name="OutcomeUnits" Relationship="Model.FK__OutcomeUn__Unit___6EF57B66" FromRole="Unit" ToRole="OutcomeUnit" />
-          <NavigationProperty Name="Subject" Relationship="Model.FK__Unit__Subject_Id__3B75D760" FromRole="Unit" ToRole="Subject" />
           <NavigationProperty Name="UserProfile" Relationship="Model.FK__Unit__UserProfil__0E04126B" FromRole="Unit" ToRole="UserProfile" />
           <NavigationProperty Name="UnitFiles" Relationship="Model.FK__UnitFile__Unit_I__73BA3083" FromRole="Unit" ToRole="UnitFile" />
+          <NavigationProperty Name="UnitGrades" Relationship="Model.FK__UnitGrade__Unit___4EDDB18F" FromRole="Unit" ToRole="UnitGrade" />
           <NavigationProperty Name="UnitStandards" Relationship="Model.FK__UnitStand__Unit___44FF419A" FromRole="Unit" ToRole="UnitStandard" />
+          <NavigationProperty Name="UnitSubjects" Relationship="Model.FK__UnitSubje__Unit___54968AE5" FromRole="Unit" ToRole="UnitSubject" />
         </EntityType>
         <EntityType Name="UnitFile">
           <Key>
@@ -1045,6 +1123,16 @@
           <NavigationProperty Name="File" Relationship="Model.FK__UnitFile__File_I__74AE54BC" FromRole="UnitFile" ToRole="File" />
           <NavigationProperty Name="Unit" Relationship="Model.FK__UnitFile__Unit_I__73BA3083" FromRole="UnitFile" ToRole="Unit" />
         </EntityType>
+        <EntityType Name="UnitGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
+          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
+          <NavigationProperty Name="Grade" Relationship="Model.FK__UnitGrade__Grade__4FD1D5C8" FromRole="UnitGrade" ToRole="Grade" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK__UnitGrade__Unit___4EDDB18F" FromRole="UnitGrade" ToRole="Unit" />
+        </EntityType>
         <EntityType Name="UnitStandard">
           <Key>
             <PropertyRef Name="Id" />
@@ -1054,6 +1142,26 @@
           <Property Type="Int32" Name="Standard_Id" Nullable="false" />
           <NavigationProperty Name="Standard" Relationship="Model.FK__UnitStand__Stand__29AC2CE0" FromRole="UnitStandard" ToRole="Standard" />
           <NavigationProperty Name="Unit" Relationship="Model.FK__UnitStand__Unit___44FF419A" FromRole="UnitStandard" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="UnitSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="Unit_Id" Nullable="false" />
+          <Property Type="Int32" Name="Subject_Id" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Model.FK__UnitSubje__Subje__558AAF1E" FromRole="UnitSubject" ToRole="Subject" />
+          <NavigationProperty Name="Unit" Relationship="Model.FK__UnitSubje__Unit___54968AE5" FromRole="UnitSubject" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="UserGrade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
+          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
+          <NavigationProperty Name="Grade" Relationship="Model.FK__UserGrade__Grade__351DDF8C" FromRole="UserGrade" ToRole="Grade" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserGrade__UserP__3429BB53" FromRole="UserGrade" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -1066,10 +1174,10 @@
           <Property Type="String" Name="Last" MaxLength="31" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Files" Relationship="Model.FK__File__UserProfil__2022C2A6" FromRole="UserProfile" ToRole="File" />
           <NavigationProperty Name="Units" Relationship="Model.FK__Unit__UserProfil__0E04126B" FromRole="UserProfile" ToRole="Unit" />
-          <NavigationProperty Name="UserProfileSchools" Relationship="Model.FK__UserProfi__UserP__7908F585" FromRole="UserProfile" ToRole="UserProfileSchool" />
-          <NavigationProperty Name="webpages_Roles" Relationship="Model.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
           <NavigationProperty Name="UserGrades" Relationship="Model.FK__UserGrade__UserP__3429BB53" FromRole="UserProfile" ToRole="UserGrade" />
+          <NavigationProperty Name="UserProfileSchools" Relationship="Model.FK__UserProfi__UserP__7908F585" FromRole="UserProfile" ToRole="UserProfileSchool" />
           <NavigationProperty Name="UserSubjects" Relationship="Model.FK__UserSubje__UserP__2E70E1FD" FromRole="UserProfile" ToRole="UserSubject" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Model.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="UserProfileSchool">
           <Key>
@@ -1080,6 +1188,16 @@
           <Property Type="Int32" Name="School_Id" Nullable="false" />
           <NavigationProperty Name="School" Relationship="Model.FK__UserProfi__Schoo__79FD19BE" FromRole="UserProfileSchool" ToRole="School" />
           <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserProfi__UserP__7908F585" FromRole="UserProfileSchool" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
+          <Property Type="Int32" Name="Subject_Id" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="Model.FK__UserSubje__Subje__2F650636" FromRole="UserSubject" ToRole="Subject" />
+          <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserSubje__UserP__2E70E1FD" FromRole="UserSubject" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -1210,14 +1328,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Unit__Grade_Id__3A81B327">
+        <Association Name="FK__UnitGrade__Grade__4FD1D5C8">
           <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="Model.Unit" Role="Unit" Multiplicity="*" />
+          <End Type="Model.UnitGrade" Role="UnitGrade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grade">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Unit">
+            <Dependent Role="UnitGrade">
+              <PropertyRef Name="Grade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserGrade__Grade__351DDF8C">
+          <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="Model.UserGrade" Role="UserGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGrade">
               <PropertyRef Name="Grade_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1330,14 +1460,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Unit__Subject_Id__3B75D760">
+        <Association Name="FK__UnitSubje__Subje__558AAF1E">
           <End Type="Model.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="Model.Unit" Role="Unit" Multiplicity="*" />
+          <End Type="Model.UnitSubject" Role="UnitSubject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Unit">
+            <Dependent Role="UnitSubject">
+              <PropertyRef Name="Subject_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserSubje__Subje__2F650636">
+          <End Type="Model.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="Model.UserSubject" Role="UserSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSubject">
               <PropertyRef Name="Subject_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1366,6 +1508,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UnitGrade__Unit___4EDDB18F">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="Model.UnitGrade" Role="UnitGrade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UnitGrade">
+              <PropertyRef Name="Unit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UnitStand__Unit___44FF419A">
           <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
           <End Type="Model.UnitStandard" Role="UnitStandard" Multiplicity="*" />
@@ -1378,63 +1532,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserProfi__UserP__7908F585">
-          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
-          <End Type="Model.UserProfileSchool" Role="UserProfileSchool" Multiplicity="*" />
+        <Association Name="FK__UnitSubje__Unit___54968AE5">
+          <End Type="Model.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="Model.UnitSubject" Role="UnitSubject" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserProfileSchool">
-              <PropertyRef Name="UserProfile_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="webpages_UsersInRoles">
-          <End Type="Model.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
-          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="*" />
-        </Association>
-        <EntityType Name="UserGrade">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
-          <Property Type="Int32" Name="Grade_Id" Nullable="false" />
-          <NavigationProperty Name="Grade" Relationship="Model.FK__UserGrade__Grade__351DDF8C" FromRole="UserGrade" ToRole="Grade" />
-          <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserGrade__UserP__3429BB53" FromRole="UserGrade" ToRole="UserProfile" />
-        </EntityType>
-        <EntityType Name="UserSubject">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserProfile_Id" Nullable="false" />
-          <Property Type="Int32" Name="Subject_Id" Nullable="false" />
-          <NavigationProperty Name="Subject" Relationship="Model.FK__UserSubje__Subje__2F650636" FromRole="UserSubject" ToRole="Subject" />
-          <NavigationProperty Name="UserProfile" Relationship="Model.FK__UserSubje__UserP__2E70E1FD" FromRole="UserSubject" ToRole="UserProfile" />
-        </EntityType>
-        <Association Name="FK__UserGrade__Grade__351DDF8C">
-          <End Type="Model.Grade" Role="Grade" Multiplicity="1" />
-          <End Type="Model.UserGrade" Role="UserGrade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grade">
+            <Principal Role="Unit">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserGrade">
-              <PropertyRef Name="Grade_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserSubje__Subje__2F650636">
-          <End Type="Model.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="Model.UserSubject" Role="UserSubject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserSubject">
-              <PropertyRef Name="Subject_Id" />
+            <Dependent Role="UnitSubject">
+              <PropertyRef Name="Unit_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1450,6 +1556,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UserProfi__UserP__7908F585">
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Model.UserProfileSchool" Role="UserProfileSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserProfileSchool">
+              <PropertyRef Name="UserProfile_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserSubje__UserP__2E70E1FD">
           <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="1" />
           <End Type="Model.UserSubject" Role="UserSubject" Multiplicity="*" />
@@ -1461,6 +1579,10 @@
               <PropertyRef Name="UserProfile_Id" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="Model.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+          <End Type="Model.UserProfile" Role="UserProfile" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1595,6 +1717,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TeachingDates">
             <EntityTypeMapping TypeName="Model.TeachingDate">
               <MappingFragment StoreEntitySet="TeachingDate">
@@ -1609,8 +1742,6 @@
             <EntityTypeMapping TypeName="Model.Unit">
               <MappingFragment StoreEntitySet="Unit">
                 <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
-                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
-                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UnitName" ColumnName="UnitName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1626,11 +1757,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UnitGrades">
+            <EntityTypeMapping TypeName="Model.UnitGrade">
+              <MappingFragment StoreEntitySet="UnitGrade">
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UnitStandards">
             <EntityTypeMapping TypeName="Model.UnitStandard">
               <MappingFragment StoreEntitySet="UnitStandard">
                 <ScalarProperty Name="Standard_Id" ColumnName="Standard_Id" />
                 <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitSubjects">
+            <EntityTypeMapping TypeName="Model.UnitSubject">
+              <MappingFragment StoreEntitySet="UnitSubject">
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+                <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGrades">
+            <EntityTypeMapping TypeName="Model.UserGrade">
+              <MappingFragment StoreEntitySet="UserGrade">
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1650,6 +1808,15 @@
             <EntityTypeMapping TypeName="Model.UserProfileSchool">
               <MappingFragment StoreEntitySet="UserProfileSchool">
                 <ScalarProperty Name="School_Id" ColumnName="School_Id" />
+                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSubjects">
+            <EntityTypeMapping TypeName="Model.UserSubject">
+              <MappingFragment StoreEntitySet="UserSubject">
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
                 <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1697,24 +1864,6 @@
               <ScalarProperty Name="RoleId" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="UserGrades">
-            <EntityTypeMapping TypeName="Model.UserGrade">
-              <MappingFragment StoreEntitySet="UserGrade">
-                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
-                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserSubjects">
-            <EntityTypeMapping TypeName="Model.UserSubject">
-              <MappingFragment StoreEntitySet="UserSubject">
-                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
-                <ScalarProperty Name="UserProfile_Id" ColumnName="UserProfile_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

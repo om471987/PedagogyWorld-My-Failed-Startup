@@ -4,29 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c27ac8cfbb514836972e07ba7a62dde9" Name="Diagram1" ZoomLevel="42">
-        <EntityTypeShape EntityType="Model.District" Width="1.5" PointX="9.1574871694471156" PointY="10.46874054263753" />
-        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="8.35839227789938" PointY="1.1876469260024125" />
-        <EntityTypeShape EntityType="Model.FileFileType" Width="1.5" PointX="10.348484934469912" PointY="5.1376131945930483" />
-        <EntityTypeShape EntityType="Model.FileType" Width="1.5" PointX="11.374710017524059" PointY="21.726615111216258" />
-        <EntityTypeShape EntityType="Model.Grade" Width="1.5" PointX="0.9186027259186853" PointY="1.6456250556025771" />
-        <EntityTypeShape EntityType="Model.Header" Width="1.5" PointX="4.44269471822432" PointY="24.902408715757733" />
-        <EntityTypeShape EntityType="Model.Outcome" Width="1.5" PointX="11.923534719237841" PointY="22.050951506034913" />
-        <EntityTypeShape EntityType="Model.OutcomeUnit" Width="1.5" PointX="9.6096572566822438" PointY="5.7048159119229842" />
-        <EntityTypeShape EntityType="Model.School" Width="1.5" PointX="4.0556025095542907" PointY="22.234570543390966" />
-        <EntityTypeShape EntityType="Model.Standard" Width="1.5" PointX="1.7421125870859775" PointY="16.405967466722227" />
-        <EntityTypeShape EntityType="Model.State" Width="1.5" PointX="9.3658624223274458" PointY="23.250069718458722" />
-        <EntityTypeShape EntityType="Model.StrandDomain" Width="1.5" PointX="8.0253928154825189" PointY="10.926883032045739" />
-        <EntityTypeShape EntityType="Model.Subject" Width="1.5" PointX="5.79791045086361" PointY="25.781919267858342" />
-        <EntityTypeShape EntityType="Model.TeachingDate" Width="1.5" PointX="7.1848399802971823" PointY="17.75644639961256" />
-        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="2.3941069107475257" PointY="31.411838501417932" />
-        <EntityTypeShape EntityType="Model.UnitFile" Width="1.5" PointX="0.33838404730818428" PointY="21.921749706343633" />
-        <EntityTypeShape EntityType="Model.UnitStandard" Width="1.5" PointX="1.804179093709299" PointY="1.8621018835632606" />
-        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="4.2826993299101943" PointY="8.9342281114935069" />
-        <EntityTypeShape EntityType="Model.UserProfileSchool" Width="1.5" PointX="7.875" PointY="8" />
-        <EntityTypeShape EntityType="Model.webpages_Membership" Width="1.5" PointX="7.0957909594736019" PointY="29.108568458402793" />
-        <EntityTypeShape EntityType="Model.webpages_OAuthMembership" Width="1.5" PointX="6.5579219081243139" PointY="2.1977221081954066" />
-        <EntityTypeShape EntityType="Model.webpages_Roles" Width="1.5" PointX="1.4396876028923726" PointY="9.1660953802830054" />
+      <Diagram DiagramId="c27ac8cfbb514836972e07ba7a62dde9" Name="Diagram1" ZoomLevel="18">
+        <EntityTypeShape EntityType="Model.District" Width="1.5" PointX="9.875" PointY="1.25" />
+        <EntityTypeShape EntityType="Model.File" Width="1.5" PointX="12.875" PointY="2.75" />
+        <EntityTypeShape EntityType="Model.FileFileType" Width="1.5" PointX="15.875" PointY="4.25" />
+        <EntityTypeShape EntityType="Model.FileType" Width="1.5" PointX="18.875" PointY="5.75" />
+        <EntityTypeShape EntityType="Model.Grade" Width="1.5" PointX="1.375" PointY="7.25" />
+        <EntityTypeShape EntityType="Model.Header" Width="1.5" PointX="3.875" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.Outcome" Width="1.5" PointX="6.875" PointY="10.25" />
+        <EntityTypeShape EntityType="Model.OutcomeUnit" Width="1.5" PointX="9.875" PointY="11.75" />
+        <EntityTypeShape EntityType="Model.School" Width="1.5" PointX="12.875" PointY="13.25" />
+        <EntityTypeShape EntityType="Model.Standard" Width="1.5" PointX="15.875" PointY="14.75" />
+        <EntityTypeShape EntityType="Model.State" Width="1.5" PointX="18.875" PointY="16.25" />
+        <EntityTypeShape EntityType="Model.StrandDomain" Width="1.5" PointX="1.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Model.Subject" Width="1.5" PointX="3.875" PointY="19.25" />
+        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="6.875" PointY="20.75" />
+        <EntityTypeShape EntityType="Model.TeachingDate" Width="1.5" PointX="9.875" PointY="22.25" />
+        <EntityTypeShape EntityType="Model.Unit" Width="1.5" PointX="12.875" PointY="23.75" />
+        <EntityTypeShape EntityType="Model.UnitFile" Width="1.5" PointX="15.875" PointY="25.25" />
+        <EntityTypeShape EntityType="Model.UnitGrade" Width="1.5" PointX="18.875" PointY="26.75" />
+        <EntityTypeShape EntityType="Model.UnitStandard" Width="1.5" PointX="1.375" PointY="28.25" />
+        <EntityTypeShape EntityType="Model.UnitSubject" Width="1.5" PointX="3.875" PointY="29.75" />
+        <EntityTypeShape EntityType="Model.UserGrade" Width="1.5" PointX="6.875" PointY="31.25" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="9.875" PointY="32.75" />
+        <EntityTypeShape EntityType="Model.UserProfileSchool" Width="1.5" PointX="12.875" PointY="34.25" />
+        <EntityTypeShape EntityType="Model.UserSubject" Width="1.5" PointX="15.875" PointY="35.75" />
+        <EntityTypeShape EntityType="Model.webpages_Membership" Width="1.5" PointX="18.875" PointY="37.25" />
+        <EntityTypeShape EntityType="Model.webpages_OAuthMembership" Width="1.5" PointX="1.375" PointY="38.75" />
+        <EntityTypeShape EntityType="Model.webpages_Roles" Width="1.5" PointX="3.875" PointY="40.25" />
         <AssociationConnector Association="Model.FK__District__State___20C1E124" />
         <AssociationConnector Association="Model.FK__School__District__25869641" />
         <AssociationConnector Association="Model.FK__File__UserProfil__2022C2A6" />
@@ -35,7 +40,8 @@
         <AssociationConnector Association="Model.FK__UnitFile__File_I__74AE54BC" />
         <AssociationConnector Association="Model.FK__FileFileT__FileT__6383C8BA" />
         <AssociationConnector Association="Model.FK__StrandDom__Grade__1EA48E88" />
-        <AssociationConnector Association="Model.FK__Unit__Grade_Id__3A81B327" />
+        <AssociationConnector Association="Model.FK__UnitGrade__Grade__4FD1D5C8" />
+        <AssociationConnector Association="Model.FK__UserGrade__Grade__351DDF8C" />
         <AssociationConnector Association="Model.FK__Header__StrandDo__02084FDA" />
         <AssociationConnector Association="Model.FK__Standard__Header__01142BA1" />
         <AssociationConnector Association="Model.FK__OutcomeUn__Outco__6E01572D" />
@@ -45,18 +51,17 @@
         <AssociationConnector Association="Model.FK__UnitStand__Stand__29AC2CE0" />
         <AssociationConnector Association="Model.FK__StrandDom__State__1DB06A4F" />
         <AssociationConnector Association="Model.FK__StrandDom__Subje__1F98B2C1" />
-        <AssociationConnector Association="Model.FK__Unit__Subject_Id__3B75D760" />
+        <AssociationConnector Association="Model.FK__UnitSubje__Subje__558AAF1E" />
+        <AssociationConnector Association="Model.FK__UserSubje__Subje__2F650636" />
         <AssociationConnector Association="Model.FK__Unit__UserProfil__0E04126B" />
         <AssociationConnector Association="Model.FK__UnitFile__Unit_I__73BA3083" />
+        <AssociationConnector Association="Model.FK__UnitGrade__Unit___4EDDB18F" />
         <AssociationConnector Association="Model.FK__UnitStand__Unit___44FF419A" />
-        <AssociationConnector Association="Model.FK__UserProfi__UserP__7908F585" />
-        <AssociationConnector Association="Model.webpages_UsersInRoles" />
-        <EntityTypeShape EntityType="Model.UserGrade" Width="1.5" PointX="5.400701162126242" PointY="0.64595796197930255" />
-        <EntityTypeShape EntityType="Model.UserSubject" Width="1.5" PointX="1.7364666991571274" PointY="31.082724272777664" />
-        <AssociationConnector Association="Model.FK__UserGrade__Grade__351DDF8C" />
-        <AssociationConnector Association="Model.FK__UserSubje__Subje__2F650636" />
+        <AssociationConnector Association="Model.FK__UnitSubje__Unit___54968AE5" />
         <AssociationConnector Association="Model.FK__UserGrade__UserP__3429BB53" />
+        <AssociationConnector Association="Model.FK__UserProfi__UserP__7908F585" />
         <AssociationConnector Association="Model.FK__UserSubje__UserP__2E70E1FD" />
+        <AssociationConnector Association="Model.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

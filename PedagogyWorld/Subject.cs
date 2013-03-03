@@ -17,7 +17,7 @@ namespace PedagogyWorld
         public Subject()
         {
             this.StrandDomains = new HashSet<StrandDomain>();
-            this.Units = new HashSet<Unit>();
+            this.UnitSubjects = new HashSet<UnitSubject>();
             this.UserSubjects = new HashSet<UserSubject>();
         }
     
@@ -25,7 +25,7 @@ namespace PedagogyWorld
         public string SubjectName { get; set; }
     
         public virtual ICollection<StrandDomain> StrandDomains { get; set; }
-        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<UnitSubject> UnitSubjects { get; set; }
         public virtual ICollection<UserSubject> UserSubjects { get; set; }
     }
 }

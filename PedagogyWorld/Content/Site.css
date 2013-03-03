@@ -758,10 +758,11 @@ tr.pager td {
 }
 
 .display-label {
-               color: #333333;
+            color: #333333;
             content: attr(alt);
             font-size: 1.8em;
             font-weight: 600;
+            margin:10px !important;
 }
 
 .display-field {
@@ -770,7 +771,7 @@ tr.pager td {
             content: attr(alt);
             font-size: 1.2em;
             font-weight: 600;
-
+            margin:10px !important;
 }
 
 .editor-label {

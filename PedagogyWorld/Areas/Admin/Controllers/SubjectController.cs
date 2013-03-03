@@ -19,7 +19,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Index()
         {
-            return View(context.Subjects.Include(subject => subject.Units).ToList());
+            return View(context.Subjects.ToList());
         }
 
         //
@@ -27,7 +27,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Subject subject = context.Subjects.Single(x => x.Id == id);
+            Subject subject = context.Subjects.Include(t => t.UnitSubjects).Single(x => x.Id == id);
             return View(subject);
         }
 
@@ -84,7 +84,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            Subject subject = context.Subjects.Single(x => x.Id == id);
+            Subject subject = context.Subjects.Include(t => t.UnitSubjects).Single(x => x.Id == id);
             return View(subject);
         }
 
@@ -94,7 +94,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Subject subject = context.Subjects.Single(x => x.Id == id);
+            Subject subject = context.Subjects.Include(t => t.UnitSubjects).Single(x => x.Id == id);
             context.Subjects.Remove(subject);
             context.SaveChanges();
             return RedirectToAction("Index");

@@ -18,21 +18,21 @@ namespace PedagogyWorld
         {
             this.OutcomeUnits = new HashSet<OutcomeUnit>();
             this.UnitFiles = new HashSet<UnitFile>();
+            this.UnitGrades = new HashSet<UnitGrade>();
             this.UnitStandards = new HashSet<UnitStandard>();
+            this.UnitSubjects = new HashSet<UnitSubject>();
         }
     
         public System.Guid Id { get; set; }
         public string UnitName { get; set; }
         public string Description { get; set; }
-        public int Grade_Id { get; set; }
-        public int Subject_Id { get; set; }
         public int UserProfile_Id { get; set; }
     
-        public virtual Grade Grade { get; set; }
         public virtual ICollection<OutcomeUnit> OutcomeUnits { get; set; }
-        public virtual Subject Subject { get; set; }
         public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<UnitFile> UnitFiles { get; set; }
+        public virtual ICollection<UnitGrade> UnitGrades { get; set; }
         public virtual ICollection<UnitStandard> UnitStandards { get; set; }
+        public virtual ICollection<UnitSubject> UnitSubjects { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace PedagogyWorld
         public Grade()
         {
             this.StrandDomains = new HashSet<StrandDomain>();
-            this.Units = new HashSet<Unit>();
+            this.UnitGrades = new HashSet<UnitGrade>();
             this.UserGrades = new HashSet<UserGrade>();
         }
     
@@ -25,7 +25,7 @@ namespace PedagogyWorld
         public string GradeName { get; set; }
     
         public virtual ICollection<StrandDomain> StrandDomains { get; set; }
-        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<UnitGrade> UnitGrades { get; set; }
         public virtual ICollection<UserGrade> UserGrades { get; set; }
     }
 }

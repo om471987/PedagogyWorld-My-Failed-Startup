@@ -15,7 +15,8 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Index()
         {
-            return View(_context.Grades.Include(grade => grade.Units).ToList());
+
+            return View(_context.Grades.ToList());
         }
 
         //
@@ -23,7 +24,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
 
         public ViewResult Details(int id)
         {
-            Grade grade = _context.Grades.Single(x => x.Id == id);
+            Grade grade = _context.Grades.Include(t=>t.UnitGrades).Single(x => x.Id == id);
             return View(grade);
         }
 
@@ -80,7 +81,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
  
         public ActionResult Delete(int id)
         {
-            Grade grade = _context.Grades.Single(x => x.Id == id);
+            Grade grade = _context.Grades.Include(t => t.UnitGrades).Single(x => x.Id == id);
             return View(grade);
         }
 
@@ -90,7 +91,7 @@ namespace PedagogyWorld.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Grade grade = _context.Grades.Single(x => x.Id == id);
+            Grade grade = _context.Grades.Include(t => t.UnitGrades).Single(x => x.Id == id);
             _context.Grades.Remove(grade);
             _context.SaveChanges();
             return RedirectToAction("Index");

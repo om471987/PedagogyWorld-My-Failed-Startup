@@ -4,9 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-@if (Model.Units.Any())
+@if (Model.UnitSubjects.Any(t=>t.Subject_Id == Model.Id))
 {
-    <h2>Can't delete Subject used by units. This Subject is used by @Model.Units.Count.ToString() units.</h2>
+    <h2>Can't delete Subject used by units. This Subject is used by @Model.UnitSubjects.Count(t=>t.Subject_Id == Model.Id) units.</h2>
    
     <p>@Html.ActionLink("Back to List", "Index")</p>
 }
@@ -20,9 +20,6 @@ else
 
         <div class="display-label">SubjectName</div>
         <div class="display-field">@Model.SubjectName</div>
-
-        <div class="display-label">Units</div>
-        <div class="display-field">@(Model.Units == null ? "None" : Model.Units.Count.ToString())</div>
     </fieldset>
     using (Html.BeginForm()) {
         <p>

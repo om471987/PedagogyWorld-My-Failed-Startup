@@ -19,9 +19,6 @@
         <th>
             Subject
         </th>
-        <th>
-            Units
-        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -33,9 +30,6 @@
         </td>
         <td>
 			@item.SubjectName
-        </td>
-        <td>
-			@(item.Units == null ? "None" : item.Units.Count.ToString())
         </td>
     </tr>
 }

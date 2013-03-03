@@ -38,16 +38,19 @@ namespace PedagogyWorld
         public DbSet<State> States { get; set; }
         public DbSet<StrandDomain> StrandDomains { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TeachingDate> TeachingDates { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<UnitFile> UnitFiles { get; set; }
+        public DbSet<UnitGrade> UnitGrades { get; set; }
         public DbSet<UnitStandard> UnitStandards { get; set; }
+        public DbSet<UnitSubject> UnitSubjects { get; set; }
+        public DbSet<UserGrade> UserGrades { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserProfileSchool> UserProfileSchools { get; set; }
+        public DbSet<UserSubject> UserSubjects { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
-        public DbSet<UserGrade> UserGrades { get; set; }
-        public DbSet<UserSubject> UserSubjects { get; set; }
     }
 }
