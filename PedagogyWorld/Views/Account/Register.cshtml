@@ -5,10 +5,9 @@
     <h1>Create a new account.</h1>
 </hgroup>
 
-@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "Post"}))
+@using(Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
     <div id="ValidationSummary"></div>
     <fieldset>
         <legend>Registration Form</legend>
@@ -40,10 +39,12 @@
             <li>
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
             </li>
            <li>
               @Html.LabelFor(m => m.ConfirmPassword)
               @Html.PasswordFor(m => m.ConfirmPassword)
+               @Html.ValidationMessageFor(m => m.ConfirmPassword)
            </li>
 
            <li>
@@ -75,15 +76,19 @@
 
             <li>
                 @Html.LabelFor(m => m.Subjects, "Subjects Teaching")
-               @Html.CheckBoxList("SubjectIds", Model.Subjects)
+                @Html.CheckBoxList("SubjectIds", Model.Subjects)
+                @Html.ValidationMessageFor(m => m.SubjectIds)
+                <p id="subjectvalidate" class="field-validation-error" style="display:none"></p>
             </li>
 
             <li>
                 @Html.LabelFor(m => m.Grades, "Grades Teaching")
-               @Html.CheckBoxList("GradeIds", Model.Grades)
+                @Html.CheckBoxList("GradeIds", Model.Grades)
+                @Html.ValidationMessageFor(m => m.GradeIds)
+                <p id="gradevalidate" class="field-validation-error" style="display:none"></p>
             </li>
         </ol>
-        <input id="submit" type="submit" value="Register" />
+        <input type="submit" value="Register" id="submit"/>
     </fieldset>
 }
 
@@ -93,7 +98,6 @@
 }
 
 <script type="text/javascript">
-    
     $('#UserName').blur(function () {
         if (validateUserName($(this).val())) {
             $("#usernameloading").show();
@@ -143,18 +147,26 @@
             request.done(function (msg) {
                 var txt = "Email Address already exists. Please select another one.";
                 var color = "red";
+                $("#emailyes").hide();
+                $("#emailno").hide();
+                $("#emailloading").hide();
                 if (!msg) {
                     txt = "This Email Address can be used."
                     color = "green";
+                    $("#emailyes").show();
+                }
+                else {
+                    $("#emailno").show();
                 }
                 $("#emailvalidate").text(txt)
                                     .css("color", color)
-                                    .css("display", "block");
-                $("#emailloading").hide();
+                                    .show();
             });
         }
         else {
             $("#emailvalidate").text("");
+            $("#emailyes").hide();
+            $("#emailno").hide();
         }
     });
 
@@ -168,29 +180,61 @@
     }
 
     $('#State').change(function () {
-        $.getJSON('/Account/UpdateDistrictJSon?selectedState=' + $("#State option:selected").text(), function (result) {
+        $.getJSON('/Account/UpdateDistrictJSon?stateId=' + $("#State option:selected").val(), function (result) {
             var district = $('#District');
             district.empty();
-            $(result).each(function () {
+            $(result).each(function (index, data) {
                $(document.createElement('option'))
-                  .attr('value', this)
-                  .text(this)
+                  .attr('value', data.Id)
+                  .text(data.DistrictName)
                   .appendTo(district);
             });
          });
       }).change();
       
-      $('#District').change(function () {
-         $.getJSON('/Account/UpdateSchoolJSon?selectedDistrict=' + $("#District option:selected").text(), function (result) {
+    $('#District').change(function () {
+        var selected = $("#District option:selected");
+        if (selected.text() == "-- Loading Districts --") {
+            selected.val(-1);
+        }
+        $.getJSON('/Account/UpdateSchoolJSon?districtId=' + selected.val(), function (result) {
             var school = $('#School');
             school.empty();
-            $(result).each(function () {
+            $(result).each(function (index, data) {
                $(document.createElement('option'))
-                  .attr('value', this)
-                  .text(this)
+                  .attr('value', data.Id)
+                  .text(data.SchoolName)
                   .appendTo(school);
             });
          });
-      }).change();
+    }).change();
+
+    //$("#submit").click(function () {
+    //    if ($("#usernameno").css('display') != "none") {
+    //        alert("Duplicate username");
+    //    }
+
+    //    if ($("#emailno").css('display') != "none") {
+    //        alert("Duplicate email");
+    //    }
+
+    //    if ($("#GradeIds input:checked").length == 0) {
+    //        $("#gradevalidate").text("Please select atleast one Grade.")
+    //                           .css("color", "red")
+    //                           .show();
+    //    }
+    //    else {
+    //        $("#gradevalidate").hide();
+    //    }
+
+    //    if ($("#SubjectIds input:checked").length == 0) {
+    //        $("#subjectvalidate").text("Please select atleast one subject.")
+    //                             .css("color", "red")
+    //                             .show();
+    //    }
+    //    else {
+    //        $("#subjectvalidate").hide();
+    //    }
+    //});
 </script>
 

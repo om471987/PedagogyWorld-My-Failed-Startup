@@ -148,6 +148,7 @@
     <Compile Include="Areas\Admin\Controllers\SubjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\StrandDomainController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
+    <Compile Include="CustomAttributes\MustSelectAttribute.cs" />
     <Compile Include="District.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>

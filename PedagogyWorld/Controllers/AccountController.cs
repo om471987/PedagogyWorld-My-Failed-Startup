@@ -22,35 +22,23 @@ namespace PedagogyWorld.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult UpdateDistrictJSon(string selectedState)
+        public ActionResult UpdateDistrictJSon(int stateId)
         {
             var db = new Context();
-            var statId = db.States.FirstOrDefault(t => t.ShortForm == selectedState).Id;
             var districts = (from name in db.Districts
-                             where name.State_Id == statId
-                             select name.DistrictName).ToList();
+                             where name.State_Id == stateId
+                             select new { name.Id, name.DistrictName }).AsEnumerable();
             return Json(districts, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
-        public ActionResult UpdateSchoolJSon(string selectedDistrict)
+        public ActionResult UpdateSchoolJSon(int districtId)
         {
-            IList<string> schools;
             var db = new Context();
-            if (selectedDistrict != "-- Loading Districts --")
-            {
-
-                var statId = db.Districts.FirstOrDefault(t => t.DistrictName == selectedDistrict).Id;
-                schools = (from name in db.Schools
-                           where name.District_Id == statId
-                           select name.SchoolName).ToList();
-            }
-            else
-            {
-                schools = (from name in db.Schools
-                           select name.SchoolName).ToList();
-            }
-
+            districtId = districtId == -1 ? 1 : districtId;
+            var schools = (from name in db.Schools
+            where name.District_Id == districtId
+            select new { name.Id, name.SchoolName }).AsEnumerable();
             return Json(schools, JsonRequestBehavior.AllowGet);
         }
 
@@ -64,33 +52,35 @@ namespace PedagogyWorld.Controllers
             {
                 try
                 {
-                    if (db.UserProfiles.Any(t => t.UserName == model.UserName))
-                    {
-                        ModelState.AddModelError("UserName", "This user name address aleady exists. Please try another name");
-                        return Content("This user name address aleady exists. Please try another name");
-                    }
-                    if (db.UserProfiles.Any(t => t.Email == model.Email))
-                    {
-                        //ModelState.AddModelError("Email", "This email address aleady exists. Please try another email");
-                        return Content("This email address aleady exists. Please try another email");
-                    }
                     //WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.First, model.Last });
                     //WebSecurity.Login(model.UserName, model.Password);
 
-                    //var school = db.Schools.FirstOrDefault(t => t.SchoolName == model.School);
-                    //var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
-                    //db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
+                    var school = db.Schools.FirstOrDefault(t => t.Id == model.School);
+                    var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
+                    db.UserProfileSchools.Add(new UserProfileSchool { School = school, UserProfile = user });
+
+                    foreach (var gradeId in model.GradeIds)
+	                {
+                        var userGrade = new UserGrade { UserProfile = user, Grade_Id = gradeId };
+                        db.UserGrades.Add(userGrade);
+	                }
+
+                    foreach (var subjectId in model.SubjectIds)
+                    {
+                        var userSubject = new UserSubject { UserProfile = user, Subject_Id = subjectId };
+                        db.UserSubjects.Add(userSubject);
+                    }
                     //db.SaveChanges();
 
                     WebSecurity.Login("omkar", "abc123");
-                    return View("TakeATour", "Home", new { Area = "" });
+                    return RedirectToAction("TakeATour", "Home", new { Area = "" });
                 }
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
-            return Content("Please fill the required fields and try again.");
+            return View(GenerateRegisterForm());
         }
 
         [HttpPost]

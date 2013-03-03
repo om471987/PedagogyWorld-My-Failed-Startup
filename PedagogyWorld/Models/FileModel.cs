@@ -21,10 +21,4 @@ namespace PedagogyWorld.Models
 
         public int[] FileIds { get; set; }
     }
-
-    public class FileType
-    {
-        public bool IsChecked { get; set; }
-        public string Type { get; set; }
-    }
 }
