@@ -52,8 +52,8 @@ namespace PedagogyWorld.Controllers
             {
                 try
                 {
-                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.First, model.Last });
-                    //WebSecurity.Login(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.Email, model.First, model.Last });
+                    WebSecurity.Login(model.UserName, model.Password);
 
                     var school = db.Schools.FirstOrDefault(t => t.Id == model.School);
                     var user = db.UserProfiles.FirstOrDefault(t => t.UserName == model.UserName);
@@ -70,9 +70,7 @@ namespace PedagogyWorld.Controllers
                         var userSubject = new UserSubject { UserProfile = user, Subject_Id = subjectId };
                         db.UserSubjects.Add(userSubject);
                     }
-                    //db.SaveChanges();
-
-                    WebSecurity.Login("omkar", "abc123");
+                    db.SaveChanges();
                     return RedirectToAction("TakeATour", "Home", new { Area = "" });
                 }
                 catch (MembershipCreateUserException e)
@@ -80,7 +78,7 @@ namespace PedagogyWorld.Controllers
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
-            return View(GenerateRegisterForm());
+            return View(GenerateRegisterForm(model));
         }
 
         [HttpPost]
@@ -238,35 +236,47 @@ namespace PedagogyWorld.Controllers
             }
         }
 
-        private RegisterModel GenerateRegisterForm()
+        private RegisterModel GenerateRegisterForm(RegisterModel model=null)
         {
             var db = new Context();
-            var model = new RegisterModel();
+            model = model?? new RegisterModel();
+
             model.States = db.States;
-            model.Districts = db.Districts.Where(t => t.State_Id == 1);
-            model.Schools = db.Schools.Where(t => t.District_Id == 1);
-            
+            model.Districts = db.Districts.Where(t => t.State_Id == model.State);
+            model.Schools = db.Schools.Where(t => t.District_Id == model.District);
+
             var result = new List<SelectListItem>();
             foreach (var t in db.Subjects)
             {
-                result.Add(new SelectListItem
+                var selectListItem = new SelectListItem
                 {
                     Text = t.SubjectName,
-                    Value = t.Id.ToString()
-                });
+                    Value = t.Id.ToString(),
+                };
+                if(model.SubjectIds != null && model.SubjectIds.Contains(t.Id))
+                {
+                    selectListItem.Selected = true;
+                }
+                result.Add(selectListItem);
             }
             model.Subjects = result.ToList();
 
             result = new List<SelectListItem>();
             foreach (var t in db.Grades)
             {
-                result.Add(new SelectListItem
+                var selectListItem = new SelectListItem
                 {
                     Text = t.GradeName,
-                    Value = t.Id.ToString()
-                });
+                    Value = t.Id.ToString(),
+                };
+                if (model.GradeIds != null && model.GradeIds.Contains(t.Id))
+                {
+                    selectListItem.Selected = true;
+                }
+                result.Add(selectListItem);
             }
             model.Grades = result.ToList();
+
             return model;
         }
     }

@@ -10,6 +10,13 @@ namespace PedagogyWorld.Models
 {
     public class RegisterModel
     {
+        public RegisterModel()
+        {
+            State = 1;
+            District = 1;
+            School = 1;
+        }
+
         [Required]
         [Remote("DoesUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "User name already exists. Please enter a different one.")]
         [Display(Name = "User Name")]
@@ -45,15 +52,12 @@ namespace PedagogyWorld.Models
         public string Email { get; set; }
 
         public int State { get; set; }
-
         public int District { get; set; }
-
         public int School { get; set; }
 
         public IEnumerable<State> States { get; set; }
         public IEnumerable<District> Districts { get; set; }
         public IEnumerable<School> Schools { get; set; }
-
 
         public IEnumerable<SelectListItem> Subjects { get; set; }
         [MustSelect(ErrorMessage = "Must select atleast one subject.")]

@@ -83,7 +83,6 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-
 <script>
     $('#State').change(function () {
         $.getJSON('/Account/UpdateDistrictJSon?stateId=' + $("#State option:selected").val(), function (result) {
@@ -100,7 +99,6 @@
       });
       
     $('#District').change(function () {
-        alert("distrinct changed");
         $.getJSON('/Account/UpdateSchoolJSon?districtId=' + $("#District option:selected").val(), function (result) {
             var school = $('#School');
             school.empty();
